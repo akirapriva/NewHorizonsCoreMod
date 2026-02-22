@@ -84,8 +84,7 @@ public class ScriptGalacticraft implements IScriptLoader {
                 IndustrialCraft2.ID,
                 IronChests.ID,
                 PamsHarvestCraft.ID,
-                ProjectRedIllumination.ID,
-                TinkersGregworks.ID);
+                ProjectRedIllumination.ID);
     }
 
     @Override
@@ -1079,23 +1078,25 @@ public class ScriptGalacticraft implements IScriptLoader {
                 "cableGt02Aluminium",
                 getModItem(GalacticraftMars.ID, "item.null", 1, 5, missing),
                 "cableGt02Aluminium");
-        addShapedRecipe(
-                getModItem(GalacticraftMars.ID, "item.grapple", 1, 0, missing),
-                null,
-                null,
-                createItemStack(
-                        TinkersGregworks.ID,
-                        "tGregToolPartArrowHead",
-                        1,
-                        1573,
-                        "{material:\"MeteoricSteel\"}",
-                        missing),
-                NHItemList.MeteoricIronString.get(),
-                NHItemList.MeteoricIronString.get(),
-                NHItemList.MeteoricIronString.get(),
-                "springMeteoricSteel",
-                null,
-                null);
+        if (TinkersGregworks.isModLoaded()) {
+            addShapedRecipe(
+                    getModItem(GalacticraftMars.ID, "item.grapple", 1, 0, missing),
+                    null,
+                    null,
+                    createItemStack(
+                            TinkersGregworks.ID,
+                            "tGregToolPartArrowHead",
+                            1,
+                            1573,
+                            "{material:\"MeteoricSteel\"}",
+                            missing),
+                    NHItemList.MeteoricIronString.get(),
+                    NHItemList.MeteoricIronString.get(),
+                    NHItemList.MeteoricIronString.get(),
+                    "springMeteoricSteel",
+                    null,
+                    null);
+        }
         addShapedRecipe(
                 getModItem(GalacticraftMars.ID, "tile.minerBase", 4, 0, missing),
                 "compressedTitanium",

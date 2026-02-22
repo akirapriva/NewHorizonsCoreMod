@@ -1608,15 +1608,17 @@ public class AssemblerRecipes implements Runnable {
                     .addTo(assemblerRecipes);
 
             // Alveary Unlighting
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            alveary,
-                            GTModHandler.getModItem(Forestry.ID, "thermionicTubes", 4L, 8),
-                            GTModHandler.getModItem(ExtraUtilities.ID, "curtains", 4L, 0),
-                            new ItemStack(Blocks.wool, 1, 15))
-                    .itemOutputs(GTModHandler.getModItem(ExtraBees.ID, "alveary", 1L, 7))
-                    .fluidInputs(Materials.Honey.getFluid(7500L)).duration(60 * SECONDS).eut(TierEU.RECIPE_MV)
-                    .addTo(assemblerRecipes);
+            if (ExtraUtilities.isModLoaded()) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                alveary,
+                                GTModHandler.getModItem(Forestry.ID, "thermionicTubes", 4L, 8),
+                                GTModHandler.getModItem(ExtraUtilities.ID, "curtains", 4L, 0),
+                                new ItemStack(Blocks.wool, 1, 15))
+                        .itemOutputs(GTModHandler.getModItem(ExtraBees.ID, "alveary", 1L, 7))
+                        .fluidInputs(Materials.Honey.getFluid(7500L)).duration(60 * SECONDS).eut(TierEU.RECIPE_MV)
+                        .addTo(assemblerRecipes);
+            }
 
         }
 
@@ -5403,14 +5405,16 @@ public class AssemblerRecipes implements Runnable {
         ItemStack alveary = GTModHandler.getModItem(Forestry.ID, "alveary", 1L, 0);
 
         // Impregnated Frame
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTModHandler.getModItem(Railcraft.ID, "slab", 3L, 38),
-                        GTModHandler.getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1L),
-                        GTModHandler.getModItem(Forestry.ID, "oakStick", 5L, 0))
-                .itemOutputs(GTModHandler.getModItem(Forestry.ID, "frameImpregnated", 1L, 0))
-                .fluidInputs(Materials.SeedOil.getFluid(250L)).duration(60 * SECONDS).eut(TierEU.RECIPE_MV / 2)
-                .addTo(assemblerRecipes);
+        if (PamsHarvestCraft.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTModHandler.getModItem(Railcraft.ID, "slab", 3L, 38),
+                            GTModHandler.getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1L),
+                            GTModHandler.getModItem(Forestry.ID, "oakStick", 5L, 0))
+                    .itemOutputs(GTModHandler.getModItem(Forestry.ID, "frameImpregnated", 1L, 0))
+                    .fluidInputs(Materials.SeedOil.getFluid(250L)).duration(60 * SECONDS).eut(TierEU.RECIPE_MV / 2)
+                    .addTo(assemblerRecipes);
+        }
 
         // Apiary
         List<ItemStack> fence = OreDictionary.getOres("fenceWood");
@@ -6778,15 +6782,14 @@ public class AssemblerRecipes implements Runnable {
                 .eut(TierEU.RECIPE_EV).addTo(assemblerRecipes);
 
         // nose cones
-
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTModHandler
-                                .getModItem(ProjectRedIllumination.ID, "projectred.illumination.cagelamp2.inv", 1L, 14),
-                        GTModHandler.getModItem(GalacticraftCore.ID, "item.heavyPlating", 4L, 0))
-                .circuit(4).itemOutputs(GTModHandler.getModItem(GalacticraftCore.ID, "item.noseCone", 1L, 0))
-                .fluidInputs(Materials.StainlessSteel.getMolten(36L)).duration(2 * SECONDS + 10 * TICKS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (ProjectRedIllumination.isModLoaded()) {
+            GTValues.RA.stdBuilder().itemInputs(
+                    GTModHandler.getModItem(ProjectRedIllumination.ID, "projectred.illumination.cagelamp2.inv", 1L, 14),
+                    GTModHandler.getModItem(GalacticraftCore.ID, "item.heavyPlating", 4L, 0)).circuit(4)
+                    .itemOutputs(GTModHandler.getModItem(GalacticraftCore.ID, "item.noseCone", 1L, 0))
+                    .fluidInputs(Materials.StainlessSteel.getMolten(36L)).duration(2 * SECONDS + 10 * TICKS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
 
         GTValues.RA.stdBuilder()
                 .itemInputs(
@@ -7210,13 +7213,14 @@ public class AssemblerRecipes implements Runnable {
                 .circuit(24).itemOutputs(GTModHandler.getModItem(Chisel.ID, "templeblock", 8L, 0)).duration(5 * SECONDS)
                 .eut(24).addTo(assemblerRecipes);
         // Mossy Temple Block
-
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTModHandler.getModItem(Chisel.ID, "templeblock", 8L, 0),
-                        GTModHandler.getModItem(BiomesOPlenty.ID, "moss", 8L, 0))
-                .circuit(24).itemOutputs(GTModHandler.getModItem(Chisel.ID, "mossy_templeblock", 4L, 0))
-                .duration(5 * SECONDS).eut(24).addTo(assemblerRecipes);
+        if (BiomesOPlenty.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTModHandler.getModItem(Chisel.ID, "templeblock", 8L, 0),
+                            GTModHandler.getModItem(BiomesOPlenty.ID, "moss", 8L, 0))
+                    .circuit(24).itemOutputs(GTModHandler.getModItem(Chisel.ID, "mossy_templeblock", 4L, 0))
+                    .duration(5 * SECONDS).eut(24).addTo(assemblerRecipes);
+        }
 
         GTValues.RA.stdBuilder()
                 .itemInputs(new ItemStack(Blocks.stone, 4), GTOreDictUnificator.get(new ItemStack(Items.dye, 1, 9)))

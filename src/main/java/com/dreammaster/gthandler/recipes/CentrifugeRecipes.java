@@ -23,6 +23,7 @@ import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
+import gregtech.common.config.Gregtech;
 import gregtech.common.items.CombType;
 import gregtech.loaders.misc.GTBees;
 
@@ -641,22 +642,24 @@ public class CentrifugeRecipes implements Runnable {
                     .addTo(centrifugeRecipes);
         }
         if (Forestry.isModLoaded()) {
-            GTValues.RA.stdBuilder().itemInputs(GTModHandler.getModItem(Forestry.ID, "beeCombs", 1L, 9))
-                    .itemOutputs(
-                            GTModHandler.getModItem(Forestry.ID, "beeswax", 1L, 0),
-                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 1L))
-                    .outputChances(10000, 11).duration(15 * SECONDS).eut(TierEU.RECIPE_IV).addTo(centrifugeRecipes);
-            GTValues.RA.stdBuilder().itemInputs(GTBees.combs.getStackForType(CombType.INDIUM, 8)).circuit(2)
-                    .fluidInputs(GGMaterial.thoriumBasedLiquidFuelDepleted.getFluidOrGas(1000))
-                    .itemOutputs(
-                            WerkstoffLoader.Thorium232.get(OrePrefixes.dust, 64),
-                            WerkstoffLoader.Thorium232.get(OrePrefixes.dust, 16),
-                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Praseodymium, 64),
-                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Praseodymium, 32),
-                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Boron, 2),
-                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Indium, 12))
-                    .outputChances(10000, 8000, 10000, 8000, 3000, 5000).duration(1 * MINUTES + 15 * SECONDS)
-                    .eut(TierEU.RECIPE_EV / 2).addTo(centrifugeRecipes);
+            if (Gregtech.general.GTBees) {
+                GTValues.RA.stdBuilder().itemInputs(GTModHandler.getModItem(Forestry.ID, "beeCombs", 1L, 9))
+                        .itemOutputs(
+                                GTModHandler.getModItem(Forestry.ID, "beeswax", 1L, 0),
+                                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 1L))
+                        .outputChances(10000, 11).duration(15 * SECONDS).eut(TierEU.RECIPE_IV).addTo(centrifugeRecipes);
+                GTValues.RA.stdBuilder().itemInputs(GTBees.combs.getStackForType(CombType.INDIUM, 8)).circuit(2)
+                        .fluidInputs(GGMaterial.thoriumBasedLiquidFuelDepleted.getFluidOrGas(1000))
+                        .itemOutputs(
+                                WerkstoffLoader.Thorium232.get(OrePrefixes.dust, 64),
+                                WerkstoffLoader.Thorium232.get(OrePrefixes.dust, 16),
+                                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Praseodymium, 64),
+                                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Praseodymium, 32),
+                                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Boron, 2),
+                                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Indium, 12))
+                        .outputChances(10000, 8000, 10000, 8000, 3000, 5000).duration(1 * MINUTES + 15 * SECONDS)
+                        .eut(TierEU.RECIPE_EV / 2).addTo(centrifugeRecipes);
+            }
         }
     }
 }

@@ -49,11 +49,10 @@ public class ArcFurnaceRecipes implements Runnable {
                             GTOreDictUnificator.get(OrePrefixes.dust, Materials.DraconiumAwakened, 32L),
                             GTOreDictUnificator.get(OrePrefixes.plate, Materials.Firestone, 32L),
                             GTOreDictUnificator.get(OrePrefixes.dust, Materials.Dilithium, 32L),
-                            GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.Ardite, 64L),
                             GTModHandler.getModItem(GalacticraftAmunRa.ID, "item.baseItem", 4L, 3),
                             NHItemList.ChaoticDust.get(2),
                             GTModHandler.getModItem(GalacticraftAmunRa.ID, "item.baseItem", 1L, 26))
-                    .outputChances(5000, 5000, 5000, 5000, 5000, 3000, 2000, 500, 250)
+                    .outputChances(5000, 5000, 5000, 5000, 5000, 3000, 2000) // 7 chances
                     .fluidInputs(MaterialsElements.STANDALONE.CELESTIAL_TUNGSTEN.getFluidStack(144))
                     .fluidOutputs(Materials.Tungsten.getMolten(144)).duration(50 * SECONDS).eut(TierEU.RECIPE_ZPM)
                     .addTo(plasmaArcFurnaceRecipes);
