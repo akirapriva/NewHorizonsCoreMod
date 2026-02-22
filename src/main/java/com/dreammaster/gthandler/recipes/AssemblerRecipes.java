@@ -6108,74 +6108,80 @@ public class AssemblerRecipes implements Runnable {
                 .circuit(1).itemOutputs(GTModHandler.getModItem(OpenComputers.ID, "item", 1L, 108))
                 .fluidInputs(Materials.Polyethylene.getMolten(72L)).duration(20 * SECONDS).eut(TierEU.RECIPE_HV)
                 .addTo(assemblerRecipes);
-        // Open Printers
-        // Printer
+        if (OpenPrinters.isModLoaded()) {
+            // Open Printers
+            // Printer
 
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        ItemList.Machine_MV_Printer.get(1L),
-                        ItemList.Circuit_Board_Plastic_Advanced.get(1L),
-                        GTModHandler.getModItem(OpenComputers.ID, "item", 2L, 24))
-                .circuit(1).itemOutputs(GTModHandler.getModItem(OpenPrinters.ID, "openprinter.printer", 1L, 0))
-                .fluidInputs(Materials.Polyethylene.getMolten(72L)).duration(15 * SECONDS).eut(TierEU.RECIPE_MV)
-                .addTo(assemblerRecipes);
-        // Shredder
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            ItemList.Machine_MV_Printer.get(1L),
+                            ItemList.Circuit_Board_Plastic_Advanced.get(1L),
+                            GTModHandler.getModItem(OpenComputers.ID, "item", 2L, 24))
+                    .circuit(1).itemOutputs(GTModHandler.getModItem(OpenPrinters.ID, "openprinter.printer", 1L, 0))
+                    .fluidInputs(Materials.Polyethylene.getMolten(72L)).duration(15 * SECONDS).eut(TierEU.RECIPE_MV)
+                    .addTo(assemblerRecipes);
+            // Shredder
 
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        ItemList.Machine_MV_Macerator.get(1L),
-                        ItemList.Circuit_Board_Plastic_Advanced.get(1L),
-                        GTModHandler.getModItem(OpenComputers.ID, "item", 2L, 24))
-                .circuit(1).itemOutputs(GTModHandler.getModItem(OpenPrinters.ID, "openprinter.shredder", 1L, 0))
-                .fluidInputs(Materials.Polyethylene.getMolten(72L)).duration(15 * SECONDS).eut(TierEU.RECIPE_MV)
-                .addTo(assemblerRecipes);
-        // Paper Roll
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            ItemList.Machine_MV_Macerator.get(1L),
+                            ItemList.Circuit_Board_Plastic_Advanced.get(1L),
+                            GTModHandler.getModItem(OpenComputers.ID, "item", 2L, 24))
+                    .circuit(1).itemOutputs(GTModHandler.getModItem(OpenPrinters.ID, "openprinter.shredder", 1L, 0))
+                    .fluidInputs(Materials.Polyethylene.getMolten(72L)).duration(15 * SECONDS).eut(TierEU.RECIPE_MV)
+                    .addTo(assemblerRecipes);
+            // Paper Roll
 
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        new ItemStack(Items.paper, 64, 0),
-                        new ItemStack(Items.paper, 64, 0),
-                        new ItemStack(Items.paper, 64, 0),
-                        new ItemStack(Items.paper, 64, 0))
-                .circuit(12)
-                .itemOutputs(GTModHandler.getModItem(OpenPrinters.ID, "openprinter.printerPaperRoll", 1L, 0))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_MV / 2).addTo(assemblerRecipes);
-        // Black Ink Cartridge
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            new ItemStack(Items.paper, 64, 0),
+                            new ItemStack(Items.paper, 64, 0),
+                            new ItemStack(Items.paper, 64, 0),
+                            new ItemStack(Items.paper, 64, 0))
+                    .circuit(12)
+                    .itemOutputs(GTModHandler.getModItem(OpenPrinters.ID, "openprinter.printerPaperRoll", 1L, 0))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_MV / 2).addTo(assemblerRecipes);
+            // Black Ink Cartridge
 
-        GTValues.RA.stdBuilder()
-                .itemInputs(GTModHandler.getModItem(OpenComputers.ID, "item", 1L, 94), ItemList.Color_00.get(3L))
-                .circuit(2).itemOutputs(GTModHandler.getModItem(OpenPrinters.ID, "openprinter.printerInkBlack", 1L, 0))
-                .fluidInputs(Materials.Water.getFluid(1000L)).duration(15 * SECONDS).eut(TierEU.RECIPE_MV)
-                .addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(GTModHandler.getModItem(OpenComputers.ID, "item", 1L, 94), ItemList.Color_00.get(3L))
+                    .circuit(2)
+                    .itemOutputs(GTModHandler.getModItem(OpenPrinters.ID, "openprinter.printerInkBlack", 1L, 0))
+                    .fluidInputs(Materials.Water.getFluid(1000L)).duration(15 * SECONDS).eut(TierEU.RECIPE_MV)
+                    .addTo(assemblerRecipes);
 
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTModHandler.getModItem(OpenPrinters.ID, "openprinter.printerInkBlack", 1L, W),
-                        ItemList.Color_00.get(3L))
-                .circuit(2).itemOutputs(GTModHandler.getModItem(OpenPrinters.ID, "openprinter.printerInkBlack", 1L, 0))
-                .fluidInputs(Materials.Water.getFluid(1000L)).duration(7 * SECONDS + 10 * TICKS).eut(TierEU.RECIPE_MV)
-                .addTo(assemblerRecipes);
-        // Color Ink Cartridge
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTModHandler.getModItem(OpenPrinters.ID, "openprinter.printerInkBlack", 1L, W),
+                            ItemList.Color_00.get(3L))
+                    .circuit(2)
+                    .itemOutputs(GTModHandler.getModItem(OpenPrinters.ID, "openprinter.printerInkBlack", 1L, 0))
+                    .fluidInputs(Materials.Water.getFluid(1000L)).duration(7 * SECONDS + 10 * TICKS)
+                    .eut(TierEU.RECIPE_MV).addTo(assemblerRecipes);
+            // Color Ink Cartridge
 
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTModHandler.getModItem(OpenComputers.ID, "item", 1L, 94),
-                        ItemList.Color_06.get(1L),
-                        ItemList.Color_11.get(1L),
-                        ItemList.Color_13.get(1L))
-                .circuit(2).itemOutputs(GTModHandler.getModItem(OpenPrinters.ID, "openprinter.printerInkColor", 1L, 0))
-                .fluidInputs(Materials.Water.getFluid(1000L)).duration(15 * SECONDS).eut(TierEU.RECIPE_MV)
-                .addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTModHandler.getModItem(OpenComputers.ID, "item", 1L, 94),
+                            ItemList.Color_06.get(1L),
+                            ItemList.Color_11.get(1L),
+                            ItemList.Color_13.get(1L))
+                    .circuit(2)
+                    .itemOutputs(GTModHandler.getModItem(OpenPrinters.ID, "openprinter.printerInkColor", 1L, 0))
+                    .fluidInputs(Materials.Water.getFluid(1000L)).duration(15 * SECONDS).eut(TierEU.RECIPE_MV)
+                    .addTo(assemblerRecipes);
 
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTModHandler.getModItem(OpenPrinters.ID, "openprinter.printerInkColor", 1L, W),
-                        ItemList.Color_06.get(1L),
-                        ItemList.Color_11.get(1L),
-                        ItemList.Color_13.get(1L))
-                .circuit(2).itemOutputs(GTModHandler.getModItem(OpenPrinters.ID, "openprinter.printerInkColor", 1L, 0))
-                .fluidInputs(Materials.Water.getFluid(1000L)).duration(7 * SECONDS + 10 * TICKS).eut(TierEU.RECIPE_MV)
-                .addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTModHandler.getModItem(OpenPrinters.ID, "openprinter.printerInkColor", 1L, W),
+                            ItemList.Color_06.get(1L),
+                            ItemList.Color_11.get(1L),
+                            ItemList.Color_13.get(1L))
+                    .circuit(2)
+                    .itemOutputs(GTModHandler.getModItem(OpenPrinters.ID, "openprinter.printerInkColor", 1L, 0))
+                    .fluidInputs(Materials.Water.getFluid(1000L)).duration(7 * SECONDS + 10 * TICKS)
+                    .eut(TierEU.RECIPE_MV).addTo(assemblerRecipes);
+        }
         // Open Security
         if (OpenSecurity.isModLoaded()) {
             // Magnetic Card Reader
@@ -10149,7 +10155,7 @@ public class AssemblerRecipes implements Runnable {
 
             }
 
-            if (Computronics.isModLoaded()) {
+            if (OpenComputers.isModLoaded() && Computronics.isModLoaded()) {
                 // Camera Upgrade
 
                 GTValues.RA.stdBuilder()

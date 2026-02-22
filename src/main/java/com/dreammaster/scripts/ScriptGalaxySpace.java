@@ -7,7 +7,6 @@ import static gregtech.api.enums.Mods.GalaxySpace;
 import static gregtech.api.enums.Mods.IndustrialCraft2;
 import static gregtech.api.enums.Mods.OpenComputers;
 import static gregtech.api.enums.Mods.OpenModularTurrets;
-import static gregtech.api.enums.Mods.TinkerConstruct;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.autoclaveRecipes;
 import static gregtech.api.recipe.RecipeMaps.compressorRecipes;
@@ -62,8 +61,7 @@ public class ScriptGalaxySpace implements IScriptLoader {
                 GalacticraftMars.ID,
                 GalaxySpace.ID,
                 IndustrialCraft2.ID,
-                OpenComputers.ID,
-                TinkerConstruct.ID);
+                OpenComputers.ID);
     }
 
     @Override
@@ -525,20 +523,6 @@ public class ScriptGalaxySpace implements IScriptLoader {
                 new ItemStack(MarsItems.marsItemBasic, 1, 5), // Compressed Desh
                 'C',
                 getGSItem("item.CompressedPlates", 1, 2)); // Compressed Duralumin
-
-        addShapedRecipe(
-                getGSItem("item.QuantBow", 1, 0),
-                "LMS",
-                "m S",
-                "LMS",
-                'L',
-                GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.Lead, 1),
-                'M',
-                NHItemList.MytrylCrystal.get(),
-                'S',
-                getModItem(TinkerConstruct.ID, "bowstring", 1, 2), // Fiery Bowstring
-                'm',
-                NHItemList.MysteriousCrystal.get());
 
         GTModHandler.addCraftingRecipe(
                 getGSItem("item.lead_helmet", 1, 0),

@@ -1,16 +1,6 @@
 package com.dreammaster.scripts;
 
-import static gregtech.api.enums.Mods.BiomesOPlenty;
-import static gregtech.api.enums.Mods.BuildCraftFactory;
-import static gregtech.api.enums.Mods.Forestry;
-import static gregtech.api.enums.Mods.IndustrialCraft2;
-import static gregtech.api.enums.Mods.Minecraft;
-import static gregtech.api.enums.Mods.Natura;
-import static gregtech.api.enums.Mods.Railcraft;
-import static gregtech.api.enums.Mods.Thaumcraft;
-import static gregtech.api.enums.Mods.TinkerConstruct;
-import static gregtech.api.enums.Mods.TinkersGregworks;
-import static gregtech.api.enums.Mods.TwilightForest;
+import static gregtech.api.enums.Mods.*;
 import static gregtech.api.recipe.RecipeMaps.alloySmelterRecipes;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.blastFurnaceRecipes;
@@ -60,17 +50,7 @@ public class ScriptIndustrialCraft implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                BiomesOPlenty.ID,
-                BuildCraftFactory.ID,
-                Forestry.ID,
-                IndustrialCraft2.ID,
-                Natura.ID,
-                Railcraft.ID,
-                Thaumcraft.ID,
-                TinkerConstruct.ID,
-                TinkersGregworks.ID,
-                TwilightForest.ID);
+        return Arrays.asList(BuildCraftFactory.ID, Forestry.ID, IndustrialCraft2.ID, Railcraft.ID, TwilightForest.ID);
     }
 
     @Override
@@ -344,6 +324,17 @@ public class ScriptIndustrialCraft implements IScriptLoader {
                 null,
                 "craftingToolWrench",
                 null);
+        addShapedRecipe(
+                getModItem(IndustrialCraft2.ID, "blockMachine", 1, 1, missing),
+                "plateIron",
+                "plateIron",
+                "plateIron",
+                "plateIron",
+                "craftingToolWrench",
+                "plateIron",
+                "plateIron",
+                getModItem(Minecraft.ID, "furnace", 1, 0, missing),
+                "plateIron");
         addShapedRecipe(
                 getModItem(IndustrialCraft2.ID, "reactorVent", 1, 1, missing),
                 "plateAluminium",
@@ -689,23 +680,25 @@ public class ScriptIndustrialCraft implements IScriptLoader {
                 "itemCasingSteel",
                 "craftingToolScrewdriver",
                 "itemCasingSteel");
-        addShapedRecipe(
-                getModItem(IndustrialCraft2.ID, "itemNanoSaber", 1, 0, missing),
-                "plateAlloyIridium",
-                createItemStack(
-                        TinkersGregworks.ID,
-                        "tGregToolPartLargeSwordBlade",
-                        1,
-                        1529,
-                        "{material:\"TungstenSteel\"}",
-                        missing),
-                "plateAlloyIridium",
-                "circuitMaster",
-                "batteryData",
-                "circuitMaster",
-                "craftingToolFile",
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 2, missing),
-                "craftingToolHardHammer");
+        if (TinkersGregworks.isModLoaded()) {
+            addShapedRecipe(
+                    getModItem(IndustrialCraft2.ID, "itemNanoSaber", 1, 0, missing),
+                    "plateAlloyIridium",
+                    createItemStack(
+                            TinkersGregworks.ID,
+                            "tGregToolPartLargeSwordBlade",
+                            1,
+                            1529,
+                            "{material:\"TungstenSteel\"}",
+                            missing),
+                    "plateAlloyIridium",
+                    "circuitMaster",
+                    "batteryData",
+                    "circuitMaster",
+                    "craftingToolFile",
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 2, missing),
+                    "craftingToolHardHammer");
+        }
         addShapedRecipe(
                 getModItem(IndustrialCraft2.ID, "obscurator", 1, 0, missing),
                 "screwSteel",
@@ -925,63 +918,64 @@ public class ScriptIndustrialCraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        GameRegistry.addRecipe(
-                new ArmorRepairRecipe(
-                        getModItem(IndustrialCraft2.ID, "itemArmorRubBoots", 1, 0, missing),
-                        "aba",
-                        "-c-",
-                        "-d-",
-                        'a',
-                        "plateAnyRubber",
-                        'b',
-                        getModItem(IndustrialCraft2.ID, "itemArmorRubBoots", 1, wildcard, missing),
-                        'c',
-                        ToolDictNames.craftingToolSoftMallet.name(),
-                        'd',
-                        getModItem(TinkerConstruct.ID, "buckets", 1, 25, missing)));
-        GameRegistry.addRecipe(
-                new ArmorRepairRecipe(
-                        getModItem(IndustrialCraft2.ID, "itemArmorHazmatHelmet", 1, 0, missing),
-                        "aba",
-                        "-c-",
-                        "-d-",
-                        'a',
-                        "plateAnyRubber",
-                        'b',
-                        getModItem(IndustrialCraft2.ID, "itemArmorHazmatHelmet", 1, wildcard, missing),
-                        'c',
-                        ToolDictNames.craftingToolSoftMallet.name(),
-                        'd',
-                        getModItem(TinkerConstruct.ID, "buckets", 1, 25, missing)));
-        GameRegistry.addRecipe(
-                new ArmorRepairRecipe(
-                        getModItem(IndustrialCraft2.ID, "itemArmorHazmatChestplate", 1, 0, missing),
-                        "aba",
-                        "-c-",
-                        "-d-",
-                        'a',
-                        "plateAnyRubber",
-                        'b',
-                        getModItem(IndustrialCraft2.ID, "itemArmorHazmatChestplate", 1, wildcard, missing),
-                        'c',
-                        ToolDictNames.craftingToolSoftMallet.name(),
-                        'd',
-                        getModItem(TinkerConstruct.ID, "buckets", 1, 25, missing)));
-        GameRegistry.addRecipe(
-                new ArmorRepairRecipe(
-                        getModItem(IndustrialCraft2.ID, "itemArmorHazmatLeggings", 1, 0, missing),
-                        "aba",
-                        "-c-",
-                        "-d-",
-                        'a',
-                        "plateAnyRubber",
-                        'b',
-                        getModItem(IndustrialCraft2.ID, "itemArmorHazmatLeggings", 1, wildcard, missing),
-                        'c',
-                        ToolDictNames.craftingToolSoftMallet.name(),
-                        'd',
-                        getModItem(TinkerConstruct.ID, "buckets", 1, 25, missing)));
-
+        if (TinkerConstruct.isModLoaded()) {
+            GameRegistry.addRecipe(
+                    new ArmorRepairRecipe(
+                            getModItem(IndustrialCraft2.ID, "itemArmorRubBoots", 1, 0, missing),
+                            "aba",
+                            "-c-",
+                            "-d-",
+                            'a',
+                            "plateAnyRubber",
+                            'b',
+                            getModItem(IndustrialCraft2.ID, "itemArmorRubBoots", 1, wildcard, missing),
+                            'c',
+                            ToolDictNames.craftingToolSoftMallet.name(),
+                            'd',
+                            getModItem(TinkerConstruct.ID, "buckets", 1, 25, missing)));
+            GameRegistry.addRecipe(
+                    new ArmorRepairRecipe(
+                            getModItem(IndustrialCraft2.ID, "itemArmorHazmatHelmet", 1, 0, missing),
+                            "aba",
+                            "-c-",
+                            "-d-",
+                            'a',
+                            "plateAnyRubber",
+                            'b',
+                            getModItem(IndustrialCraft2.ID, "itemArmorHazmatHelmet", 1, wildcard, missing),
+                            'c',
+                            ToolDictNames.craftingToolSoftMallet.name(),
+                            'd',
+                            getModItem(TinkerConstruct.ID, "buckets", 1, 25, missing)));
+            GameRegistry.addRecipe(
+                    new ArmorRepairRecipe(
+                            getModItem(IndustrialCraft2.ID, "itemArmorHazmatChestplate", 1, 0, missing),
+                            "aba",
+                            "-c-",
+                            "-d-",
+                            'a',
+                            "plateAnyRubber",
+                            'b',
+                            getModItem(IndustrialCraft2.ID, "itemArmorHazmatChestplate", 1, wildcard, missing),
+                            'c',
+                            ToolDictNames.craftingToolSoftMallet.name(),
+                            'd',
+                            getModItem(TinkerConstruct.ID, "buckets", 1, 25, missing)));
+            GameRegistry.addRecipe(
+                    new ArmorRepairRecipe(
+                            getModItem(IndustrialCraft2.ID, "itemArmorHazmatLeggings", 1, 0, missing),
+                            "aba",
+                            "-c-",
+                            "-d-",
+                            'a',
+                            "plateAnyRubber",
+                            'b',
+                            getModItem(IndustrialCraft2.ID, "itemArmorHazmatLeggings", 1, wildcard, missing),
+                            'c',
+                            ToolDictNames.craftingToolSoftMallet.name(),
+                            'd',
+                            getModItem(TinkerConstruct.ID, "buckets", 1, 25, missing)));
+        }
         ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
                 getModItem(IndustrialCraft2.ID, "blockKineticGenerator", 1, 4, missing),
                 "---------",
@@ -1423,6 +1417,13 @@ public class ScriptIndustrialCraft implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.Wood, 8L))
                 .circuit(2).itemOutputs(getModItem(IndustrialCraft2.ID, "blockCrop", 16, 0, missing))
                 .duration(7 * SECONDS + 10 * TICKS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+
+        GTValues.RA.stdBuilder()
+                .itemInputs(
+                        getModItem(Minecraft.ID, "furnace", 1, 0, missing),
+                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Iron, 5L))
+                .itemOutputs(getModItem(IndustrialCraft2.ID, "blockMachine", 1, 1, missing)).duration(20 * SECONDS)
+                .eut(16).addTo(assemblerRecipes);
 
         GTValues.RA.stdBuilder()
                 .itemInputs(

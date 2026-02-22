@@ -78,18 +78,14 @@ public class ScriptProjectRed implements IScriptLoader {
     @Override
     public List<String> getDependencies() {
         return Arrays.asList(
-                Botania.ID,
                 Botany.ID,
                 BuildCraftFactory.ID,
                 EtFuturumRequiem.ID,
                 ExtraBees.ID,
-                ForbiddenMagic.ID,
                 Forestry.ID,
                 GalacticraftAmunRa.ID,
                 Gendustry.ID,
                 IndustrialCraft2.ID,
-                MCFrames.ID,
-                Natura.ID,
                 OpenBlocks.ID,
                 OpenComputers.ID,
                 PamsHarvestCraft.ID,
@@ -99,10 +95,7 @@ public class ScriptProjectRed implements IScriptLoader {
                 ProjectRedTransportation.ID,
                 ProjectRedExpansion.ID,
                 ProjectRedFabrication.ID,
-                Railcraft.ID,
-                StevesCarts2.ID,
-                ThaumicHorizons.ID,
-                TinkerConstruct.ID);
+                Railcraft.ID);
     }
 
     // This should ideally be shared somewhere; pending more cleanup/rewrite.
@@ -171,8 +164,9 @@ public class ScriptProjectRed implements IScriptLoader {
                     getModItem(ProjectRedExploration.ID, "projectred.exploration.stone", 1, 6, missing));
             ChiselHelper.addVariationFromStack("peridot", getModItem(BiomesOPlenty.ID, "gemOre", 1, 5, missing));
 
-            ChiselHelper
-                    .addVariationFromStack("peridot", GTOreDictUnificator.get(OrePrefixes.block, Materials.Olivine, 1L));
+            ChiselHelper.addVariationFromStack(
+                    "peridot",
+                    GTOreDictUnificator.get(OrePrefixes.block, Materials.Olivine, 1L));
             ChiselHelper.addVariationFromStack(
                     "peridot",
                     getModItem(ProjectRedExploration.ID, "projectred.exploration.stone", 1, 7, missing));
@@ -242,17 +236,19 @@ public class ScriptProjectRed implements IScriptLoader {
                 "itemCasingAluminium",
                 "craftingFilter",
                 "itemCasingAluminium");
-        addShapedRecipe(
-                getModItem(ProjectRedExpansion.ID, "projectred.expansion.machine2", 1, 4, missing),
-                getModItem(TinkerConstruct.ID, "heavyPlate", 1, 7, missing),
-                ItemList.Electric_Motor_LV.get(1L),
-                getModItem(TinkerConstruct.ID, "heavyPlate", 1, 7, missing),
-                "circuitBasic",
-                getModItem(Minecraft.ID, "flint_and_steel", 1, 0, missing),
-                ItemList.Conveyor_Module_LV.get(1L),
-                "itemCasingSteel",
-                "craftingPiston",
-                "itemCasingSteel");
+        if (TinkerConstruct.isModLoaded()) {
+            addShapedRecipe(
+                    getModItem(ProjectRedExpansion.ID, "projectred.expansion.machine2", 1, 4, missing),
+                    getModItem(TinkerConstruct.ID, "heavyPlate", 1, 7, missing),
+                    ItemList.Electric_Motor_LV.get(1L),
+                    getModItem(TinkerConstruct.ID, "heavyPlate", 1, 7, missing),
+                    "circuitBasic",
+                    getModItem(Minecraft.ID, "flint_and_steel", 1, 0, missing),
+                    ItemList.Conveyor_Module_LV.get(1L),
+                    "itemCasingSteel",
+                    "craftingPiston",
+                    "itemCasingSteel");
+        }
         addShapedRecipe(
                 getModItem(ProjectRedExpansion.ID, "projectred.expansion.machine2", 1, 5, missing),
                 "plateSteel",
@@ -479,17 +475,19 @@ public class ScriptProjectRed implements IScriptLoader {
                 "screwSteel",
                 "craftingToolScrewdriver",
                 "screwSteel");
-        addShapedRecipe(
-                getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 1, 0, missing),
-                null,
-                "craftingToolFile",
-                null,
-                "stickIron",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickIron",
-                null,
-                "craftingToolSaw",
-                null);
+        if (TinkerConstruct.isModLoaded()) {
+            addShapedRecipe(
+                    getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 1, 0, missing),
+                    null,
+                    "craftingToolFile",
+                    null,
+                    "stickIron",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickIron",
+                    null,
+                    "craftingToolSaw",
+                    null);
+        }
         addShapedRecipe(
                 getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 1, 0, missing),
                 null,
@@ -509,6 +507,30 @@ public class ScriptProjectRed implements IScriptLoader {
                 "stickIron",
                 "plateGlass",
                 "stickIron",
+                null,
+                "craftingToolSaw",
+                null);
+        if (TinkerConstruct.isModLoaded()) {
+            addShapedRecipe(
+                    getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 2, 0, missing),
+                    null,
+                    "craftingToolFile",
+                    null,
+                    "stickLongIron",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickLongIron",
+                    null,
+                    "craftingToolSaw",
+                    null);
+        }
+        addShapedRecipe(
+                getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 2, 0, missing),
+                null,
+                "craftingToolFile",
+                null,
+                "stickLongIron",
+                "paneGlass",
+                "stickLongIron",
                 null,
                 "craftingToolSaw",
                 null);
@@ -518,44 +540,24 @@ public class ScriptProjectRed implements IScriptLoader {
                 "craftingToolFile",
                 null,
                 "stickLongIron",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickLongIron",
-                null,
-                "craftingToolSaw",
-                null);
-        addShapedRecipe(
-                getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 2, 0, missing),
-                null,
-                "craftingToolFile",
-                null,
-                "stickLongIron",
-                "paneGlass",
-                "stickLongIron",
-                null,
-                "craftingToolSaw",
-                null);
-        addShapedRecipe(
-                getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 2, 0, missing),
-                null,
-                "craftingToolFile",
-                null,
-                "stickLongIron",
                 "plateGlass",
                 "stickLongIron",
                 null,
                 "craftingToolSaw",
                 null);
-        addShapedRecipe(
-                getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 4, 0, missing),
-                null,
-                "craftingToolFile",
-                null,
-                "stickSteel",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickSteel",
-                null,
-                "craftingToolSaw",
-                null);
+        if (TinkerConstruct.isModLoaded()) {
+            addShapedRecipe(
+                    getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 4, 0, missing),
+                    null,
+                    "craftingToolFile",
+                    null,
+                    "stickSteel",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickSteel",
+                    null,
+                    "craftingToolSaw",
+                    null);
+        }
         addShapedRecipe(
                 getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 4, 0, missing),
                 null,
@@ -578,17 +580,19 @@ public class ScriptProjectRed implements IScriptLoader {
                 null,
                 "craftingToolSaw",
                 null);
-        addShapedRecipe(
-                getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 8, 0, missing),
-                null,
-                "craftingToolFile",
-                null,
-                "stickLongSteel",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickLongSteel",
-                null,
-                "craftingToolSaw",
-                null);
+        if (TinkerConstruct.isModLoaded()) {
+            addShapedRecipe(
+                    getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 8, 0, missing),
+                    null,
+                    "craftingToolFile",
+                    null,
+                    "stickLongSteel",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickLongSteel",
+                    null,
+                    "craftingToolSaw",
+                    null);
+        }
         addShapedRecipe(
                 getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 8, 0, missing),
                 null,
@@ -611,17 +615,19 @@ public class ScriptProjectRed implements IScriptLoader {
                 null,
                 "craftingToolSaw",
                 null);
-        addShapedRecipe(
-                getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 16, 0, missing),
-                null,
-                "craftingToolFile",
-                null,
-                "stickAluminium",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickAluminium",
-                null,
-                "craftingToolSaw",
-                null);
+        if (TinkerConstruct.isModLoaded()) {
+            addShapedRecipe(
+                    getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 16, 0, missing),
+                    null,
+                    "craftingToolFile",
+                    null,
+                    "stickAluminium",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickAluminium",
+                    null,
+                    "craftingToolSaw",
+                    null);
+        }
         addShapedRecipe(
                 getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 16, 0, missing),
                 null,
@@ -644,17 +650,19 @@ public class ScriptProjectRed implements IScriptLoader {
                 null,
                 "craftingToolSaw",
                 null);
-        addShapedRecipe(
-                getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 32, 0, missing),
-                null,
-                "craftingToolFile",
-                null,
-                "stickLongAluminium",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickLongAluminium",
-                null,
-                "craftingToolSaw",
-                null);
+        if (TinkerConstruct.isModLoaded()) {
+            addShapedRecipe(
+                    getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 32, 0, missing),
+                    null,
+                    "craftingToolFile",
+                    null,
+                    "stickLongAluminium",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickLongAluminium",
+                    null,
+                    "craftingToolSaw",
+                    null);
+        }
         addShapedRecipe(
                 getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 32, 0, missing),
                 null,
@@ -930,10 +938,12 @@ public class ScriptProjectRed implements IScriptLoader {
                 "stickSteel",
                 ItemList.Machine_LV_Printer.get(1L),
                 "stickSteel");
-        addShapelessRecipe(
-                getModItem(MCFrames.ID, "mcframes.frame", 1, 0, missing),
-                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Wood, 1L),
-                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Wood, 1L));
+        if (MCFrames.isModLoaded()) {
+            addShapelessRecipe(
+                    getModItem(MCFrames.ID, "mcframes.frame", 1, 0, missing),
+                    GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Wood, 1L),
+                    GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Wood, 1L));
+        }
         addShapelessRecipe(
                 getModItem(ProjectRedExpansion.ID, "projectred.expansion.machine2", 1, 10, missing),
                 getModItem(Forestry.ID, "factory2", 1, 2, missing));
@@ -1863,25 +1873,19 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedExpansion.ID, "projectred.expansion.electric_screwdriver", 1, 0))
                 .duration(5 * SECONDS).eut(TierEU.RECIPE_LV / 2).requireMods(ProjectRedCore, ProjectRedExpansion)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(TinkerConstruct.ID, "GlassPane", 1, 0),
-                        GTOreDictUnificator.get(OrePrefixes.stick, Materials.Iron, 2L))
-                .circuit(19)
-                .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 2, 0))
-                .duration(5 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation, TinkerConstruct)
-                .addTo(assemblerRecipes);
+        if (TinkerConstruct.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TinkerConstruct.ID, "GlassPane", 1, 0),
+                            GTOreDictUnificator.get(OrePrefixes.stick, Materials.Iron, 2L))
+                    .circuit(19)
+                    .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 2, 0))
+                    .duration(5 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation, TinkerConstruct)
+                    .addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Minecraft.ID, "glass_pane", 1, 0),
-                        GTOreDictUnificator.get(OrePrefixes.stick, Materials.Iron, 2L))
-                .circuit(19)
-                .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 2, 0))
-                .duration(5 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glass, 1L),
                         GTOreDictUnificator.get(OrePrefixes.stick, Materials.Iron, 2L))
                 .circuit(19)
                 .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 2, 0))
@@ -1889,12 +1893,22 @@ public class ScriptProjectRed implements IScriptLoader {
                 .addTo(assemblerRecipes);
         GTValues.RA.stdBuilder()
                 .itemInputs(
-                        getModItem(TinkerConstruct.ID, "GlassPane", 1, 0),
-                        GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.Iron, 2L))
+                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glass, 1L),
+                        GTOreDictUnificator.get(OrePrefixes.stick, Materials.Iron, 2L))
                 .circuit(19)
-                .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 4, 0))
-                .duration(5 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation, TinkerConstruct)
+                .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 2, 0))
+                .duration(5 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation)
                 .addTo(assemblerRecipes);
+        if (TinkerConstruct.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TinkerConstruct.ID, "GlassPane", 1, 0),
+                            GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.Iron, 2L))
+                    .circuit(19)
+                    .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 4, 0))
+                    .duration(5 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation, TinkerConstruct)
+                    .addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Minecraft.ID, "glass_pane", 1, 0),
@@ -1911,14 +1925,16 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 4, 0))
                 .duration(5 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(TinkerConstruct.ID, "GlassPane", 1, 0),
-                        GTOreDictUnificator.get(OrePrefixes.stick, Materials.Steel, 2L))
-                .circuit(19)
-                .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 8, 0))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation, TinkerConstruct)
-                .addTo(assemblerRecipes);
+        if (TinkerConstruct.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TinkerConstruct.ID, "GlassPane", 1, 0),
+                            GTOreDictUnificator.get(OrePrefixes.stick, Materials.Steel, 2L))
+                    .circuit(19)
+                    .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 8, 0))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation, TinkerConstruct)
+                    .addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Minecraft.ID, "glass_pane", 1, 0),
@@ -1935,14 +1951,16 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 8, 0))
                 .duration(10 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(TinkerConstruct.ID, "GlassPane", 1, 0),
-                        GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.Steel, 2L))
-                .circuit(19)
-                .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 16, 0))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation, TinkerConstruct)
-                .addTo(assemblerRecipes);
+        if (TinkerConstruct.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TinkerConstruct.ID, "GlassPane", 1, 0),
+                            GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.Steel, 2L))
+                    .circuit(19)
+                    .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 16, 0))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation, TinkerConstruct)
+                    .addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Minecraft.ID, "glass_pane", 1, 0),
@@ -1959,22 +1977,24 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 16, 0))
                 .duration(10 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(TinkerConstruct.ID, "GlassPane", 1, 0),
-                        GTOreDictUnificator.get(OrePrefixes.stick, Materials.Aluminium, 2L))
-                .circuit(19)
-                .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 32, 0))
-                .duration(20 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation, TinkerConstruct)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "glass_pane", 1, 0),
-                        GTOreDictUnificator.get(OrePrefixes.stick, Materials.Aluminium, 2L))
-                .circuit(19)
-                .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 32, 0))
-                .duration(20 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation, TinkerConstruct)
-                .addTo(assemblerRecipes);
+        if (TinkerConstruct.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TinkerConstruct.ID, "GlassPane", 1, 0),
+                            GTOreDictUnificator.get(OrePrefixes.stick, Materials.Aluminium, 2L))
+                    .circuit(19)
+                    .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 32, 0))
+                    .duration(20 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation, TinkerConstruct)
+                    .addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "glass_pane", 1, 0),
+                            GTOreDictUnificator.get(OrePrefixes.stick, Materials.Aluminium, 2L))
+                    .circuit(19)
+                    .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 32, 0))
+                    .duration(20 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation, TinkerConstruct)
+                    .addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glass, 1L),
@@ -1983,14 +2003,16 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 32, 0))
                 .duration(20 * SECONDS).eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(TinkerConstruct.ID, "GlassPane", 1, 0),
-                        GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.Aluminium, 2L))
-                .circuit(19)
-                .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 64, 0))
-                .duration(20 * SECONDS).requireMods(ProjectRedTransportation, TinkerConstruct).eut(TierEU.RECIPE_LV)
-                .addTo(assemblerRecipes);
+        if (TinkerConstruct.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TinkerConstruct.ID, "GlassPane", 1, 0),
+                            GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.Aluminium, 2L))
+                    .circuit(19)
+                    .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 64, 0))
+                    .duration(20 * SECONDS).requireMods(ProjectRedTransportation, TinkerConstruct).eut(TierEU.RECIPE_LV)
+                    .addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Minecraft.ID, "glass_pane", 1, 0),
@@ -2149,13 +2171,15 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 1, 6))
                 .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 1440)).duration(20 * SECONDS)
                 .eut(TierEU.RECIPE_LV).requireMods(ProjectRedTransportation).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 1, 0),
-                        getModItem(StevesCarts2.ID, "ModuleComponents", 1, 60))
-                .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 1, 9))
-                .requireMods(ProjectRedTransportation, StevesCarts2).duration(10 * SECONDS).eut(TierEU.RECIPE_LV)
-                .addTo(assemblerRecipes);
+        if (StevesCarts2.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 1, 0),
+                            getModItem(StevesCarts2.ID, "ModuleComponents", 1, 60))
+                    .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 1, 9))
+                    .requireMods(ProjectRedTransportation, StevesCarts2).duration(10 * SECONDS).eut(TierEU.RECIPE_LV)
+                    .addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 1, 0))
                 .itemOutputs(getModItem(ProjectRedTransportation.ID, "projectred.transportation.pipe", 1, 10))
@@ -3005,10 +3029,13 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 19))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 0))
-                .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 19))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
-                .addTo(mixerRecipes);
+        if (Botania.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 0)).circuit(8)
+                    .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 19))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
+                    .addTo(mixerRecipes);
+        }
         if (BiomesOPlenty.isModLoaded()) {
             GTValues.RA.stdBuilder()
                     .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(BiomesOPlenty.ID, "misc", 1, 8))
@@ -3042,10 +3069,13 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 20))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 1))
-                .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 20))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
-                .addTo(mixerRecipes);
+        if (Botania.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 1)).circuit(8)
+                    .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 20))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
+                    .addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), ItemList.Color_14.get(1L))
                 .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 20))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
@@ -3067,10 +3097,13 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 21))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 2))
-                .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 21))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Botania)
-                .addTo(mixerRecipes);
+        if (Botania.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 2)).circuit(8)
+                    .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 21))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Botania)
+                    .addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), ItemList.Color_13.get(1L))
                 .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 21))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
@@ -3092,10 +3125,13 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 22))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 3))
-                .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 22))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
-                .addTo(mixerRecipes);
+        if (Botania.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 3)).circuit(8)
+                    .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 22))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
+                    .addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), ItemList.Color_12.get(1L))
                 .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 22))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
@@ -3117,10 +3153,13 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 23))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 4))
-                .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 23))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
-                .addTo(mixerRecipes);
+        if (Botania.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 4)).circuit(8)
+                    .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 23))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
+                    .addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         new ItemStack(Items.glowstone_dust, 1),
@@ -3154,10 +3193,13 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 24))
                 .duration(1 * SECONDS + 5 * TICKS).requireMods(ProjectRedCore).eut(TierEU.RECIPE_ULV)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 5))
-                .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 24))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
-                .addTo(mixerRecipes);
+        if (Botania.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 5)).circuit(8)
+                    .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 24))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
+                    .addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), ItemList.Color_10.get(1L))
                 .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 24))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
@@ -3186,10 +3228,13 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 25))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 6))
-                .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 25))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
-                .addTo(mixerRecipes);
+        if (Botania.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 6)).circuit(8)
+                    .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 25))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
+                    .addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), ItemList.Color_09.get(1L))
                 .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 25))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
@@ -3211,10 +3256,13 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 26))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 7))
-                .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 26))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Botania)
-                .addTo(mixerRecipes);
+        if (Botania.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 7)).circuit(8)
+                    .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 26))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Botania)
+                    .addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), ItemList.Color_08.get(1L))
                 .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 26))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
@@ -3236,10 +3284,13 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 27))
                 .duration(1 * SECONDS + 5 * TICKS).requireMods(ProjectRedCore).eut(TierEU.RECIPE_ULV)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 8))
-                .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 27))
-                .duration(1 * SECONDS + 5 * TICKS).requireMods(ProjectRedCore, Botania).eut(TierEU.RECIPE_ULV)
-                .addTo(mixerRecipes);
+        if (Botania.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 8)).circuit(8)
+                    .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 27))
+                    .duration(1 * SECONDS + 5 * TICKS).requireMods(ProjectRedCore, Botania).eut(TierEU.RECIPE_ULV)
+                    .addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), ItemList.Color_07.get(1L))
                 .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 27))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
@@ -3261,10 +3312,13 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 28))
                 .duration(1 * SECONDS + 5 * TICKS).requireMods(ProjectRedCore).eut(TierEU.RECIPE_ULV)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 9))
-                .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 28))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
-                .addTo(mixerRecipes);
+        if (Botania.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 9)).circuit(8)
+                    .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 28))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
+                    .addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         new ItemStack(Items.glowstone_dust, 1),
@@ -3300,11 +3354,13 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 29))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 10)).circuit(8)
-                .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 29))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Botania)
-                .addTo(mixerRecipes);
+        if (Botania.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 10)).circuit(8)
+                    .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 29))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Botania)
+                    .addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), ItemList.Color_05.get(1L))
                 .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 29))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
@@ -3326,16 +3382,20 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 30))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 11)).circuit(8)
-                .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 30))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Botania)
-                .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Natura.ID, "barleyFood", 1, 8))
-                .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 30))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Natura)
-                .addTo(mixerRecipes);
+        if (Botania.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 11)).circuit(8)
+                    .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 30))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Botania)
+                    .addTo(mixerRecipes);
+        }
+        if (Natura.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Natura.ID, "barleyFood", 1, 8))
+                    .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 30))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Natura)
+                    .addTo(mixerRecipes);
+        }
         if (BiomesOPlenty.isModLoaded()) {
             GTValues.RA.stdBuilder()
                     .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(BiomesOPlenty.ID, "misc", 1, 5))
@@ -3401,11 +3461,13 @@ public class ScriptProjectRed implements IScriptLoader {
                 .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 31))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV)
                 .requireMods(ProjectRedCore, GalacticraftAmunRa).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 12)).circuit(8)
-                .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 31))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Botania)
-                .addTo(mixerRecipes);
+        if (Botania.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 12)).circuit(8)
+                    .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 31))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Botania)
+                    .addTo(mixerRecipes);
+        }
         if (BiomesOPlenty.isModLoaded()) {
             GTValues.RA.stdBuilder()
                     .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(BiomesOPlenty.ID, "misc", 1, 6))
@@ -3456,11 +3518,13 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 32))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 13)).circuit(8)
-                .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 32))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Botania)
-                .addTo(mixerRecipes);
+        if (Botania.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 13)).circuit(8)
+                    .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 32))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Botania)
+                    .addTo(mixerRecipes);
+        }
         if (BiomesOPlenty.isModLoaded()) {
             GTValues.RA.stdBuilder()
                     .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(BiomesOPlenty.ID, "misc", 1, 7))
@@ -3494,11 +3558,13 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 33))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 14)).circuit(8)
-                .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 33))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Botania)
-                .addTo(mixerRecipes);
+        if (Botania.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 14)).circuit(8)
+                    .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 33))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Botania)
+                    .addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.glowstone_dust, 1), ItemList.Color_01.get(1L))
                 .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 33))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
@@ -3525,11 +3591,13 @@ public class ScriptProjectRed implements IScriptLoader {
                 .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 34))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 15)).circuit(8)
-                .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 34))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Botania)
-                .addTo(mixerRecipes);
+        if (Botania.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(Botania.ID, "dye", 1, 15)).circuit(8)
+                    .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 34))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, Botania)
+                    .addTo(mixerRecipes);
+        }
         if (BiomesOPlenty.isModLoaded()) {
             GTValues.RA.stdBuilder()
                     .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(BiomesOPlenty.ID, "misc", 1, 9))
@@ -3541,16 +3609,22 @@ public class ScriptProjectRed implements IScriptLoader {
                 .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 34))
                 .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(ForbiddenMagic.ID, "FMResource", 1, 1))
-                .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 34))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, ForbiddenMagic)
-                .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(ThaumicHorizons.ID, "inkEgg", 1, 0))
-                .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 34))
-                .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV).requireMods(ProjectRedCore, ThaumicHorizons)
-                .addTo(mixerRecipes);
+        if (ForbiddenMagic.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            new ItemStack(Items.glowstone_dust, 1),
+                            getModItem(ForbiddenMagic.ID, "FMResource", 1, 1))
+                    .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 34))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV)
+                    .requireMods(ProjectRedCore, ForbiddenMagic).addTo(mixerRecipes);
+        }
+        if (ThaumicHorizons.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(ThaumicHorizons.ID, "inkEgg", 1, 0))
+                    .circuit(8).itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 34))
+                    .duration(1 * SECONDS + 5 * TICKS).eut(TierEU.RECIPE_ULV)
+                    .requireMods(ProjectRedCore, ThaumicHorizons).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(new ItemStack(Items.glowstone_dust, 1), getModItem(ExtraBees.ID, "misc", 1, 24)).circuit(8)
                 .itemOutputs(getModItem(ProjectRedCore.ID, "projectred.core.part", 4, 34))

@@ -1,14 +1,6 @@
 package com.dreammaster.scripts;
 
-import static gregtech.api.enums.Mods.Backpack;
-import static gregtech.api.enums.Mods.BiomesOPlenty;
-import static gregtech.api.enums.Mods.ExtraTrees;
-import static gregtech.api.enums.Mods.Forestry;
-import static gregtech.api.enums.Mods.IguanaTweaksTinkerConstruct;
-import static gregtech.api.enums.Mods.MalisisDoors;
-import static gregtech.api.enums.Mods.Minecraft;
-import static gregtech.api.enums.Mods.Natura;
-import static gregtech.api.enums.Mods.PamsHarvestCraft;
+import static gregtech.api.enums.Mods.*;
 import static gregtech.api.recipe.RecipeMaps.centrifugeRecipes;
 import static gregtech.api.recipe.RecipeMaps.extractorRecipes;
 import static gregtech.api.recipe.RecipeMaps.formingPressRecipes;
@@ -48,15 +40,7 @@ public class ScriptHarvestcraft implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                Backpack.ID,
-                BiomesOPlenty.ID,
-                ExtraTrees.ID,
-                Forestry.ID,
-                IguanaTweaksTinkerConstruct.ID,
-                MalisisDoors.ID,
-                Natura.ID,
-                PamsHarvestCraft.ID);
+        return Arrays.asList(ExtraTrees.ID, Forestry.ID, PamsHarvestCraft.ID);
     }
 
     @Override
@@ -74,216 +58,221 @@ public class ScriptHarvestcraft implements IScriptLoader {
         OreDictionary.registerOre(
                 "toolJuicer",
                 MetaGeneratedTool01.INSTANCE.getToolWithStats(SOFTMALLET.ID, 1, null, null, null));
-
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(Natura.ID, "trapdoor.eucalyptus", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(Natura.ID, "trapdoor.sakura", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(Natura.ID, "trapdoor.ghostwood", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(Natura.ID, "trapdoor.redwood", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(Natura.ID, "trapdoor.bloodwood", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(Natura.ID, "trapdoor.hopseed", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(Natura.ID, "trapdoor.maple", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(Natura.ID, "trapdoor.amaranth", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(Natura.ID, "trapdoor.silverbell", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(Natura.ID, "trapdoor.tiger", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(Natura.ID, "trapdoor.willow", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(Natura.ID, "trapdoor.darkwood", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(Natura.ID, "trapdoor.fusewood", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(MalisisDoors.ID, "trapdoor_acacia", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(MalisisDoors.ID, "trapdoor_birch", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(MalisisDoors.ID, "trapdoor_dark_oak", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(MalisisDoors.ID, "trapdoor_jungle", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
-                "stickWood",
-                getModItem(MalisisDoors.ID, "trapdoor_spruce", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "chestWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                getModItem(Natura.ID, "barleyFood", 1, 3, missing),
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                getModItem(Natura.ID, "barleyFood", 1, 3, missing),
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                getModItem(Natura.ID, "barleyFood", 1, 3, missing),
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                getModItem(Natura.ID, "barleyFood", 1, 3, missing),
-                getModItem(Minecraft.ID, "string", 1, 0, missing));
+        if (Natura.isModLoaded()) {
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Natura.ID, "trapdoor.eucalyptus", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Natura.ID, "trapdoor.sakura", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Natura.ID, "trapdoor.ghostwood", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Natura.ID, "trapdoor.redwood", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Natura.ID, "trapdoor.bloodwood", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Natura.ID, "trapdoor.hopseed", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Natura.ID, "trapdoor.maple", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Natura.ID, "trapdoor.amaranth", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Natura.ID, "trapdoor.silverbell", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Natura.ID, "trapdoor.tiger", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Natura.ID, "trapdoor.willow", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Natura.ID, "trapdoor.darkwood", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Natura.ID, "trapdoor.fusewood", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+        }
+        if (MalisisDoors.isModLoaded()) {
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(MalisisDoors.ID, "trapdoor_acacia", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(MalisisDoors.ID, "trapdoor_birch", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(MalisisDoors.ID, "trapdoor_dark_oak", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(MalisisDoors.ID, "trapdoor_jungle", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "animaltrap", 1, 0, missing),
+                    "stickWood",
+                    getModItem(MalisisDoors.ID, "trapdoor_spruce", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "chestWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood");
+        }
+        if (Natura.isModLoaded()) {
+            addShapedRecipe(
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    getModItem(Natura.ID, "barleyFood", 1, 3, missing),
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    getModItem(Natura.ID, "barleyFood", 1, 3, missing),
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    getModItem(Natura.ID, "barleyFood", 1, 3, missing),
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    getModItem(Natura.ID, "barleyFood", 1, 3, missing),
+                    getModItem(Minecraft.ID, "string", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(PamsHarvestCraft.ID, "watergarden", 1, 0, missing),
                 getModItem(PamsHarvestCraft.ID, "tropicalgarden", 1, 0, missing),
@@ -647,23 +636,27 @@ public class ScriptHarvestcraft implements IScriptLoader {
         addShapelessRecipe(
                 getModItem(PamsHarvestCraft.ID, "freshmilkItem", 4, 0, missing),
                 getModItem(Minecraft.ID, "milk_bucket", 1, 0, missing));
-        addShapelessRecipe(
-                getModItem(PamsHarvestCraft.ID, "freshmilkItem", 2, 0, missing),
-                getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketMilk", 1, 0, missing));
-        addShapelessRecipe(
-                getModItem(PamsHarvestCraft.ID, "freshwaterItem", 4, 0, missing),
-                getModItem(Minecraft.ID, "water_bucket", 1, 0, missing));
-        addShapelessRecipe(
-                getModItem(PamsHarvestCraft.ID, "freshwaterItem", 2, 0, missing),
-                getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketWater", 1, 0, missing));
-        addShapelessRecipe(
-                NHItemList.WetTofu.get(),
-                getModItem(PamsHarvestCraft.ID, "soybeanItem", 1, 0, missing),
-                getModItem(Minecraft.ID, "water_bucket", 1, 0, missing));
+        if (IguanaTweaksTinkerConstruct.isModLoaded()) {
+            addShapelessRecipe(
+                    getModItem(PamsHarvestCraft.ID, "freshmilkItem", 2, 0, missing),
+                    getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketMilk", 1, 0, missing));
+            addShapelessRecipe(
+                    getModItem(PamsHarvestCraft.ID, "freshwaterItem", 4, 0, missing),
+                    getModItem(Minecraft.ID, "water_bucket", 1, 0, missing));
+            addShapelessRecipe(
+                    getModItem(PamsHarvestCraft.ID, "freshwaterItem", 2, 0, missing),
+                    getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketWater", 1, 0, missing));
+        }
         addShapelessRecipe(
                 NHItemList.WetTofu.get(),
                 getModItem(PamsHarvestCraft.ID, "soybeanItem", 1, 0, missing),
-                getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketWater", 1, 0, missing));
+                getModItem(Minecraft.ID, "water_bucket", 1, 0, missing));
+        if (IguanaTweaksTinkerConstruct.isModLoaded()) {
+            addShapelessRecipe(
+                    NHItemList.WetTofu.get(),
+                    getModItem(PamsHarvestCraft.ID, "soybeanItem", 1, 0, missing),
+                    getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketWater", 1, 0, missing));
+        }
         addShapelessRecipe(
                 NHItemList.WetTofu.get(),
                 getModItem(PamsHarvestCraft.ID, "soybeanItem", 1, 0, missing),
@@ -701,13 +694,15 @@ public class ScriptHarvestcraft implements IScriptLoader {
                 getModItem(Minecraft.ID, "bowl", 1, 0, missing),
                 getModItem(Minecraft.ID, "bowl", 1, 0, missing),
                 getModItem(Minecraft.ID, "milk_bucket", 1, 0, missing));
-        addShapelessRecipe(
-                getModItem(PamsHarvestCraft.ID, "heavycreamItem", 4, 0, missing),
-                getModItem(Minecraft.ID, "bowl", 1, 0, missing),
-                getModItem(Minecraft.ID, "bowl", 1, 0, missing),
-                getModItem(Minecraft.ID, "bowl", 1, 0, missing),
-                getModItem(Minecraft.ID, "bowl", 1, 0, missing),
-                getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketMilk", 1, 0, missing));
+        if (IguanaTweaksTinkerConstruct.isModLoaded()) {
+            addShapelessRecipe(
+                    getModItem(PamsHarvestCraft.ID, "heavycreamItem", 4, 0, missing),
+                    getModItem(Minecraft.ID, "bowl", 1, 0, missing),
+                    getModItem(Minecraft.ID, "bowl", 1, 0, missing),
+                    getModItem(Minecraft.ID, "bowl", 1, 0, missing),
+                    getModItem(Minecraft.ID, "bowl", 1, 0, missing),
+                    getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketMilk", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(PamsHarvestCraft.ID, "heavycreamItem", 1, 0, missing),
                 getModItem(PamsHarvestCraft.ID, "mixingbowlItem", 1, 0, missing),
@@ -720,39 +715,45 @@ public class ScriptHarvestcraft implements IScriptLoader {
                 getModItem(PamsHarvestCraft.ID, "heavycreamItem", 4, 0, missing),
                 getModItem(PamsHarvestCraft.ID, "mixingbowlItem", 1, 0, missing),
                 getModItem(Minecraft.ID, "milk_bucket", 1, 0, missing));
-        addShapelessRecipe(
-                getModItem(PamsHarvestCraft.ID, "heavycreamItem", 4, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "mixingbowlItem", 1, 0, missing),
-                getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketMilk", 1, 0, missing));
+        if (IguanaTweaksTinkerConstruct.isModLoaded()) {
+            addShapelessRecipe(
+                    getModItem(PamsHarvestCraft.ID, "heavycreamItem", 4, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "mixingbowlItem", 1, 0, missing),
+                    getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketMilk", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(PamsHarvestCraft.ID, "onionsoupItem", 1, 0, missing),
                 getModItem(PamsHarvestCraft.ID, "potItem", 1, 0, missing),
                 "cropOnion",
                 getModItem(PamsHarvestCraft.ID, "stockItem", 1, 0, missing),
                 "foodCheese");
-        addShapelessRecipe(
-                getModItem(PamsHarvestCraft.ID, "rainbowcurryItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "skilletItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "curryItem", 1, 0, missing),
-                getModItem(Minecraft.ID, "bowl", 1, 0, missing),
-                getModItem(Minecraft.ID, "red_flower", 1, 1, missing),
-                getModItem(Minecraft.ID, "tallgrass", 1, 1, missing),
-                getModItem(BiomesOPlenty.ID, "flowers2", 1, 2, missing),
-                getModItem(BiomesOPlenty.ID, "flowers2", 1, 3, missing),
-                getModItem(Minecraft.ID, "red_flower", 1, 0, missing),
-                getModItem(Minecraft.ID, "yellow_flower", 1, 0, missing));
-        addShapelessRecipe(
-                getModItem(PamsHarvestCraft.ID, "honeycombchocolatebarItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "saucepanItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "chocolatebarItem", 1, 0, missing),
-                getModItem(BiomesOPlenty.ID, "food", 1, 9, missing));
+        if (BiomesOPlenty.isModLoaded()) {
+            addShapelessRecipe(
+                    getModItem(PamsHarvestCraft.ID, "rainbowcurryItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "skilletItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "curryItem", 1, 0, missing),
+                    getModItem(Minecraft.ID, "bowl", 1, 0, missing),
+                    getModItem(Minecraft.ID, "red_flower", 1, 1, missing),
+                    getModItem(Minecraft.ID, "tallgrass", 1, 1, missing),
+                    getModItem(BiomesOPlenty.ID, "flowers2", 1, 2, missing),
+                    getModItem(BiomesOPlenty.ID, "flowers2", 1, 3, missing),
+                    getModItem(Minecraft.ID, "red_flower", 1, 0, missing),
+                    getModItem(Minecraft.ID, "yellow_flower", 1, 0, missing));
+            addShapelessRecipe(
+                    getModItem(PamsHarvestCraft.ID, "honeycombchocolatebarItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "saucepanItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "chocolatebarItem", 1, 0, missing),
+                    getModItem(BiomesOPlenty.ID, "food", 1, 9, missing));
+        }
 
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "soybeanItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "soymilkItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "food", 1, 9, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "honeyItem", 1, 0, missing)).duration(15 * SECONDS).eut(2)
-                .addTo(extractorRecipes);
+        if (BiomesOPlenty.isModLoaded()) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "food", 1, 9, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "honeyItem", 1, 0, missing)).duration(15 * SECONDS)
+                    .eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(Minecraft.ID, "apple", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "applejuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
@@ -765,9 +766,11 @@ public class ScriptHarvestcraft implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(Minecraft.ID, "carrot", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "carrotjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "food", 2, 2, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "carrotjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (BiomesOPlenty.isModLoaded()) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "food", 2, 2, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "carrotjuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "strawberryItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "strawberryjuiceItem", 1, 0, missing))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
@@ -783,9 +786,11 @@ public class ScriptHarvestcraft implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "blueberryItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "blueberryjuiceItem", 1, 0, missing))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(Natura.ID, "berry", 1, 1, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "blueberryjuiceItem", 1, 0, missing))
-                .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        if (Natura.isModLoaded()) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(Natura.ID, "berry", 1, 1, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "blueberryjuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 5, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "cherryjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
@@ -801,18 +806,22 @@ public class ScriptHarvestcraft implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "blackberryItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "blackberryjuiceItem", 1, 0, missing))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(Natura.ID, "berry", 1, 2, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "blackberryjuiceItem", 1, 0, missing))
-                .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        if (Natura.isModLoaded()) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(Natura.ID, "berry", 1, 2, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "blackberryjuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "raspberryItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "raspberryjuiceItem", 1, 0, missing))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
         GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 44, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "raspberryjuiceItem", 1, 0, missing))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(Natura.ID, "berry", 1, 0, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "raspberryjuiceItem", 1, 0, missing))
-                .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        if (Natura.isModLoaded()) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(Natura.ID, "berry", 1, 0, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "raspberryjuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(Forestry.ID, "fruits", 1, 6, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "papayajuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
@@ -849,9 +858,11 @@ public class ScriptHarvestcraft implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 1, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "orangejuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "food", 1, 3, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "peachjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (BiomesOPlenty.isModLoaded()) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "food", 1, 3, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "peachjuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 12, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "peachjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
@@ -882,9 +893,11 @@ public class ScriptHarvestcraft implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "pearItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "food", 1, 12, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (BiomesOPlenty.isModLoaded()) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "food", 1, 12, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
+                    .eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 22, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
@@ -900,9 +913,11 @@ public class ScriptHarvestcraft implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "persimmonItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "persimmonjuiceItem", 1, 0, missing))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "food", 1, 8, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "persimmonjuiceItem", 1, 0, missing))
-                .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        if (BiomesOPlenty.isModLoaded()) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "food", 1, 8, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "persimmonjuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 11, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "grapefruitjuiceItem", 1, 0, missing))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
@@ -989,12 +1004,14 @@ public class ScriptHarvestcraft implements IScriptLoader {
                         getModItem(PamsHarvestCraft.ID, "soymilkItem", 1, 0, missing))
                 .outputChances(10000, 5000, 5000).duration(10 * SECONDS).eut(TierEU.RECIPE_ULV)
                 .addTo(centrifugeRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Backpack.ID, "tannedLeather", 2, 0, missing),
-                        getModItem(PamsHarvestCraft.ID, "waxItem", 1, 0, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "hardenedleatherItem", 1, 0, missing))
-                .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(formingPressRecipes);
+        if (Backpack.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Backpack.ID, "tannedLeather", 2, 0, missing),
+                            getModItem(PamsHarvestCraft.ID, "waxItem", 1, 0, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "hardenedleatherItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(formingPressRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "cornItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "cornmealItem", 1, 0, missing)).outputChances(10000)
                 .duration(15 * SECONDS).eut(2).addTo(maceratorRecipes);
@@ -1037,12 +1054,14 @@ public class ScriptHarvestcraft implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "blueberrysmoothieItem", 1, 0, missing))
                 .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Natura.ID, "berry", 1, 1, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "blueberrysmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        if (Natura.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Natura.ID, "berry", 1, 1, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "blueberrysmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "cherryItem", 1, 0, missing),
@@ -1145,12 +1164,14 @@ public class ScriptHarvestcraft implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "peachsmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
                 .eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(BiomesOPlenty.ID, "food", 1, 3, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "peachsmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
-                .eut(2).addTo(mixerRecipes);
+        if (BiomesOPlenty.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BiomesOPlenty.ID, "food", 1, 3, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "peachsmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "limeItem", 1, 0, missing),
@@ -1199,12 +1220,14 @@ public class ScriptHarvestcraft implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "blackberrysmoothieItem", 1, 0, missing))
                 .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Natura.ID, "berry", 1, 2, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "blackberrysmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        if (Natura.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Natura.ID, "berry", 1, 2, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "blackberrysmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(ExtraTrees.ID, "food", 1, 43, missing),
@@ -1217,12 +1240,14 @@ public class ScriptHarvestcraft implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "raspberrysmoothieItem", 1, 0, missing))
                 .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Natura.ID, "berry", 1, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "raspberrysmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        if (Natura.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Natura.ID, "berry", 1, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "raspberrysmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(ExtraTrees.ID, "food", 1, 44, missing),
@@ -1265,12 +1290,14 @@ public class ScriptHarvestcraft implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "persimmonsmoothieItem", 1, 0, missing))
                 .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(BiomesOPlenty.ID, "food", 1, 8, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "persimmonsmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        if (BiomesOPlenty.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BiomesOPlenty.ID, "food", 1, 8, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "persimmonsmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "gooseberryItem", 1, 0, missing),
@@ -1343,12 +1370,14 @@ public class ScriptHarvestcraft implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearsmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
                 .eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(BiomesOPlenty.ID, "food", 1, 12, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearsmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
-                .eut(2).addTo(mixerRecipes);
+        if (BiomesOPlenty.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BiomesOPlenty.ID, "food", 1, 12, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearsmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(ExtraTrees.ID, "food", 1, 23, missing),
