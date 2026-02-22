@@ -319,13 +319,15 @@ public class ScriptBiomesOPlenty implements IScriptLoader {
                 .itemOutputs(GTModHandler.getModItem(BiomesOPlenty.ID, "misc", 1L, 4))
                 .fluidInputs(FluidRegistry.getFluidStack("endergoo", 1000)).duration(15 * SECONDS).eut(TierEU.RECIPE_HV)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(TinkerConstruct.ID, "CraftedSoil", 2L, 6),
-                        getModItem(Chisel.ID, "hempcretesand", 2L, 0))
-                .itemOutputs(GTModHandler.getModItem(BiomesOPlenty.ID, "mud", 4L, 1))
-                .fluidInputs(FluidRegistry.getFluidStack("glue", 1000)).duration(15 * SECONDS).eut(TierEU.RECIPE_HV)
-                .addTo(mixerRecipes);
+        if (TinkerConstruct.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TinkerConstruct.ID, "CraftedSoil", 2L, 6),
+                            getModItem(Chisel.ID, "hempcretesand", 2L, 0))
+                    .itemOutputs(GTModHandler.getModItem(BiomesOPlenty.ID, "mud", 4L, 1))
+                    .fluidInputs(FluidRegistry.getFluidStack("glue", 1000)).duration(15 * SECONDS).eut(TierEU.RECIPE_HV)
+                    .addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Salt, 1L),

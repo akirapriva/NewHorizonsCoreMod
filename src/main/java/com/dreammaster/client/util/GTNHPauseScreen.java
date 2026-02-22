@@ -26,7 +26,7 @@ public class GTNHPauseScreen {
 
     private static final ResourceLocation GTNH_LOGO = new ResourceLocation(
             "dreamcraft",
-            "textures/icon/GTNH_256x256.png");
+            "textures/icon/gt5uce_256x256.png");
     private static final int BUG_BUTTON_ID = -161518;
     private static final int WIKI_BUTTON_ID = -8998561;
 

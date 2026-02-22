@@ -61,7 +61,7 @@ public abstract class MixinMinecraft_ConfirmExit {
                 final JFrame frame = new JFrame();
                 frame.setAlwaysOnTop(true);
                 final URL resource = IconLoader.class.getClassLoader()
-                        .getResource("assets/dreamcraft/textures/icon/GTNH_42x42.png");
+                        .getResource("assets/dreamcraft/textures/icon/gt5uce_42x42.png");
                 final ImageIcon imageIcon = resource == null ? null : new ImageIcon(resource);
                 final Object[] options = new String[] {
                         dreamcraft$translateOrDefault("dreamcraft.gui.quitmessage.yes", "Yes"),

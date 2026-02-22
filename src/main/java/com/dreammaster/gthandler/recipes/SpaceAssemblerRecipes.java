@@ -396,18 +396,20 @@ public class SpaceAssemblerRecipes implements Runnable {
                     .addTo(IGRecipeMaps.spaceAssemblerRecipes);
 
             // Digital Singularity ME Storage Cell
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(EternalSingularity.ID, "eternal_singularity", 1),
-                            getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 12, 60),
-                            ItemList.Quantum_Chest_IV.get(8L),
-                            GTOreDictUnificator.get(OrePrefixes.block, Materials.Infinity, 4L),
-                            getModItem(Avaritia.ID, "Resource", 4, 5),
-                            GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 12L))
-                    .fluidInputs(new FluidStack(solderUEV, 2304))
-                    .itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemExtremeStorageCell.Singularity", 1))
-                    .metadata(IGRecipeMaps.MODULE_TIER, 1).duration(10 * SECONDS).eut(TierEU.RECIPE_UHV)
-                    .addTo(IGRecipeMaps.spaceAssemblerRecipes);
+            if (EternalSingularity.isModLoaded()) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(EternalSingularity.ID, "eternal_singularity", 1),
+                                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 12, 60),
+                                ItemList.Quantum_Chest_IV.get(8L),
+                                GTOreDictUnificator.get(OrePrefixes.block, Materials.Infinity, 4L),
+                                getModItem(Avaritia.ID, "Resource", 4, 5),
+                                GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 12L))
+                        .fluidInputs(new FluidStack(solderUEV, 2304))
+                        .itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemExtremeStorageCell.Singularity", 1))
+                        .metadata(IGRecipeMaps.MODULE_TIER, 1).duration(10 * SECONDS).eut(TierEU.RECIPE_UHV)
+                        .addTo(IGRecipeMaps.spaceAssemblerRecipes);
+            }
         }
 
         if (AE2FluidCraft.isModLoaded()) {
@@ -428,34 +430,36 @@ public class SpaceAssemblerRecipes implements Runnable {
                     .addTo(IGRecipeMaps.spaceAssemblerRecipes);
 
             // ME Fluid Digital Singularity Storage Cell
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(EternalSingularity.ID, "eternal_singularity", 1),
-                            new ItemStack(Loaders.yottaFluidTankCell, 4, 6),
-                            getModItem(AE2FluidCraft.ID, "fluid_part", 8, 7),
-                            ItemList.Quantum_Tank_IV.get(8L),
-                            GTOreDictUnificator.get(OrePrefixes.block, Materials.Infinity, 4L),
-                            getModItem(Avaritia.ID, "Resource", 4, 5),
-                            GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 12L))
-                    .fluidInputs(new FluidStack(solderUEV, 2304))
-                    .itemOutputs(getModItem(AE2FluidCraft.ID, "fluid_storage.singularity", 1, 0))
-                    .metadata(IGRecipeMaps.MODULE_TIER, 1).duration(10 * SECONDS).eut(TierEU.RECIPE_UHV)
-                    .addTo(IGRecipeMaps.spaceAssemblerRecipes);
-
-            // ME Essentia Digital Singularity Storage Cell
-            if (ThaumicEnergistics.isModLoaded()) {
+            if (EternalSingularity.isModLoaded()) {
                 GTValues.RA.stdBuilder()
                         .itemInputs(
                                 getModItem(EternalSingularity.ID, "eternal_singularity", 1),
-                                getModItem(ThaumicEnergistics.ID, "storage.component", 12, 8),
-                                getModItem(Thaumcraft.ID, "blockEssentiaReservoir", 8, 0),
+                                new ItemStack(Loaders.yottaFluidTankCell, 4, 6),
+                                getModItem(AE2FluidCraft.ID, "fluid_part", 8, 7),
+                                ItemList.Quantum_Tank_IV.get(8L),
                                 GTOreDictUnificator.get(OrePrefixes.block, Materials.Infinity, 4L),
                                 getModItem(Avaritia.ID, "Resource", 4, 5),
                                 GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 12L))
                         .fluidInputs(new FluidStack(solderUEV, 2304))
-                        .itemOutputs(getModItem(ThaumicEnergistics.ID, "storage.essentia", 1, 10))
+                        .itemOutputs(getModItem(AE2FluidCraft.ID, "fluid_storage.singularity", 1, 0))
                         .metadata(IGRecipeMaps.MODULE_TIER, 1).duration(10 * SECONDS).eut(TierEU.RECIPE_UHV)
                         .addTo(IGRecipeMaps.spaceAssemblerRecipes);
+
+                // ME Essentia Digital Singularity Storage Cell
+                if (ThaumicEnergistics.isModLoaded()) {
+                    GTValues.RA.stdBuilder()
+                            .itemInputs(
+                                    getModItem(EternalSingularity.ID, "eternal_singularity", 1),
+                                    getModItem(ThaumicEnergistics.ID, "storage.component", 12, 8),
+                                    getModItem(Thaumcraft.ID, "blockEssentiaReservoir", 8, 0),
+                                    GTOreDictUnificator.get(OrePrefixes.block, Materials.Infinity, 4L),
+                                    getModItem(Avaritia.ID, "Resource", 4, 5),
+                                    GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 12L))
+                            .fluidInputs(new FluidStack(solderUEV, 2304))
+                            .itemOutputs(getModItem(ThaumicEnergistics.ID, "storage.essentia", 1, 10))
+                            .metadata(IGRecipeMaps.MODULE_TIER, 1).duration(10 * SECONDS).eut(TierEU.RECIPE_UHV)
+                            .addTo(IGRecipeMaps.spaceAssemblerRecipes);
+                }
             }
             // Pseudo-Inversion Sigil Ritual
             /*

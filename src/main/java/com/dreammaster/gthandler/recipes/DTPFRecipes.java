@@ -441,17 +441,19 @@ public class DTPFRecipes implements Runnable {
                         .metadata(COIL_HEAT, eternal_heat).addTo(plasmaForgeRecipes);
 
                 // V2
-                GTValues.RA.stdBuilder()
-                        .itemInputs(
-                                GTOreDictUnificator.get(OrePrefixes.stick, Materials.CosmicNeutronium, 12L),
-                                GGMaterial.tairitsu.get(OrePrefixes.stick, 12),
-                                GTOreDictUnificator.get(OrePrefixes.stick, Materials.TranscendentMetal, 8L),
-                                MaterialsAlloy.BOTMIUM.getPlate(24),
-                                MaterialsAlloy.ARCANITE.getScrew(16),
-                                GTModHandler.getModItem(SuperSolarPanels.ID, "enderquantumcomponent", 1L))
-                        .itemOutputs(ItemList.Tesseract.get(8)).fluidInputs(Materials.ExcitedDTEC.getFluid(1000))
-                        .fluidOutputs(Materials.DTR.getFluid(1000)).duration(40 * SECONDS).eut(128_000_000)
-                        .metadata(COIL_HEAT, eternal_heat).addTo(plasmaForgeRecipes);
+                if (SuperSolarPanels.isModLoaded()) {
+                    GTValues.RA.stdBuilder()
+                            .itemInputs(
+                                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.CosmicNeutronium, 12L),
+                                    GGMaterial.tairitsu.get(OrePrefixes.stick, 12),
+                                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.TranscendentMetal, 8L),
+                                    MaterialsAlloy.BOTMIUM.getPlate(24),
+                                    MaterialsAlloy.ARCANITE.getScrew(16),
+                                    GTModHandler.getModItem(SuperSolarPanels.ID, "enderquantumcomponent", 1L))
+                            .itemOutputs(ItemList.Tesseract.get(8)).fluidInputs(Materials.ExcitedDTEC.getFluid(1000))
+                            .fluidOutputs(Materials.DTR.getFluid(1000)).duration(40 * SECONDS).eut(128_000_000)
+                            .metadata(COIL_HEAT, eternal_heat).addTo(plasmaForgeRecipes);
+                }
 
                 // V1
                 GTValues.RA.stdBuilder()
@@ -497,42 +499,45 @@ public class DTPFRecipes implements Runnable {
                             .calculateNonEBFRecipe(32_000_000, base_time);
 
                     // Tier 5
-                    GTValues.RA.stdBuilder().itemInputs(GTModHandler.getModItem(Avaritia.ID, "Resource", 4L, 5))
-                            .circuit(4).fluidInputs(Materials.ExcitedDTSC.getFluid(infinity.getCatalystAmount(4)))
-                            .fluidOutputs(
-                                    Materials.DTR.getFluid(infinity.getResidueAmount(4)),
-                                    Materials.Infinity.getMolten(256L * 144L))
-                            .duration(infinity.getDuration(4)).eut(infinity.getEUt(4)).metadata(COIL_HEAT, eternal_heat)
-                            .addTo(plasmaForgeRecipes);
+                    if (Avaritia.isModLoaded()) {
+                        GTValues.RA.stdBuilder().itemInputs(GTModHandler.getModItem(Avaritia.ID, "Resource", 4L, 5))
+                                .circuit(4).fluidInputs(Materials.ExcitedDTSC.getFluid(infinity.getCatalystAmount(4)))
+                                .fluidOutputs(
+                                        Materials.DTR.getFluid(infinity.getResidueAmount(4)),
+                                        Materials.Infinity.getMolten(256L * 144L))
+                                .duration(infinity.getDuration(4)).eut(infinity.getEUt(4))
+                                .metadata(COIL_HEAT, eternal_heat).addTo(plasmaForgeRecipes);
 
-                    // Tier 4
-                    GTValues.RA.stdBuilder().itemInputs(GTModHandler.getModItem(Avaritia.ID, "Resource", 2L, 5))
-                            .circuit(4).fluidInputs(Materials.ExcitedDTEC.getFluid(infinity.getCatalystAmount(3)))
-                            .fluidOutputs(
-                                    Materials.DTR.getFluid(infinity.getResidueAmount(3)),
-                                    Materials.Infinity.getMolten(128L * 144L))
-                            .duration(infinity.getDuration(3)).eut(infinity.getEUt(3)).metadata(COIL_HEAT, eternal_heat)
-                            .addTo(plasmaForgeRecipes);
+                        // Tier 4
+                        GTValues.RA.stdBuilder().itemInputs(GTModHandler.getModItem(Avaritia.ID, "Resource", 2L, 5))
+                                .circuit(4).fluidInputs(Materials.ExcitedDTEC.getFluid(infinity.getCatalystAmount(3)))
+                                .fluidOutputs(
+                                        Materials.DTR.getFluid(infinity.getResidueAmount(3)),
+                                        Materials.Infinity.getMolten(128L * 144L))
+                                .duration(infinity.getDuration(3)).eut(infinity.getEUt(3))
+                                .metadata(COIL_HEAT, eternal_heat).addTo(plasmaForgeRecipes);
 
-                    // Tier 3
-                    GTValues.RA.stdBuilder().itemInputs(GTModHandler.getModItem(Avaritia.ID, "Resource", 1L, 5))
-                            .circuit(4).fluidInputs(Materials.ExcitedDTRC.getFluid(infinity.getCatalystAmount(2) / 64))
-                            .fluidOutputs(
-                                    Materials.DTR.getFluid(infinity.getResidueAmount(2) / 64),
-                                    Materials.Infinity.getMolten(144L))
-                            .duration(infinity.getDuration(2) / 128).eut(infinity.getEUt(2) / 64)
-                            .metadata(COIL_HEAT, awakened_heat).addTo(plasmaForgeRecipes);
+                        // Tier 3
+                        GTValues.RA.stdBuilder().itemInputs(GTModHandler.getModItem(Avaritia.ID, "Resource", 1L, 5))
+                                .circuit(4)
+                                .fluidInputs(Materials.ExcitedDTRC.getFluid(infinity.getCatalystAmount(2) / 64))
+                                .fluidOutputs(
+                                        Materials.DTR.getFluid(infinity.getResidueAmount(2) / 64),
+                                        Materials.Infinity.getMolten(144L))
+                                .duration(infinity.getDuration(2) / 128).eut(infinity.getEUt(2) / 64)
+                                .metadata(COIL_HEAT, awakened_heat).addTo(plasmaForgeRecipes);
 
-                    // Tier 3.5
-                    GTValues.RA.stdBuilder().itemInputs(GTModHandler.getModItem(Avaritia.ID, "Resource", 1L, 5))
-                            .circuit(5).fluidInputs(Materials.ExcitedDTRC.getFluid(infinity.getCatalystAmount(2)))
-                            .fluidOutputs(
-                                    Materials.DTR.getFluid(infinity.getResidueAmount(2)),
-                                    Materials.Infinity.getMolten(64L * 144L))
-                            .duration(infinity.getDuration(2)).eut(infinity.getEUt(2)).metadata(COIL_HEAT, hypogen_heat)
-                            .addTo(plasmaForgeRecipes);
+                        // Tier 3.5
+                        GTValues.RA.stdBuilder().itemInputs(GTModHandler.getModItem(Avaritia.ID, "Resource", 1L, 5))
+                                .circuit(5).fluidInputs(Materials.ExcitedDTRC.getFluid(infinity.getCatalystAmount(2)))
+                                .fluidOutputs(
+                                        Materials.DTR.getFluid(infinity.getResidueAmount(2)),
+                                        Materials.Infinity.getMolten(64L * 144L))
+                                .duration(infinity.getDuration(2)).eut(infinity.getEUt(2))
+                                .metadata(COIL_HEAT, hypogen_heat).addTo(plasmaForgeRecipes);
+                    }
 
-                    if (Forestry.isModLoaded()) {
+                    if (Forestry.isModLoaded() && Avaritia.isModLoaded()) {
                         DTPFCalculator infinity_bee = new DTPFCalculator().setBaseParallel(base_quantity)
                                 .setLowestCatalystTier(2).setHighestCatalystTier(4).setCatalystDiscount(15)
                                 .setProcessingTimeDiscount(50).setEUtDivisor(2)
@@ -1050,20 +1055,22 @@ public class DTPFRecipes implements Runnable {
                     .setScalingFactor(8).setHighestCatalystTier(4)
                     .calculateNonEBFRecipe(total_EU_per_ingot / recipe_time, recipe_time);
 
-            GTValues.RA.stdBuilder()
-                    .itemInputs(ItemList.Tesseract.get(32), GTOreDictUnificator.get("blockCosmicNeutronium", 40))
-                    .itemOutputs(Materials.TranscendentMetal.getBlocks(40), Materials.TranscendentMetal.getDust(24))
-                    .fluidInputs(
-                            MaterialsAlloy.TITANSTEEL.getFluidStack(144 * 40 * 9),
-                            Materials.CallistoIce.getMolten(144 * 20 * 9),
-                            Materials.Ledox.getMolten(144 * 20 * 9),
-                            Materials.Tungsten.getMolten(144 * 40 * 9),
-                            Materials.ExcitedDTSC.getFluid(transcendent_metal.getCatalystAmount(4)))
-                    .fluidOutputs(
-                            Materials.DTR.getFluid(transcendent_metal.getResidueAmount(4)),
-                            MaterialsElements.STANDALONE.CELESTIAL_TUNGSTEN.getFluidStack(144 * 20 * 9))
-                    .duration(transcendent_metal.getDuration(4)).eut(transcendent_metal.getEUt(4))
-                    .metadata(COIL_HEAT, eternal_heat).addTo(plasmaForgeRecipes);
+            if (GalaxySpace.isModLoaded()) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(ItemList.Tesseract.get(32), GTOreDictUnificator.get("blockCosmicNeutronium", 40))
+                        .itemOutputs(Materials.TranscendentMetal.getBlocks(40), Materials.TranscendentMetal.getDust(24))
+                        .fluidInputs(
+                                MaterialsAlloy.TITANSTEEL.getFluidStack(144 * 40 * 9),
+                                Materials.CallistoIce.getMolten(144 * 20 * 9),
+                                Materials.Ledox.getMolten(144 * 20 * 9),
+                                Materials.Tungsten.getMolten(144 * 40 * 9),
+                                Materials.ExcitedDTSC.getFluid(transcendent_metal.getCatalystAmount(4)))
+                        .fluidOutputs(
+                                Materials.DTR.getFluid(transcendent_metal.getResidueAmount(4)),
+                                MaterialsElements.STANDALONE.CELESTIAL_TUNGSTEN.getFluidStack(144 * 20 * 9))
+                        .duration(transcendent_metal.getDuration(4)).eut(transcendent_metal.getEUt(4))
+                        .metadata(COIL_HEAT, eternal_heat).addTo(plasmaForgeRecipes);
+            }
 
             // Quantum + Astral Titanium
 

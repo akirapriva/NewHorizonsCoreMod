@@ -1302,13 +1302,15 @@ public class ScriptIndustrialCraft implements IScriptLoader {
                 .itemOutputs(getModItem(IndustrialCraft2.ID, "upgradeModule", 1, 6, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("molten.copper", 144)).duration(1 * MINUTES)
                 .eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Rubber, 5),
-                        NHItemList.ReinforcedGlassLense.get(2))
-                .itemOutputs(getModItem(IndustrialCraft2.ID, "itemArmorHazmatHelmet", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("glue", 144)).duration(25 * SECONDS).eut(TierEU.RECIPE_LV)
-                .addTo(assemblerRecipes);
+        if (TinkerConstruct.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Rubber, 5),
+                            NHItemList.ReinforcedGlassLense.get(2))
+                    .itemOutputs(getModItem(IndustrialCraft2.ID, "itemArmorHazmatHelmet", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("glue", 144)).duration(25 * SECONDS).eut(TierEU.RECIPE_LV)
+                    .addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.plate, Materials.Rubber, 5),
@@ -1316,13 +1318,15 @@ public class ScriptIndustrialCraft implements IScriptLoader {
                 .itemOutputs(getModItem(IndustrialCraft2.ID, "itemArmorHazmatHelmet", 1, 0, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("refinedglue", 144)).duration(25 * SECONDS)
                 .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Rubber, 8),
-                        getModItem(Minecraft.ID, "wool", 4, 1, missing))
-                .itemOutputs(getModItem(IndustrialCraft2.ID, "itemArmorHazmatChestplate", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("glue", 144)).duration(25 * SECONDS).eut(TierEU.RECIPE_LV)
-                .addTo(assemblerRecipes);
+        if (TinkerConstruct.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Rubber, 8),
+                            getModItem(Minecraft.ID, "wool", 4, 1, missing))
+                    .itemOutputs(getModItem(IndustrialCraft2.ID, "itemArmorHazmatChestplate", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("glue", 144)).duration(25 * SECONDS).eut(TierEU.RECIPE_LV)
+                    .addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.plate, Materials.Rubber, 8),
@@ -1330,13 +1334,15 @@ public class ScriptIndustrialCraft implements IScriptLoader {
                 .itemOutputs(getModItem(IndustrialCraft2.ID, "itemArmorHazmatChestplate", 1, 0, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("refinedglue", 144)).duration(25 * SECONDS)
                 .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Rubber, 7),
-                        getModItem(Minecraft.ID, "carpet", 4, 1, missing))
-                .itemOutputs(getModItem(IndustrialCraft2.ID, "itemArmorHazmatLeggings", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("glue", 144)).duration(25 * SECONDS).eut(TierEU.RECIPE_LV)
-                .addTo(assemblerRecipes);
+        if (TinkerConstruct.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Rubber, 7),
+                            getModItem(Minecraft.ID, "carpet", 4, 1, missing))
+                    .itemOutputs(getModItem(IndustrialCraft2.ID, "itemArmorHazmatLeggings", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("glue", 144)).duration(25 * SECONDS).eut(TierEU.RECIPE_LV)
+                    .addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.plate, Materials.Rubber, 7),

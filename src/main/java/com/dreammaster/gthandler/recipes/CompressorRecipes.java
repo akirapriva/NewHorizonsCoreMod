@@ -79,11 +79,13 @@ public class CompressorRecipes implements Runnable {
         }
 
         // custom ingot to block compression
-        Materials[] ingotToBlockList = new Materials[] { Materials.Ardite, Materials.Manyullyn, Materials.Alumite };
-        for (Materials material : ingotToBlockList) {
-            GTValues.RA.stdBuilder().itemInputs(GTOreDictUnificator.get(OrePrefixes.ingot, material, 9L))
-                    .itemOutputs(GTOreDictUnificator.get(OrePrefixes.block, material, 1L)).duration(15 * SECONDS).eut(2)
-                    .addTo(compressorRecipes);
+        if (TinkerConstruct.isModLoaded()) {
+            Materials[] ingotToBlockList = new Materials[] { Materials.Ardite, Materials.Manyullyn, Materials.Alumite };
+            for (Materials material : ingotToBlockList) {
+                GTValues.RA.stdBuilder().itemInputs(GTOreDictUnificator.get(OrePrefixes.ingot, material, 9L))
+                        .itemOutputs(GTOreDictUnificator.get(OrePrefixes.block, material, 1L)).duration(15 * SECONDS)
+                        .eut(2).addTo(compressorRecipes);
+            }
         }
 
         GTValues.RA.stdBuilder().itemInputs(GTOreDictUnificator.get(OrePrefixes.nugget, Materials.WroughtIron, 9L))

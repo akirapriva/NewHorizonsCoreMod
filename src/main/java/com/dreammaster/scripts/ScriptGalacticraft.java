@@ -1,20 +1,6 @@
 package com.dreammaster.scripts;
 
-import static gregtech.api.enums.Mods.AE2FluidCraft;
-import static gregtech.api.enums.Mods.AppliedEnergistics2;
-import static gregtech.api.enums.Mods.BuildCraftTransport;
-import static gregtech.api.enums.Mods.CarpentersBlocks;
-import static gregtech.api.enums.Mods.GalacticraftAmunRa;
-import static gregtech.api.enums.Mods.GalacticraftCore;
-import static gregtech.api.enums.Mods.GalacticraftMars;
-import static gregtech.api.enums.Mods.GalaxySpace;
-import static gregtech.api.enums.Mods.GraviSuite;
-import static gregtech.api.enums.Mods.IndustrialCraft2;
-import static gregtech.api.enums.Mods.IronChests;
-import static gregtech.api.enums.Mods.Minecraft;
-import static gregtech.api.enums.Mods.PamsHarvestCraft;
-import static gregtech.api.enums.Mods.ProjectRedIllumination;
-import static gregtech.api.enums.Mods.TinkersGregworks;
+import static gregtech.api.enums.Mods.*;
 import static gregtech.api.recipe.RecipeMaps.arcFurnaceRecipes;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.blastFurnaceRecipes;
@@ -1778,13 +1764,15 @@ public class ScriptGalacticraft implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(GalacticraftMars.ID, "item.thermalPadding", 1, 3, missing))
                 .circuit(1).itemOutputs(getModItem(GalacticraftMars.ID, "item.itemBasicAsteroids", 4, 7, missing))
                 .duration(7 * SECONDS + 10 * TICKS).eut(TierEU.RECIPE_HV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(IndustrialCraft2.ID, "itemArmorHazmatHelmet", 1, 0, missing),
-                        NHItemList.ReinforcedGlassPlate.get(16))
-                .itemOutputs(getModItem(GalacticraftCore.ID, "item.oxygenMask", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("glue", 144)).duration(20 * SECONDS).eut(TierEU.RECIPE_MV)
-                .addTo(assemblerRecipes);
+        if (TinkerConstruct.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(IndustrialCraft2.ID, "itemArmorHazmatHelmet", 1, 0, missing),
+                            NHItemList.ReinforcedGlassPlate.get(16))
+                    .itemOutputs(getModItem(GalacticraftCore.ID, "item.oxygenMask", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("glue", 144)).duration(20 * SECONDS).eut(TierEU.RECIPE_MV)
+                    .addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(IndustrialCraft2.ID, "itemArmorHazmatHelmet", 1, 0, missing),

@@ -82,13 +82,15 @@ public class ScriptEMT implements IScriptLoader {
                         ItemList.Shape_Mold_Ball.get(0L))
                 .itemOutputs(getModItem(ElectroMagicTools.ID, "EMTItems", 1, 10, missing)).duration(10 * SECONDS)
                 .eut(TierEU.RECIPE_LV / 2).addTo(alloySmelterRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "paper", 12, 0, missing),
-                        getModItem(ElectroMagicTools.ID, "EMTItems", 4, 10, missing))
-                .itemOutputs(getModItem(ElectroMagicTools.ID, "EMTItems", 1, 9, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("glue", 6912)).duration(30 * SECONDS).eut(TierEU.RECIPE_LV)
-                .addTo(assemblerRecipes);
+        if (TinkerConstruct.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "paper", 12, 0, missing),
+                            getModItem(ElectroMagicTools.ID, "EMTItems", 4, 10, missing))
+                    .itemOutputs(getModItem(ElectroMagicTools.ID, "EMTItems", 1, 9, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("glue", 6912)).duration(30 * SECONDS).eut(TierEU.RECIPE_LV)
+                    .addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Minecraft.ID, "paper", 12, 0, missing),

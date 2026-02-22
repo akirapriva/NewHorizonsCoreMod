@@ -1,15 +1,6 @@
 package com.dreammaster.scripts;
 
-import static gregtech.api.enums.Mods.BiomesOPlenty;
-import static gregtech.api.enums.Mods.Botania;
-import static gregtech.api.enums.Mods.EnderIO;
-import static gregtech.api.enums.Mods.ExtraUtilities;
-import static gregtech.api.enums.Mods.ForbiddenMagic;
-import static gregtech.api.enums.Mods.Minecraft;
-import static gregtech.api.enums.Mods.Natura;
-import static gregtech.api.enums.Mods.PamsHarvestCraft;
-import static gregtech.api.enums.Mods.Thaumcraft;
-import static gregtech.api.enums.Mods.ThaumicExploration;
+import static gregtech.api.enums.Mods.*;
 import static gregtech.api.util.GTModHandler.getModItem;
 
 import java.util.Arrays;
@@ -1451,22 +1442,24 @@ public class ScriptThaumicExploration implements IScriptLoader {
                 getModItem(ThaumicExploration.ID, "bootsMeteor", 1, 0, missing))
                         .setParents("TXBOOTSTRAVELLER", "FOCUSFIRE", "INFUSION").setConcealed()
                         .setPages(new ResearchPage("te.text.METEORBOOTS.1")).registerResearchItem();
-        TCHelper.addInfusionCraftingRecipe(
-                "MeteorbootsGTNH",
-                getModItem(ThaumicExploration.ID, "bootsMeteor", 1, 0, missing),
-                6,
-                new AspectList().add(Aspect.getAspect("ignis"), 32).add(Aspect.getAspect("iter"), 32)
-                        .add(Aspect.getAspect("potentia"), 32).add(Aspect.getAspect("volatus"), 32)
-                        .add(Aspect.getAspect("praecantatio"), 16),
-                getModItem(Thaumcraft.ID, "BootsTraveller", 1, wildcard, missing),
-                getModItem(Thaumcraft.ID, "FocusFire", 1, 0, missing),
-                OrePrefixes.plate.get(Materials.Firestone),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 1, missing),
-                OrePrefixes.plate.get(Materials.Firestone),
-                OrePrefixes.plate.get(Materials.Firestone),
-                OrePrefixes.plate.get(Materials.Firestone),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 1, missing),
-                OrePrefixes.plate.get(Materials.Firestone));
+        if (ThaumicExploration.isModLoaded()) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "MeteorbootsGTNH",
+                    getModItem(ThaumicExploration.ID, "bootsMeteor", 1, 0, missing),
+                    6,
+                    new AspectList().add(Aspect.getAspect("ignis"), 32).add(Aspect.getAspect("iter"), 32)
+                            .add(Aspect.getAspect("potentia"), 32).add(Aspect.getAspect("volatus"), 32)
+                            .add(Aspect.getAspect("praecantatio"), 16),
+                    getModItem(Thaumcraft.ID, "BootsTraveller", 1, wildcard, missing),
+                    getModItem(Thaumcraft.ID, "FocusFire", 1, 0, missing),
+                    OrePrefixes.plate.get(Materials.Firestone),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 1, missing),
+                    OrePrefixes.plate.get(Materials.Firestone),
+                    OrePrefixes.plate.get(Materials.Firestone),
+                    OrePrefixes.plate.get(Materials.Firestone),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 1, missing),
+                    OrePrefixes.plate.get(Materials.Firestone));
+        }
         TCHelper.addResearchPage(
                 "MeteorbootsGTNH",
                 new ResearchPage(

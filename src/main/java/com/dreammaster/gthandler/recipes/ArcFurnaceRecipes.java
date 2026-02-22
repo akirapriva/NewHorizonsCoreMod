@@ -49,7 +49,6 @@ public class ArcFurnaceRecipes implements Runnable {
                             GTOreDictUnificator.get(OrePrefixes.dust, Materials.DraconiumAwakened, 32L),
                             GTOreDictUnificator.get(OrePrefixes.plate, Materials.Firestone, 32L),
                             GTOreDictUnificator.get(OrePrefixes.dust, Materials.Dilithium, 32L),
-                            GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.Ichorium, 16L),
                             GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.Ardite, 64L),
                             GTModHandler.getModItem(GalacticraftAmunRa.ID, "item.baseItem", 4L, 3),
                             NHItemList.ChaoticDust.get(2),

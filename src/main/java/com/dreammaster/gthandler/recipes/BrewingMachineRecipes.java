@@ -1,9 +1,6 @@
 package com.dreammaster.gthandler.recipes;
 
-import static gregtech.api.enums.Mods.Forestry;
-import static gregtech.api.enums.Mods.Genetics;
-import static gregtech.api.enums.Mods.IndustrialCraft2;
-import static gregtech.api.enums.Mods.PamsHarvestTheNether;
+import static gregtech.api.enums.Mods.*;
 import static gregtech.api.recipe.RecipeMaps.brewingRecipes;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 import static gregtech.api.util.GTRecipeBuilder.TICKS;
@@ -25,30 +22,35 @@ public class BrewingMachineRecipes implements Runnable {
     @Override
     public void run() {
 
-        GTValues.RA.stdBuilder().itemInputs(GTModHandler.getModItem(Genetics.ID, "misc", 6L, 4))
-                .fluidInputs(FluidRegistry.getFluidStack("water", 750))
-                .fluidOutputs(FluidRegistry.getFluidStack("binnie.growthmedium", 750)).duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(brewingRecipes);
+        if (BinnieCore.isModLoaded()) {
+            GTValues.RA.stdBuilder().itemInputs(GTModHandler.getModItem(Genetics.ID, "misc", 6L, 4))
+                    .fluidInputs(FluidRegistry.getFluidStack("water", 750))
+                    .fluidOutputs(FluidRegistry.getFluidStack("binnie.growthmedium", 750)).duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(brewingRecipes);
 
-        GTValues.RA.stdBuilder().itemInputs(GTModHandler.getModItem(IndustrialCraft2.ID, "itemBiochaff", 16L, 0))
-                .fluidInputs(FluidRegistry.getFluidStack("binnie.growthmedium", 750))
-                .fluidOutputs(FluidRegistry.getFluidStack("binnie.bacteria", 750)).duration(60 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(brewingRecipes);
+            GTValues.RA.stdBuilder().itemInputs(GTModHandler.getModItem(IndustrialCraft2.ID, "itemBiochaff", 16L, 0))
+                    .fluidInputs(FluidRegistry.getFluidStack("binnie.growthmedium", 750))
+                    .fluidOutputs(FluidRegistry.getFluidStack("binnie.bacteria", 750)).duration(60 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(brewingRecipes);
 
-        GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.blaze_powder, 1, 0))
-                .fluidInputs(FluidRegistry.getFluidStack("binnie.bacteria", 100))
-                .fluidOutputs(FluidRegistry.getFluidStack("binnie.bacteriavector", 100)).duration(5 * TICKS)
-                .eut(TierEU.RECIPE_MV / 2).addTo(brewingRecipes);
+            GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.blaze_powder, 1, 0))
+                    .fluidInputs(FluidRegistry.getFluidStack("binnie.bacteria", 100))
+                    .fluidOutputs(FluidRegistry.getFluidStack("binnie.bacteriavector", 100)).duration(5 * TICKS)
+                    .eut(TierEU.RECIPE_MV / 2).addTo(brewingRecipes);
 
-        GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.dye, 1, 15))
-                .fluidInputs(FluidRegistry.getFluidStack("binnie.bacteria", 100))
-                .fluidOutputs(FluidRegistry.getFluidStack("binnie.bacteriapoly", 100)).duration(5 * TICKS)
-                .eut(TierEU.RECIPE_MV / 2).addTo(brewingRecipes);
+            GTValues.RA.stdBuilder().itemInputs(new ItemStack(Items.dye, 1, 15))
+                    .fluidInputs(FluidRegistry.getFluidStack("binnie.bacteria", 100))
+                    .fluidOutputs(FluidRegistry.getFluidStack("binnie.bacteriapoly", 100)).duration(5 * TICKS)
+                    .eut(TierEU.RECIPE_MV / 2).addTo(brewingRecipes);
+        }
 
-        GTValues.RA.stdBuilder().itemInputs(GTModHandler.getModItem(PamsHarvestTheNether.ID, "ignisfruitItem", 45L, 0))
-                .fluidInputs(FluidRegistry.getFluidStack("potion.awkward", 750))
-                .fluidOutputs(FluidRegistry.getFluidStack("potion.fireresistance", 750)).duration(6 * SECONDS)
-                .eut(TierEU.RECIPE_ULV).addTo(brewingRecipes);
+        if (PamsHarvestTheNether.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(GTModHandler.getModItem(PamsHarvestTheNether.ID, "ignisfruitItem", 45L, 0))
+                    .fluidInputs(FluidRegistry.getFluidStack("potion.awkward", 750))
+                    .fluidOutputs(FluidRegistry.getFluidStack("potion.fireresistance", 750)).duration(6 * SECONDS)
+                    .eut(TierEU.RECIPE_ULV).addTo(brewingRecipes);
+        }
 
         // Add fermenter recipes from forestry into gregtech
         if (Forestry.isModLoaded()) {

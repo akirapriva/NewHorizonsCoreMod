@@ -1,13 +1,6 @@
 package com.dreammaster.scripts;
 
-import static gregtech.api.enums.Mods.AE2FluidCraft;
-import static gregtech.api.enums.Mods.AppliedEnergistics2;
-import static gregtech.api.enums.Mods.EnderIO;
-import static gregtech.api.enums.Mods.GraviSuite;
-import static gregtech.api.enums.Mods.IndustrialCraft2;
-import static gregtech.api.enums.Mods.MatterManipulator;
-import static gregtech.api.enums.Mods.Thaumcraft;
-import static gregtech.api.enums.Mods.ThaumicTinkerer;
+import static gregtech.api.enums.Mods.*;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.INGOTS;
 import static gregtech.api.util.GTRecipeBuilder.MINUTES;
@@ -89,29 +82,33 @@ public class ScriptMatterManipulator implements IScriptLoader {
                 .addTo(RecipeMaps.assemblerRecipes);
 
         // Computer core MK0
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.StainlessSteel, 8),
-                        new Object[] { OrePrefixes.circuit.get(Materials.IV), 2 },
-                        getModItem(EnderIO.ID, "blockEndermanSkull", 1, 2), // tormented enderman skull
-                        GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorHV, 12),
-                        GTOreDictUnificator.get(OrePrefixes.screw, Materials.StainlessSteel, 16))
-                .circuit(5).fluidInputs(Materials.SolderingAlloy.getMolten(INGOTS * 8))
-                .itemOutputs(MMItemList.ComputerCore0.get(1)).eut((int) TierEU.RECIPE_HV).duration(20 * SECONDS)
-                .addTo(RecipeMaps.circuitAssemblerRecipes);
+        if (EnderIO.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.StainlessSteel, 8),
+                            new Object[] { OrePrefixes.circuit.get(Materials.IV), 2 },
+                            getModItem(EnderIO.ID, "blockEndermanSkull", 1, 2), // tormented enderman skull
+                            GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorHV, 12),
+                            GTOreDictUnificator.get(OrePrefixes.screw, Materials.StainlessSteel, 16))
+                    .circuit(5).fluidInputs(Materials.SolderingAlloy.getMolten(INGOTS * 8))
+                    .itemOutputs(MMItemList.ComputerCore0.get(1)).eut((int) TierEU.RECIPE_HV).duration(20 * SECONDS)
+                    .addTo(RecipeMaps.circuitAssemblerRecipes);
+        }
 
         // Teleporter core MK0
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.StainlessSteel, 1),
-                        ItemList.Emitter_HV.get(2),
-                        getModItem(Thaumcraft.ID, "ItemResource", 1, 15), // primal charm
-                        ItemList.QuantumEye.get(2),
-                        GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.Thaumium, 8),
-                        GTOreDictUnificator.get(OrePrefixes.screw, Materials.Thaumium, 16))
-                .circuit(5).fluidInputs(FluidRegistry.getFluidStack("ender", 2000))
-                .itemOutputs(MMItemList.TeleporterCore0.get(1)).eut((int) TierEU.RECIPE_HV).duration(20 * SECONDS)
-                .addTo(RecipeMaps.assemblerRecipes);
+        if (Thaumcraft.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.StainlessSteel, 1),
+                            ItemList.Emitter_HV.get(2),
+                            getModItem(Thaumcraft.ID, "ItemResource", 1, 15), // primal charm
+                            ItemList.QuantumEye.get(2),
+                            GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.Thaumium, 8),
+                            GTOreDictUnificator.get(OrePrefixes.screw, Materials.Thaumium, 16))
+                    .circuit(5).fluidInputs(FluidRegistry.getFluidStack("ender", 2000))
+                    .itemOutputs(MMItemList.TeleporterCore0.get(1)).eut((int) TierEU.RECIPE_HV).duration(20 * SECONDS)
+                    .addTo(RecipeMaps.assemblerRecipes);
+        }
 
         // Frame MK0
         GTValues.RA.stdBuilder().itemInputs(GTOreDictUnificator.get(OrePrefixes.plate, Materials.StainlessSteel, 16))
@@ -119,16 +116,18 @@ public class ScriptMatterManipulator implements IScriptLoader {
                 .addTo(RecipeMaps.benderRecipes);
 
         // Lens MK0
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.ring, Materials.StainlessSteel, 4),
-                        getModItem(Thaumcraft.ID, "FocusTrade", 1), // equal trade focus
-                        ItemList.Field_Generator_LV.get(1),
-                        ItemList.Electric_Piston_HV.get(2),
-                        ItemList.Electric_Motor_HV.get(2))
-                .circuit(5).fluidInputs(Materials.SolderingAlloy.getMolten(INGOTS * 4))
-                .itemOutputs(MMItemList.Lens0.get(1)).eut((int) TierEU.RECIPE_HV).duration(20 * SECONDS)
-                .addTo(RecipeMaps.assemblerRecipes);
+        if (Thaumcraft.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.ring, Materials.StainlessSteel, 4),
+                            getModItem(Thaumcraft.ID, "FocusTrade", 1), // equal trade focus
+                            ItemList.Field_Generator_LV.get(1),
+                            ItemList.Electric_Piston_HV.get(2),
+                            ItemList.Electric_Motor_HV.get(2))
+                    .circuit(5).fluidInputs(Materials.SolderingAlloy.getMolten(INGOTS * 4))
+                    .itemOutputs(MMItemList.Lens0.get(1)).eut((int) TierEU.RECIPE_HV).duration(20 * SECONDS)
+                    .addTo(RecipeMaps.assemblerRecipes);
+        }
 
         // Manipulator MK0
         GTValues.RA.stdBuilder()
@@ -247,24 +246,26 @@ public class ScriptMatterManipulator implements IScriptLoader {
                 .addTo(AssemblyLine);
 
         // Teleporter core MK2
-        GTValues.RA.stdBuilder()
-                .metadata(RESEARCH_ITEM, GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Quantium, 1))
-                .metadata(SCANNING, new Scanning(1 * MINUTES, TierEU.RECIPE_LuV))
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Quantium, 1),
-                        ItemList.Emitter_LuV.get(2),
-                        ItemList.Field_Generator_LuV.get(1),
-                        ItemList.QuantumStar.get(4),
-                        getModItem(GraviSuite.ID, "itemSimpleItem", 4, 3), // gravitation engine
-                        GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.HSSS, 8),
-                        GTOreDictUnificator.get(OrePrefixes.screw, Materials.HSSS, 16))
-                .fluidInputs(
-                        MaterialsAlloy.INDALLOY_140.getFluidStack(INGOTS * 16),
-                        Materials.Quantium.getMolten(INGOTS * 16),
-                        Materials.Duranium.getMolten(INGOTS * 8),
-                        new FluidStack(FluidRegistry.getFluid("ic2coolant"), 32000))
-                .itemOutputs(MMItemList.TeleporterCore2.get(1)).duration(1 * MINUTES).eut((int) TierEU.RECIPE_LuV)
-                .addTo(AssemblyLine);
+        if (GraviSuite.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .metadata(RESEARCH_ITEM, GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Quantium, 1))
+                    .metadata(SCANNING, new Scanning(1 * MINUTES, TierEU.RECIPE_LuV))
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Quantium, 1),
+                            ItemList.Emitter_LuV.get(2),
+                            ItemList.Field_Generator_LuV.get(1),
+                            ItemList.QuantumStar.get(4),
+                            getModItem(GraviSuite.ID, "itemSimpleItem", 4, 3), // gravitation engine
+                            GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.HSSS, 8),
+                            GTOreDictUnificator.get(OrePrefixes.screw, Materials.HSSS, 16))
+                    .fluidInputs(
+                            MaterialsAlloy.INDALLOY_140.getFluidStack(INGOTS * 16),
+                            Materials.Quantium.getMolten(INGOTS * 16),
+                            Materials.Duranium.getMolten(INGOTS * 8),
+                            new FluidStack(FluidRegistry.getFluid("ic2coolant"), 32000))
+                    .itemOutputs(MMItemList.TeleporterCore2.get(1)).duration(1 * MINUTES).eut((int) TierEU.RECIPE_LuV)
+                    .addTo(AssemblyLine);
+        }
 
         // Frame MK2
         GTValues.RA.stdBuilder().itemInputs(GTOreDictUnificator.get(OrePrefixes.plate, Materials.HSSS, 48)).circuit(10)
@@ -331,25 +332,29 @@ public class ScriptMatterManipulator implements IScriptLoader {
                 .addTo(AssemblyLine);
 
         // Teleporter core MK3
-        GTValues.RA.stdBuilder()
-                .metadata(RESEARCH_ITEM, GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.MysteriousCrystal, 1))
-                .metadata(SCANNING, new Scanning(2 * MINUTES, TierEU.RECIPE_ZPM))
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.MysteriousCrystal, 1),
-                        ItemList.Emitter_ZPM.get(2),
-                        ItemList.Field_Generator_ZPM.get(1),
-                        ItemList.Gravistar.get(4),
-                        new ItemStack(ModItems.itemStandarParticleBase, 16, 0), // gravitons
-                        getModItem(GraviSuite.ID, "itemSimpleItem", 16, 3), // gravitation engine
-                        GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.Trinium, 8),
-                        GTOreDictUnificator.get(OrePrefixes.screw, Materials.Trinium, 16))
-                .fluidInputs(
-                        MaterialsAlloy.INDALLOY_140.getFluidStack(INGOTS * 16),
-                        Materials.MysteriousCrystal.getMolten(INGOTS * 16),
-                        Materials.Tritanium.getMolten(INGOTS * 16),
-                        Materials.SuperCoolant.getFluid(32000))
-                .itemOutputs(MMItemList.TeleporterCore3.get(1)).duration(1 * MINUTES).eut((int) TierEU.RECIPE_ZPM)
-                .addTo(AssemblyLine);
+        if (GraviSuite.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .metadata(
+                            RESEARCH_ITEM,
+                            GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.MysteriousCrystal, 1))
+                    .metadata(SCANNING, new Scanning(2 * MINUTES, TierEU.RECIPE_ZPM))
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.MysteriousCrystal, 1),
+                            ItemList.Emitter_ZPM.get(2),
+                            ItemList.Field_Generator_ZPM.get(1),
+                            ItemList.Gravistar.get(4),
+                            new ItemStack(ModItems.itemStandarParticleBase, 16, 0), // gravitons
+                            getModItem(GraviSuite.ID, "itemSimpleItem", 16, 3), // gravitation engine
+                            GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.Trinium, 8),
+                            GTOreDictUnificator.get(OrePrefixes.screw, Materials.Trinium, 16))
+                    .fluidInputs(
+                            MaterialsAlloy.INDALLOY_140.getFluidStack(INGOTS * 16),
+                            Materials.MysteriousCrystal.getMolten(INGOTS * 16),
+                            Materials.Tritanium.getMolten(INGOTS * 16),
+                            Materials.SuperCoolant.getFluid(32000))
+                    .itemOutputs(MMItemList.TeleporterCore3.get(1)).duration(1 * MINUTES).eut((int) TierEU.RECIPE_ZPM)
+                    .addTo(AssemblyLine);
+        }
 
         // Frame MK3
         GTValues.RA.stdBuilder().itemInputs(GTOreDictUnificator.get(OrePrefixes.plate, Materials.NaquadahAlloy, 64))
@@ -370,36 +375,38 @@ public class ScriptMatterManipulator implements IScriptLoader {
                 .addTo(AssemblyLine);
 
         // ME Downlink
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        AEApi.instance().definitions().blocks().wireless().maybeStack(1).get(),
-                        AEApi.instance().definitions().blocks().energyCell().maybeStack(1).get(),
-                        AEApi.instance().definitions().materials().cell256kPart().maybeStack(1).get(),
-                        getModItem(AE2FluidCraft.ID, "fluid_interface", 1),
-                        ItemList.Conveyor_Module_IV.get(2),
-                        ItemList.Electric_Pump_IV.get(2),
-                        new Object[] { OrePrefixes.circuit.get(Materials.IV), 1 })
-                .circuit(5).fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(INGOTS * 8))
-                .itemOutputs(MMItemList.AEDownlink.get(1)).eut((int) TierEU.RECIPE_IV).duration(20 * SECONDS)
-                .addTo(RecipeMaps.assemblerRecipes);
+        if (AE2FluidCraft.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            AEApi.instance().definitions().blocks().wireless().maybeStack(1).get(),
+                            AEApi.instance().definitions().blocks().energyCell().maybeStack(1).get(),
+                            AEApi.instance().definitions().materials().cell256kPart().maybeStack(1).get(),
+                            getModItem(AE2FluidCraft.ID, "fluid_interface", 1),
+                            ItemList.Conveyor_Module_IV.get(2),
+                            ItemList.Electric_Pump_IV.get(2),
+                            new Object[] { OrePrefixes.circuit.get(Materials.IV), 1 })
+                    .circuit(5).fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(INGOTS * 8))
+                    .itemOutputs(MMItemList.AEDownlink.get(1)).eut((int) TierEU.RECIPE_IV).duration(20 * SECONDS)
+                    .addTo(RecipeMaps.assemblerRecipes);
 
-        // Quantum Downlink
-        GTValues.RA.stdBuilder()
-                .metadata(RESEARCH_ITEM, AEApi.instance().definitions().blocks().quantumRing().maybeStack(1).get())
-                .metadata(SCANNING, new Scanning(4 * MINUTES, TierEU.RECIPE_LuV))
-                .itemInputs(
-                        AEApi.instance().definitions().blocks().quantumRing().maybeStack(8).get(),
-                        AEApi.instance().definitions().blocks().quantumLink().maybeStack(1).get(),
-                        AEApi.instance().definitions().blocks().controller().maybeStack(1).get(),
-                        AEApi.instance().definitions().blocks().energyCellDense().maybeStack(1).get(),
-                        AEApi.instance().definitions().materials().cell4096kPart().maybeStack(1).get(),
-                        getModItem(AE2FluidCraft.ID, "fluid_interface", 1),
-                        ItemList.Conveyor_Module_ZPM.get(2),
-                        ItemList.Electric_Pump_ZPM.get(2),
-                        new Object[] { OrePrefixes.circuit.get(Materials.UV), 4 })
-                .fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(INGOTS * 32))
-                .itemOutputs(MMItemList.QuantumDownlink.get(1)).duration(1 * MINUTES).eut((int) TierEU.RECIPE_ZPM)
-                .addTo(AssemblyLine);
+            // Quantum Downlink
+            GTValues.RA.stdBuilder()
+                    .metadata(RESEARCH_ITEM, AEApi.instance().definitions().blocks().quantumRing().maybeStack(1).get())
+                    .metadata(SCANNING, new Scanning(4 * MINUTES, TierEU.RECIPE_LuV))
+                    .itemInputs(
+                            AEApi.instance().definitions().blocks().quantumRing().maybeStack(8).get(),
+                            AEApi.instance().definitions().blocks().quantumLink().maybeStack(1).get(),
+                            AEApi.instance().definitions().blocks().controller().maybeStack(1).get(),
+                            AEApi.instance().definitions().blocks().energyCellDense().maybeStack(1).get(),
+                            AEApi.instance().definitions().materials().cell4096kPart().maybeStack(1).get(),
+                            getModItem(AE2FluidCraft.ID, "fluid_interface", 1),
+                            ItemList.Conveyor_Module_ZPM.get(2),
+                            ItemList.Electric_Pump_ZPM.get(2),
+                            new Object[] { OrePrefixes.circuit.get(Materials.UV), 4 })
+                    .fluidInputs(MaterialsAlloy.INDALLOY_140.getFluidStack(INGOTS * 32))
+                    .itemOutputs(MMItemList.QuantumDownlink.get(1)).duration(1 * MINUTES).eut((int) TierEU.RECIPE_ZPM)
+                    .addTo(AssemblyLine);
+        }
 
         // Manipulator MK3
         GTValues.RA.stdBuilder()
@@ -418,24 +425,26 @@ public class ScriptMatterManipulator implements IScriptLoader {
 
     private static void addUplinkRecipes() {
         // Quantum Uplink ME Connector Hatch
-        TTRecipeAdder.addResearchableAssemblylineRecipe(
-                AEApi.instance().definitions().parts().patternTerminal().maybeStack(1).get(),
-                80_000,
-                32,
-                (int) TierEU.RECIPE_UV,
-                2,
-                new Object[] { CustomItemList.dataIn_Hatch.get(1),
-                        AEApi.instance().definitions().materials().cell16384kPart().maybeStack(1).get(),
-                        getModItem(AE2FluidCraft.ID, "fluid_interface", 1),
-                        AEApi.instance().definitions().parts().patternTerminal().maybeStack(1).get(),
-                        ItemList.Robot_Arm_UV.get(1),
-                        AEApi.instance().definitions().materials().blankPattern().maybeStack(64).get(),
-                        new Object[] { OrePrefixes.circuit.get(Materials.UV), 4 } },
-                new FluidStack[] { MaterialsAlloy.INDALLOY_140.getFluidStack(INGOTS * 32),
-                        Materials.Naquadria.getMolten(INGOTS * 16), },
-                MMItemList.UplinkHatch.get(1),
-                60 * SECONDS,
-                (int) TierEU.RECIPE_UV);
+        if (AE2FluidCraft.isModLoaded()) {
+            TTRecipeAdder.addResearchableAssemblylineRecipe(
+                    AEApi.instance().definitions().parts().patternTerminal().maybeStack(1).get(),
+                    80_000,
+                    32,
+                    (int) TierEU.RECIPE_UV,
+                    2,
+                    new Object[] { CustomItemList.dataIn_Hatch.get(1),
+                            AEApi.instance().definitions().materials().cell16384kPart().maybeStack(1).get(),
+                            getModItem(AE2FluidCraft.ID, "fluid_interface", 1),
+                            AEApi.instance().definitions().parts().patternTerminal().maybeStack(1).get(),
+                            ItemList.Robot_Arm_UV.get(1),
+                            AEApi.instance().definitions().materials().blankPattern().maybeStack(64).get(),
+                            new Object[] { OrePrefixes.circuit.get(Materials.UV), 4 } },
+                    new FluidStack[] { MaterialsAlloy.INDALLOY_140.getFluidStack(INGOTS * 32),
+                            Materials.Naquadria.getMolten(INGOTS * 16), },
+                    MMItemList.UplinkHatch.get(1),
+                    60 * SECONDS,
+                    (int) TierEU.RECIPE_UV);
+        }
 
         // Matter Manipulator Quantum Uplink
         TTRecipeAdder.addResearchableAssemblylineRecipe(
@@ -471,48 +480,54 @@ public class ScriptMatterManipulator implements IScriptLoader {
                 .eut(TierEU.RECIPE_HV).duration(10 * SECONDS).addTo(RecipeMaps.assemblerRecipes);
 
         // Excavation Manipulator Upgrade
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        MMItemList.UpgradeBlank.get(1),
-                        GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.Thaumium, 8),
-                        GTOreDictUnificator.get(OrePrefixes.screw, Materials.Thaumium, 8),
-                        getModItem(Thaumcraft.ID, "FocusExcavation"), // excavation focus
-                        getModItem(Thaumcraft.ID, "WandRod", 1, 0), // greatwood wand
-                        getModItem(Thaumcraft.ID, "ItemResource", 1, 15)) // primal charm
-                .fluidInputs(Materials.Shadow.getMolten(INGOTS * 8))
-                .itemOutputs(MMItemList.UpgradePrototypeMining.get(1)).eut(TierEU.RECIPE_HV).duration(10 * SECONDS)
-                .addTo(RecipeMaps.assemblerRecipes);
-
+        if (Thaumcraft.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            MMItemList.UpgradeBlank.get(1),
+                            GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.Thaumium, 8),
+                            GTOreDictUnificator.get(OrePrefixes.screw, Materials.Thaumium, 8),
+                            getModItem(Thaumcraft.ID, "FocusExcavation"), // excavation focus
+                            getModItem(Thaumcraft.ID, "WandRod", 1, 0), // greatwood wand
+                            getModItem(Thaumcraft.ID, "ItemResource", 1, 15)) // primal charm
+                    .fluidInputs(Materials.Shadow.getMolten(INGOTS * 8))
+                    .itemOutputs(MMItemList.UpgradePrototypeMining.get(1)).eut(TierEU.RECIPE_HV).duration(10 * SECONDS)
+                    .addTo(RecipeMaps.assemblerRecipes);
+        }
         // :derangedgregger:
         ItemStack jarredNode = getModItem(Thaumcraft.ID, "BlockJarNodeItem"); // node in a jar
         jarredNode.setStackDisplayName(EnumChatFormatting.RESET + "Any " + jarredNode.getDisplayName());
 
         // Auxiliary Teleporter Manipulator Upgrade
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        MMItemList.UpgradeBlank.get(1),
-                        ItemList.Field_Generator_HV.get(2),
-                        GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 2),
-                        getModItem(ThaumicTinkerer.ID, "focusDislocation"), // dislocation focus
-                        getModItem(Thaumcraft.ID, "WandRod", 1, 2),
-                        jarredNode,
-                        GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.Thaumium, 8),
-                        GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Thaumium, 32))
-                .fluidInputs(Materials.Void.getMolten(INGOTS * 8)).itemOutputs(MMItemList.UpgradeSpeed.get(1))
-                .eut(TierEU.RECIPE_HV).duration(10 * SECONDS).addTo(RecipeMaps.assemblerRecipes);
+        if (Thaumcraft.isModLoaded() && ThaumicTinkerer.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            MMItemList.UpgradeBlank.get(1),
+                            ItemList.Field_Generator_HV.get(2),
+                            GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 2),
+                            getModItem(ThaumicTinkerer.ID, "focusDislocation"), // dislocation focus
+                            getModItem(Thaumcraft.ID, "WandRod", 1, 2),
+                            jarredNode,
+                            GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.Thaumium, 8),
+                            GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Thaumium, 32))
+                    .fluidInputs(Materials.Void.getMolten(INGOTS * 8)).itemOutputs(MMItemList.UpgradeSpeed.get(1))
+                    .eut(TierEU.RECIPE_HV).duration(10 * SECONDS).addTo(RecipeMaps.assemblerRecipes);
+        }
 
         // Adaptive Wiring Harness Manipulator Upgrade
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        MMItemList.UpgradeBlank.get(1),
-                        getModItem(Mods.Automagy.ID, "crystalBrain", 1, 4), // crystalline brain: order
-                        getModItem(Thaumcraft.ID, "ItemGolemCore", 1, 100), // blank golem animation core
-                        GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.Thaumium, 8),
-                        GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 2),
-                        GTOreDictUnificator.get(OrePrefixes.gem, Materials.Mercury, 32),
-                        GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.SuperconductorHVBase, 64))
-                .fluidInputs(Materials.Void.getMolten(INGOTS * 8)).itemOutputs(MMItemList.UpgradePowerEff.get(1))
-                .eut(TierEU.RECIPE_HV).duration(10 * SECONDS).addTo(RecipeMaps.assemblerRecipes);
+
+        if (Automagy.isModLoaded() && Thaumcraft.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            MMItemList.UpgradeBlank.get(1),
+                            getModItem(Mods.Automagy.ID, "crystalBrain", 1, 4), // crystalline brain: order
+                            getModItem(Thaumcraft.ID, "ItemGolemCore", 1, 100), // blank golem animation core
+                            GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.Thaumium, 8),
+                            GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 2),
+                            GTOreDictUnificator.get(OrePrefixes.gem, Materials.Mercury, 32),
+                            GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.SuperconductorHVBase, 64))
+                    .fluidInputs(Materials.Void.getMolten(INGOTS * 8)).itemOutputs(MMItemList.UpgradePowerEff.get(1))
+                    .eut(TierEU.RECIPE_HV).duration(10 * SECONDS).addTo(RecipeMaps.assemblerRecipes);
+        }
 
         // Energy Tunnel Manipulator Upgrade
         TTRecipeAdder.addResearchableAssemblylineRecipe(

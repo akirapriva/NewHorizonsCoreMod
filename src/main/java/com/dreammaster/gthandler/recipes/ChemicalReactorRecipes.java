@@ -2,15 +2,7 @@ package com.dreammaster.gthandler.recipes;
 
 import static bartworks.system.material.WerkstoffLoader.Roquesit;
 import static goodgenerator.items.GGMaterial.indiumPhosphate;
-import static gregtech.api.enums.Mods.Botania;
-import static gregtech.api.enums.Mods.DraconicEvolution;
-import static gregtech.api.enums.Mods.Forestry;
-import static gregtech.api.enums.Mods.Gendustry;
-import static gregtech.api.enums.Mods.Genetics;
-import static gregtech.api.enums.Mods.HardcoreEnderExpansion;
-import static gregtech.api.enums.Mods.IndustrialCraft2;
-import static gregtech.api.enums.Mods.Natura;
-import static gregtech.api.enums.Mods.TinkerConstruct;
+import static gregtech.api.enums.Mods.*;
 import static gregtech.api.recipe.RecipeMaps.chemicalReactorRecipes;
 import static gregtech.api.recipe.RecipeMaps.multiblockChemicalReactorRecipes;
 import static gregtech.api.util.GTRecipeBuilder.INGOTS;
@@ -323,7 +315,8 @@ public class ChemicalReactorRecipes implements Runnable {
                     .itemOutputs(NHItemList.TheBigEgg.get())
                     .fluidInputs(FluidRegistry.getFluidStack("binnie.bacteria", 1000)).requiresCleanRoom()
                     .duration(60 * MINUTES).eut(TierEU.RECIPE_MV).addTo(UniversalChemical);
-
+        }
+        if (Botania.isModLoaded()) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
                             GTModHandler.getModItem(Botania.ID, "cocoon", 1L, 0),
@@ -565,10 +558,14 @@ public class ChemicalReactorRecipes implements Runnable {
                 .fluidInputs(Materials.Water.getFluid(16000L)).fluidOutputs(Materials.Hydrogen.getGas(48000L))
                 .duration(20 * SECONDS).eut(TierEU.RECIPE_HV).addTo(multiblockChemicalReactorRecipes);
 
-        GTValues.RA.stdBuilder()
-                .fluidInputs(FluidRegistry.getFluidStack("blood", 1000), FluidRegistry.getFluidStack("netherair", 100))
-                .fluidOutputs(FluidRegistry.getFluidStack("hell_blood", 1000)).duration(20 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(multiblockChemicalReactorRecipes);
+        if (BiomesOPlenty.isModLoaded()) {
+            GTValues.RA.stdBuilder()
+                    .fluidInputs(
+                            FluidRegistry.getFluidStack("blood", 1000),
+                            FluidRegistry.getFluidStack("netherair", 100))
+                    .fluidOutputs(FluidRegistry.getFluidStack("hell_blood", 1000)).duration(20 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(multiblockChemicalReactorRecipes);
+        }
 
         if (Forestry.isModLoaded()) {
             GTValues.RA.stdBuilder()
