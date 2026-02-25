@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.AppliedEnergistics2;
 import static gregtech.api.enums.Mods.IC2NuclearControl;
 import static gregtech.api.enums.Mods.IndustrialCraft2;
@@ -33,7 +34,7 @@ public class ScriptNuclearControl implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(AppliedEnergistics2.ID, IC2NuclearControl.ID, IndustrialCraft2.ID, Natura.ID);
+        return Arrays.asList(AppliedEnergistics2.ID, IC2NuclearControl.ID, IndustrialCraft2.ID);
     }
 
     @Override
@@ -49,7 +50,9 @@ public class ScriptNuclearControl implements IScriptLoader {
                 .itemOutputs(NC2_PANEL_MEMORY_CARD).duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2)
                 .addTo(assemblerRecipes);
 
-        addShapelessRecipe(ItemList.Color_04.get(1L), getModItem(Natura.ID, "Bluebells", 1, 0, missing));
+        if (NML) {
+            addShapelessRecipe(ItemList.Color_04.get(1L), getModItem(Natura.ID, "Bluebells", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(IC2NuclearControl.ID, "blockNuclearControlMain", 1, 0, missing),
                 "glassReinforced",

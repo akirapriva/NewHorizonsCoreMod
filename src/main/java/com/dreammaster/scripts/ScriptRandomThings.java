@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.Chisel;
 import static gregtech.api.enums.Mods.EnderIO;
 import static gregtech.api.enums.Mods.ExtraUtilities;
@@ -51,13 +52,10 @@ public class ScriptRandomThings implements IScriptLoader {
                 Forestry.ID,
                 HardcoreEnderExpansion.ID,
                 IndustrialCraft2.ID,
-                MagicBees.ID,
                 ProjectRedIllumination.ID,
                 ProjectRedIntegration.ID,
                 RandomThings.ID,
                 RemoteIO.ID,
-                Thaumcraft.ID,
-                TinkerConstruct.ID,
                 TwilightForest.ID);
     }
 
@@ -69,17 +67,19 @@ public class ScriptRandomThings implements IScriptLoader {
                 null,
                 getModItem(Minecraft.ID, "daylight_detector", 1, 0, missing),
                 null);
-        addShapedRecipe(
-                getModItem(RandomThings.ID, "lapisLamp", 1, 0, missing),
-                getModItem(Chisel.ID, "iron_bars", 1, 2, missing),
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 0, missing),
-                getModItem(Chisel.ID, "iron_bars", 1, 2, missing),
-                getModItem(Chisel.ID, "iron_bars", 1, 2, missing),
-                getModItem(ProjectRedIllumination.ID, "projectred.illumination.lamp", 1, 27, missing),
-                getModItem(Chisel.ID, "iron_bars", 1, 2, missing),
-                getModItem(Chisel.ID, "iron_bars", 1, 2, missing),
-                getModItem(Minecraft.ID, "redstone_torch", 1, 0, missing),
-                getModItem(Chisel.ID, "iron_bars", 1, 2, missing));
+        if (TML) {
+            addShapedRecipe(
+                    getModItem(RandomThings.ID, "lapisLamp", 1, 0, missing),
+                    getModItem(Chisel.ID, "iron_bars", 1, 2, missing),
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 0, missing),
+                    getModItem(Chisel.ID, "iron_bars", 1, 2, missing),
+                    getModItem(Chisel.ID, "iron_bars", 1, 2, missing),
+                    getModItem(ProjectRedIllumination.ID, "projectred.illumination.lamp", 1, 27, missing),
+                    getModItem(Chisel.ID, "iron_bars", 1, 2, missing),
+                    getModItem(Chisel.ID, "iron_bars", 1, 2, missing),
+                    getModItem(Minecraft.ID, "redstone_torch", 1, 0, missing),
+                    getModItem(Chisel.ID, "iron_bars", 1, 2, missing));
+        }
         addShapedRecipe(
                 getModItem(RandomThings.ID, "moonSensor", 1, 0, missing),
                 getModItem(Minecraft.ID, "stained_glass_pane", 1, 0, missing),
@@ -187,10 +187,13 @@ public class ScriptRandomThings implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.plate, Materials.Lapis, 4L))
                 .itemOutputs(getModItem(RandomThings.ID, "ingredient", 1, 0, missing))
                 .duration(12 * SECONDS + 10 * TICKS).eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(TinkerConstruct.ID, "GlassPane", 16, 0, missing)).circuit(1)
-                .itemOutputs(getModItem(RandomThings.ID, "fluidDisplay", 8, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("refinedglue", 72)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (TCML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(TinkerConstruct.ID, "GlassPane", 16, 0, missing)).circuit(1)
+                    .itemOutputs(getModItem(RandomThings.ID, "fluidDisplay", 8, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("refinedglue", 72)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
+
         GTValues.RA.stdBuilder().itemInputs(getModItem(RandomThings.ID, "fluidDisplay", 1, 0, missing)).circuit(1)
                 .itemOutputs(getModItem(RandomThings.ID, "advancedFluidDisplay", 1, 0, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("refinedglue", 144)).duration(10 * SECONDS)
@@ -264,13 +267,15 @@ public class ScriptRandomThings implements IScriptLoader {
                 .itemOutputs(getModItem(RandomThings.ID, "fertilizedDirt", 1, 0, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("water", 1000)).duration(5 * SECONDS).eut(TierEU.RECIPE_LV)
                 .addTo(UniversalChemical);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(HardcoreEnderExpansion.ID, "endoplasm", 1, 0, missing),
-                        getModItem(MagicBees.ID, "wax", 1, 1, missing))
-                .itemOutputs(getModItem(RandomThings.ID, "ingredient", 1, 3, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("cadaverine", 100)).duration(5 * SECONDS).eut(TierEU.RECIPE_LV)
-                .addTo(UniversalChemical);
+        if (MBML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(HardcoreEnderExpansion.ID, "endoplasm", 1, 0, missing),
+                            getModItem(MagicBees.ID, "wax", 1, 1, missing))
+                    .itemOutputs(getModItem(RandomThings.ID, "ingredient", 1, 3, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("cadaverine", 100)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(UniversalChemical);
+        }
 
     }
 }

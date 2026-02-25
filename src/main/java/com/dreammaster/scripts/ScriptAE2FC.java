@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.*;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.circuitAssemblerRecipes;
@@ -43,8 +44,7 @@ public class ScriptAE2FC implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays
-                .asList(AE2FluidCraft.ID, AppliedEnergistics2.ID, Avaritia.ID, EternalSingularity.ID, OpenComputers.ID);
+        return Arrays.asList(AE2FluidCraft.ID, AppliedEnergistics2.ID);
     }
 
     @Override
@@ -937,28 +937,29 @@ public class ScriptAE2FC implements IScriptLoader {
                         AE2_SINGULARITY)
                 .circuit(2).itemOutputs(AE2FC_FLUID_VOID_CELL).duration(5 * SECONDS).eut(TierEU.RECIPE_HV)
                 .addTo(assemblerRecipes);
-
         // Interface from Small to Block and opposite
         GameRegistry.addShapelessRecipe(AE2FC_INTERFACE_SMALL, AE2FC_INTERFACE);
         GameRegistry.addShapelessRecipe(AE2FC_INTERFACE, AE2FC_INTERFACE_SMALL);
-        // OC Component
-        ItemStack CHIP_T1 = getModItem(OpenComputers.ID, "item", 1, 24);
-        GameRegistry.addRecipe(
-                new ShapedOreRecipe(
-                        AE2FC_OCEDITOR,
-                        "IMI",
-                        "CBC",
-                        "IPI",
-                        'I',
-                        IRON_BAR,
-                        'M',
-                        CHIP_T1,
-                        'C',
-                        "oc:cable",
-                        'B',
-                        BUCKET,
-                        'P',
-                        AE2_BLANK_PATTERN));
+        if (OCML) {
+            // OC Component
+            ItemStack CHIP_T1 = getModItem(OpenComputers.ID, "item", 1, 24);
+            GameRegistry.addRecipe(
+                    new ShapedOreRecipe(
+                            AE2FC_OCEDITOR,
+                            "IMI",
+                            "CBC",
+                            "IPI",
+                            'I',
+                            IRON_BAR,
+                            'M',
+                            CHIP_T1,
+                            'C',
+                            "oc:cable",
+                            'B',
+                            BUCKET,
+                            'P',
+                            AE2_BLANK_PATTERN));
+        }
         // Dual interface P2P
         GameRegistry.addShapelessRecipe(AE2FC_INTERFACE_P2P, AE2_P2P_ME, AE2FC_INTERFACE);
         GameRegistry.addShapelessRecipe(AE2FC_INTERFACE_P2P, AE2_P2P_ME, AE2FC_INTERFACE_SMALL);

@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.BiomesOPlenty;
 import static gregtech.api.enums.Mods.Chisel;
 import static gregtech.api.enums.Mods.EnderStorage;
@@ -45,14 +46,7 @@ public class ScriptHardcoreEnderExpansion implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                BiomesOPlenty.ID,
-                Chisel.ID,
-                EnderStorage.ID,
-                HardcoreEnderExpansion.ID,
-                IronTanks.ID,
-                Thaumcraft.ID,
-                TinkerConstruct.ID);
+        return Arrays.asList(Chisel.ID, EnderStorage.ID, HardcoreEnderExpansion.ID, IronTanks.ID);
     }
 
     @Override
@@ -68,17 +62,19 @@ public class ScriptHardcoreEnderExpansion implements IScriptLoader {
                 "plateDiamond",
                 "gemEnderEye",
                 "plateDiamond");
-        addShapedRecipe(
-                getModItem(HardcoreEnderExpansion.ID, "essence_altar", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 1, missing),
-                "itemLeather",
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 0, missing),
-                getModItem(Minecraft.ID, "bookshelf", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "altar_nexus", 1, 0, missing),
-                getModItem(Minecraft.ID, "bookshelf", 1, 0, missing),
-                "plateDenseObsidian",
-                "blockEnder",
-                "plateDenseObsidian");
+        if (TML) {
+            addShapedRecipe(
+                    getModItem(HardcoreEnderExpansion.ID, "essence_altar", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 1, missing),
+                    "itemLeather",
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 0, missing),
+                    getModItem(Minecraft.ID, "bookshelf", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "altar_nexus", 1, 0, missing),
+                    getModItem(Minecraft.ID, "bookshelf", 1, 0, missing),
+                    "plateDenseObsidian",
+                    "blockEnder",
+                    "plateDenseObsidian");
+        }
         addShapedRecipe(
                 getModItem(HardcoreEnderExpansion.ID, "void_chest", 1, 0, missing),
                 getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
@@ -191,17 +187,19 @@ public class ScriptHardcoreEnderExpansion implements IScriptLoader {
                 getModItem(Minecraft.ID, "dye", 1, 15, missing),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Apatite, 1L));
-        addShapedRecipe(
-                getModItem(HardcoreEnderExpansion.ID, "charm_pouch", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "rune", 1, wildcard, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "rune", 1, wildcard, missing),
-                getModItem(Thaumcraft.ID, "FocusPouch", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "rune", 1, wildcard, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "rune", 1, wildcard, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing));
+        if (TML) {
+            addShapedRecipe(
+                    getModItem(HardcoreEnderExpansion.ID, "charm_pouch", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "rune", 1, wildcard, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "rune", 1, wildcard, missing),
+                    getModItem(Thaumcraft.ID, "FocusPouch", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "rune", 1, wildcard, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "rune", 1, wildcard, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(HardcoreEnderExpansion.ID, "curse", 4, 0, missing),
                 getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
@@ -246,17 +244,19 @@ public class ScriptHardcoreEnderExpansion implements IScriptLoader {
                 null,
                 getModItem(HardcoreEnderExpansion.ID, "arcane_shard", 1, 0, missing),
                 null);
-        addShapedRecipe(
-                getModItem(HardcoreEnderExpansion.ID, "curse", 4, 2, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                getModItem(BiomesOPlenty.ID, "food", 1, 1, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                ItemList.Bottle_Dark_Beer.get(1L),
-                getModItem(HardcoreEnderExpansion.ID, "living_matter", 1, 0, missing),
-                "dustSugar",
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                "flowerRed",
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing));
+        if (BOPML) {
+            addShapedRecipe(
+                    getModItem(HardcoreEnderExpansion.ID, "curse", 4, 2, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    getModItem(BiomesOPlenty.ID, "food", 1, 1, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    ItemList.Bottle_Dark_Beer.get(1L),
+                    getModItem(HardcoreEnderExpansion.ID, "living_matter", 1, 0, missing),
+                    "dustSugar",
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    "flowerRed",
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(HardcoreEnderExpansion.ID, "curse", 1, 258, missing),
                 null,
@@ -290,17 +290,19 @@ public class ScriptHardcoreEnderExpansion implements IScriptLoader {
                 null,
                 getModItem(HardcoreEnderExpansion.ID, "arcane_shard", 1, 0, missing),
                 null);
-        addShapedRecipe(
-                getModItem(HardcoreEnderExpansion.ID, "curse", 4, 4, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                "itemBlazePowder",
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                getModItem(Minecraft.ID, "poisonous_potato", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "living_matter", 1, 0, missing),
-                getModItem(Minecraft.ID, "fermented_spider_eye", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                getModItem(BiomesOPlenty.ID, "foliage", 1, 7, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing));
+        if (BOPML) {
+            addShapedRecipe(
+                    getModItem(HardcoreEnderExpansion.ID, "curse", 4, 4, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    "itemBlazePowder",
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    getModItem(Minecraft.ID, "poisonous_potato", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "living_matter", 1, 0, missing),
+                    getModItem(Minecraft.ID, "fermented_spider_eye", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    getModItem(BiomesOPlenty.ID, "foliage", 1, 7, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(HardcoreEnderExpansion.ID, "curse", 1, 260, missing),
                 null,
@@ -378,17 +380,19 @@ public class ScriptHardcoreEnderExpansion implements IScriptLoader {
                 null,
                 getModItem(HardcoreEnderExpansion.ID, "arcane_shard", 1, 0, missing),
                 null);
-        addShapedRecipe(
-                getModItem(HardcoreEnderExpansion.ID, "curse", 4, 8, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                "cropGarlic",
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                getModItem(TinkerConstruct.ID, "strangeFood", 1, 1, missing),
-                getModItem(HardcoreEnderExpansion.ID, "living_matter", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "silverfish_blood", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "igneous_rock", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing));
+        if (TCML) {
+            addShapedRecipe(
+                    getModItem(HardcoreEnderExpansion.ID, "curse", 4, 8, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    "cropGarlic",
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    getModItem(TinkerConstruct.ID, "strangeFood", 1, 1, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "living_matter", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "silverfish_blood", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "igneous_rock", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(HardcoreEnderExpansion.ID, "curse", 1, 264, missing),
                 null,

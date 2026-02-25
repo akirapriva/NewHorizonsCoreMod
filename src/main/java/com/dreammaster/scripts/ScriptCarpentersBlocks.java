@@ -1,9 +1,6 @@
 package com.dreammaster.scripts;
 
-import static gregtech.api.enums.Mods.CarpentersBlocks;
-import static gregtech.api.enums.Mods.IndustrialCraft2;
-import static gregtech.api.enums.Mods.Minecraft;
-import static gregtech.api.enums.Mods.TinkerConstruct;
+import static gregtech.api.enums.Mods.*;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.cutterRecipes;
 import static gregtech.api.util.GTModHandler.getModItem;
@@ -33,7 +30,7 @@ public class ScriptCarpentersBlocks implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(Mods.CarpentersBlocks.ID, IndustrialCraft2.ID, TinkerConstruct.ID);
+        return Arrays.asList(Mods.CarpentersBlocks.ID, IndustrialCraft2.ID);
     }
 
     @Override
@@ -118,7 +115,7 @@ public class ScriptCarpentersBlocks implements IScriptLoader {
         addShapedRecipe(
                 getModItem(CarpentersBlocks.ID, "itemCarpentersChisel", 1, 0, missing),
                 "craftingToolScrewdriver",
-                getModItem(TinkerConstruct.ID, "chiselHead", 1, 2, missing),
+                getModItem(Chisel.ID, "chisel", 1, 0, missing),
                 "craftingToolSaw",
                 GTOreDictUnificator.get(OrePrefixes.screw, Materials.Iron, 1L),
                 "stickAnyIron",
@@ -376,7 +373,7 @@ public class ScriptCarpentersBlocks implements IScriptLoader {
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                        getModItem(TinkerConstruct.ID, "chiselHead", 1, 2, missing))
+                        getModItem(Chisel.ID, "chisel", 1, 0, missing))
                 .itemOutputs(getModItem(CarpentersBlocks.ID, "itemCarpentersChisel", 1, 0, missing))
                 .duration(10 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
         GTValues.RA.stdBuilder()

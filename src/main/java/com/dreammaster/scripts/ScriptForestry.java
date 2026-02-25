@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.Backpack;
 import static gregtech.api.enums.Mods.BiomesOPlenty;
 import static gregtech.api.enums.Mods.BuildCraftFactory;
@@ -12,8 +13,6 @@ import static gregtech.api.enums.Mods.Natura;
 import static gregtech.api.enums.Mods.PamsHarvestCraft;
 import static gregtech.api.enums.Mods.ProjectRedExpansion;
 import static gregtech.api.enums.Mods.Railcraft;
-import static gregtech.api.enums.Mods.Thaumcraft;
-import static gregtech.api.enums.Mods.TinkerConstruct;
 import static gregtech.api.recipe.RecipeMaps.alloySmelterRecipes;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.centrifugeRecipes;
@@ -63,18 +62,13 @@ public class ScriptForestry implements IScriptLoader {
     public List<String> getDependencies() {
         return Arrays.asList(
                 Backpack.ID,
-                BiomesOPlenty.ID,
                 BuildCraftFactory.ID,
                 ExtraBees.ID,
                 Forestry.ID,
                 IndustrialCraft2.ID,
-                MagicBees.ID,
-                Natura.ID,
                 PamsHarvestCraft.ID,
                 ProjectRedExpansion.ID,
-                Railcraft.ID,
-                Thaumcraft.ID,
-                TinkerConstruct.ID);
+                Railcraft.ID);
     }
 
     @Override
@@ -160,18 +154,20 @@ public class ScriptForestry implements IScriptLoader {
                 .itemInputs(getModItem(Forestry.ID, "refractoryWax", 9, 0, missing), ItemList.Shape_Mold_Block.get(0L))
                 .itemOutputs(getModItem(Forestry.ID, "waxCast", 1, 0, missing)).duration(10 * SECONDS)
                 .eut(TierEU.RECIPE_LV / 2).addTo(alloySmelterRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(MagicBees.ID, "wax", 9, 0, missing), ItemList.Shape_Mold_Block.get(0L))
-                .itemOutputs(getModItem(Forestry.ID, "waxCast", 1, 0, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_LV / 2).addTo(alloySmelterRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(MagicBees.ID, "wax", 9, 1, missing), ItemList.Shape_Mold_Block.get(0L))
-                .itemOutputs(getModItem(Forestry.ID, "waxCast", 1, 0, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_LV / 2).addTo(alloySmelterRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(MagicBees.ID, "wax", 9, 2, missing), ItemList.Shape_Mold_Block.get(0L))
-                .itemOutputs(getModItem(Forestry.ID, "waxCast", 1, 0, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_LV / 2).addTo(alloySmelterRecipes);
+        if (TML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(getModItem(MagicBees.ID, "wax", 9, 0, missing), ItemList.Shape_Mold_Block.get(0L))
+                    .itemOutputs(getModItem(Forestry.ID, "waxCast", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_LV / 2).addTo(alloySmelterRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(getModItem(MagicBees.ID, "wax", 9, 1, missing), ItemList.Shape_Mold_Block.get(0L))
+                    .itemOutputs(getModItem(Forestry.ID, "waxCast", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_LV / 2).addTo(alloySmelterRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(getModItem(MagicBees.ID, "wax", 9, 2, missing), ItemList.Shape_Mold_Block.get(0L))
+                    .itemOutputs(getModItem(Forestry.ID, "waxCast", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_LV / 2).addTo(alloySmelterRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Minecraft.ID, "paper", 8, 0, missing),
@@ -233,9 +229,11 @@ public class ScriptForestry implements IScriptLoader {
                         getModItem(Minecraft.ID, "chest", 1, 0, missing))
                 .circuit(1).itemOutputs(getModItem(Forestry.ID, "factory2", 1, 2, missing)).duration(10 * SECONDS)
                 .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "hive", 1, 1, missing))
-                .itemOutputs(getModItem(Forestry.ID, "propolis", 1, 0, missing)).outputChances(500)
-                .duration(20 * SECONDS).eut(40).addTo(centrifugeRecipes);
+        if (BOPML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "hive", 1, 1, missing))
+                    .itemOutputs(getModItem(Forestry.ID, "propolis", 1, 0, missing)).outputChances(500)
+                    .duration(20 * SECONDS).eut(40).addTo(centrifugeRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(ItemList.Shape_Mold_Nugget.get(0L))
                 .itemOutputs(getModItem(Forestry.ID, "honeyDrop", 1, 0, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("for.honey", 200)).duration(20 * SECONDS)
@@ -248,87 +246,90 @@ public class ScriptForestry implements IScriptLoader {
                 .itemInputs(getModItem(Forestry.ID, "refractoryWax", 9, 0, missing), ItemList.Shape_Mold_Block.get(0L))
                 .itemOutputs(getModItem(Forestry.ID, "waxCast", 1, 0, missing)).duration(5 * SECONDS)
                 .eut(TierEU.RECIPE_LV).addTo(formingPressRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(MagicBees.ID, "wax", 9, 0, missing), ItemList.Shape_Mold_Block.get(0L))
-                .itemOutputs(getModItem(Forestry.ID, "waxCast", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(formingPressRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(MagicBees.ID, "wax", 9, 1, missing), ItemList.Shape_Mold_Block.get(0L))
-                .itemOutputs(getModItem(Forestry.ID, "waxCast", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(formingPressRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(MagicBees.ID, "wax", 9, 2, missing), ItemList.Shape_Mold_Block.get(0L))
-                .itemOutputs(getModItem(Forestry.ID, "waxCast", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(formingPressRecipes);
+        if (TML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(getModItem(MagicBees.ID, "wax", 9, 0, missing), ItemList.Shape_Mold_Block.get(0L))
+                    .itemOutputs(getModItem(Forestry.ID, "waxCast", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(formingPressRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(getModItem(MagicBees.ID, "wax", 9, 1, missing), ItemList.Shape_Mold_Block.get(0L))
+                    .itemOutputs(getModItem(Forestry.ID, "waxCast", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(formingPressRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(getModItem(MagicBees.ID, "wax", 9, 2, missing), ItemList.Shape_Mold_Block.get(0L))
+                    .itemOutputs(getModItem(Forestry.ID, "waxCast", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(formingPressRecipes);
 
-        new ResearchItem(
-                "PROVENFRAME",
-                "MAGICBEES",
-                new AspectList().add(Aspect.getAspect("praecantatio"), 15).add(Aspect.getAspect("fabrico"), 12)
-                        .add(Aspect.getAspect("cognitio"), 9).add(Aspect.getAspect("potentia"), 6),
-                7,
-                0,
-                3,
-                getModItem(Forestry.ID, "frameProven", 1, 0, missing)).setParents("MB_EssenceArmor").setConcealed()
-                        .setPages(new ResearchPage("Forestry.research_page.PROVENFRAME")).registerResearchItem();
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "PROVENFRAME",
-                getModItem(Forestry.ID, "frameProven", 1, 0, missing),
-                new AspectList().add(Aspect.getAspect("ordo"), 15).add(Aspect.getAspect("terra"), 15)
-                        .add(Aspect.getAspect("aer"), 15).add(Aspect.getAspect("perditio"), 15)
-                        .add(Aspect.getAspect("ignis"), 15).add(Aspect.getAspect("aqua"), 15),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
-                'b',
-                getModItem(Forestry.ID, "honeydew", 1, 0, missing),
-                'c',
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
-                'd',
-                getModItem(Forestry.ID, "propolis", 1, 0, missing),
-                'e',
-                getModItem(Forestry.ID, "frameImpregnated", 1, 0, missing),
-                'f',
-                getModItem(Forestry.ID, "propolis", 1, 3, missing),
-                'g',
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
-                'h',
-                getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
-                'i',
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L));
-        TCHelper.addResearchPage(
-                "PROVENFRAME",
-                new ResearchPage(TCHelper.findArcaneRecipe(getModItem(Forestry.ID, "frameProven", 1, 0, missing))));
-        new ResearchItem(
-                "PROVENGRAFTER",
-                "MAGICBEES",
-                new AspectList().add(Aspect.getAspect("instrumentum"), 15).add(Aspect.getAspect("permutatio"), 12)
-                        .add(Aspect.getAspect("metallum"), 9).add(Aspect.getAspect("arbor"), 6),
-                -5,
-                -3,
-                3,
-                getModItem(Forestry.ID, "grafterProven", 1, 0, missing)).setParents("MB_Scoop").setConcealed()
-                        .setPages(new ResearchPage("Forestry.research_page.PROVENGRAFTER")).registerResearchItem();
-        TCHelper.addInfusionCraftingRecipe(
-                "PROVENGRAFTER",
-                getModItem(Forestry.ID, "grafterProven", 1, 0, missing),
-                3,
-                new AspectList().add(Aspect.getAspect("instrumentum"), 25).add(Aspect.getAspect("permutatio"), 25)
-                        .add(Aspect.getAspect("metallum"), 20).add(Aspect.getAspect("arbor"), 10),
-                getModItem(Forestry.ID, "grafter", 1, 0, missing),
-                getModItem(Minecraft.ID, "sapling", 1, 1, missing),
-                getModItem(Minecraft.ID, "sapling", 1, 2, missing),
-                getModItem(Forestry.ID, "pollen", 1, 0, missing),
-                getModItem(Minecraft.ID, "sapling", 1, 3, missing),
-                getModItem(Minecraft.ID, "sapling", 1, 4, missing),
-                getModItem(Minecraft.ID, "sapling", 1, 5, missing),
-                getModItem(Forestry.ID, "pollen", 1, 1, missing),
-                getModItem(Minecraft.ID, "sapling", 1, 0, missing));
-        TCHelper.addResearchPage(
-                "PROVENGRAFTER",
-                new ResearchPage(TCHelper.findInfusionRecipe(getModItem(Forestry.ID, "grafterProven", 1, 0, missing))));
+            new ResearchItem(
+                    "PROVENFRAME",
+                    "MAGICBEES",
+                    new AspectList().add(Aspect.getAspect("praecantatio"), 15).add(Aspect.getAspect("fabrico"), 12)
+                            .add(Aspect.getAspect("cognitio"), 9).add(Aspect.getAspect("potentia"), 6),
+                    7,
+                    0,
+                    3,
+                    getModItem(Forestry.ID, "frameProven", 1, 0, missing)).setParents("MB_EssenceArmor").setConcealed()
+                            .setPages(new ResearchPage("Forestry.research_page.PROVENFRAME")).registerResearchItem();
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "PROVENFRAME",
+                    getModItem(Forestry.ID, "frameProven", 1, 0, missing),
+                    new AspectList().add(Aspect.getAspect("ordo"), 15).add(Aspect.getAspect("terra"), 15)
+                            .add(Aspect.getAspect("aer"), 15).add(Aspect.getAspect("perditio"), 15)
+                            .add(Aspect.getAspect("ignis"), 15).add(Aspect.getAspect("aqua"), 15),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
+                    'b',
+                    getModItem(Forestry.ID, "honeydew", 1, 0, missing),
+                    'c',
+                    GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
+                    'd',
+                    getModItem(Forestry.ID, "propolis", 1, 0, missing),
+                    'e',
+                    getModItem(Forestry.ID, "frameImpregnated", 1, 0, missing),
+                    'f',
+                    getModItem(Forestry.ID, "propolis", 1, 3, missing),
+                    'g',
+                    GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
+                    'h',
+                    getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
+                    'i',
+                    GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L));
+            TCHelper.addResearchPage(
+                    "PROVENFRAME",
+                    new ResearchPage(TCHelper.findArcaneRecipe(getModItem(Forestry.ID, "frameProven", 1, 0, missing))));
+            new ResearchItem(
+                    "PROVENGRAFTER",
+                    "MAGICBEES",
+                    new AspectList().add(Aspect.getAspect("instrumentum"), 15).add(Aspect.getAspect("permutatio"), 12)
+                            .add(Aspect.getAspect("metallum"), 9).add(Aspect.getAspect("arbor"), 6),
+                    -5,
+                    -3,
+                    3,
+                    getModItem(Forestry.ID, "grafterProven", 1, 0, missing)).setParents("MB_Scoop").setConcealed()
+                            .setPages(new ResearchPage("Forestry.research_page.PROVENGRAFTER")).registerResearchItem();
+            TCHelper.addInfusionCraftingRecipe(
+                    "PROVENGRAFTER",
+                    getModItem(Forestry.ID, "grafterProven", 1, 0, missing),
+                    3,
+                    new AspectList().add(Aspect.getAspect("instrumentum"), 25).add(Aspect.getAspect("permutatio"), 25)
+                            .add(Aspect.getAspect("metallum"), 20).add(Aspect.getAspect("arbor"), 10),
+                    getModItem(Forestry.ID, "grafter", 1, 0, missing),
+                    getModItem(Minecraft.ID, "sapling", 1, 1, missing),
+                    getModItem(Minecraft.ID, "sapling", 1, 2, missing),
+                    getModItem(Forestry.ID, "pollen", 1, 0, missing),
+                    getModItem(Minecraft.ID, "sapling", 1, 3, missing),
+                    getModItem(Minecraft.ID, "sapling", 1, 4, missing),
+                    getModItem(Minecraft.ID, "sapling", 1, 5, missing),
+                    getModItem(Forestry.ID, "pollen", 1, 1, missing),
+                    getModItem(Minecraft.ID, "sapling", 1, 0, missing));
+            TCHelper.addResearchPage(
+                    "PROVENGRAFTER",
+                    new ResearchPage(
+                            TCHelper.findInfusionRecipe(getModItem(Forestry.ID, "grafterProven", 1, 0, missing))));
+        }
     }
 
     private void craftingRecipes() {
@@ -470,7 +471,7 @@ public class ScriptForestry implements IScriptLoader {
                 getModItem(Minecraft.ID, "bookshelf", 1, 0, missing),
                 "screwIron",
                 "craftingToolSaw",
-                getModItem(TinkerConstruct.ID, "CraftingStation", 1, 0, missing),
+                getModItem(Minecraft.ID, "crafting_table", 1, 0, missing),
                 "craftingToolScrewdriver",
                 "screwIron",
                 getModItem(Minecraft.ID, "chest", 1, 0, missing),
@@ -4492,24 +4493,26 @@ public class ScriptForestry implements IScriptLoader {
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
                 'h',
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L));
-        RecipeManagers.carpenterManager.addRecipe(
-                20,
-                FluidRegistry.getFluidStack("water", 100),
-                null,
-                getModItem(Forestry.ID, "fertilizerBio", 1, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'b',
-                getModItem(Natura.ID, "barleyFood", 1, 0, missing),
-                'd',
-                getModItem(Natura.ID, "barleyFood", 1, 0, missing),
-                'e',
-                getModItem(Minecraft.ID, "dirt", 1, wildcard, missing),
-                'f',
-                getModItem(Natura.ID, "barleyFood", 1, 0, missing),
-                'h',
-                getModItem(Natura.ID, "barleyFood", 1, 0, missing));
+        if (NML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    20,
+                    FluidRegistry.getFluidStack("water", 100),
+                    null,
+                    getModItem(Forestry.ID, "fertilizerBio", 1, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'b',
+                    getModItem(Natura.ID, "barleyFood", 1, 0, missing),
+                    'd',
+                    getModItem(Natura.ID, "barleyFood", 1, 0, missing),
+                    'e',
+                    getModItem(Minecraft.ID, "dirt", 1, wildcard, missing),
+                    'f',
+                    getModItem(Natura.ID, "barleyFood", 1, 0, missing),
+                    'h',
+                    getModItem(Natura.ID, "barleyFood", 1, 0, missing));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 20,
                 FluidRegistry.getFluidStack("water", 100),
@@ -4528,24 +4531,26 @@ public class ScriptForestry implements IScriptLoader {
                 getModItem(PamsHarvestCraft.ID, "barleyItem", 1, 0, missing),
                 'h',
                 getModItem(PamsHarvestCraft.ID, "barleyItem", 1, 0, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                20,
-                FluidRegistry.getFluidStack("water", 100),
-                null,
-                getModItem(Forestry.ID, "fertilizerBio", 1, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'b',
-                getModItem(BiomesOPlenty.ID, "plants", 1, 6, missing),
-                'd',
-                getModItem(BiomesOPlenty.ID, "plants", 1, 6, missing),
-                'e',
-                getModItem(Minecraft.ID, "dirt", 1, wildcard, missing),
-                'f',
-                getModItem(BiomesOPlenty.ID, "plants", 1, 6, missing),
-                'h',
-                getModItem(BiomesOPlenty.ID, "plants", 1, 6, missing));
+        if (BOPML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    20,
+                    FluidRegistry.getFluidStack("water", 100),
+                    null,
+                    getModItem(Forestry.ID, "fertilizerBio", 1, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'b',
+                    getModItem(BiomesOPlenty.ID, "plants", 1, 6, missing),
+                    'd',
+                    getModItem(BiomesOPlenty.ID, "plants", 1, 6, missing),
+                    'e',
+                    getModItem(Minecraft.ID, "dirt", 1, wildcard, missing),
+                    'f',
+                    getModItem(BiomesOPlenty.ID, "plants", 1, 6, missing),
+                    'h',
+                    getModItem(BiomesOPlenty.ID, "plants", 1, 6, missing));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 20,
                 FluidRegistry.getFluidStack("water", 100),
@@ -4596,20 +4601,22 @@ public class ScriptForestry implements IScriptLoader {
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Apatite, 1L),
                 'h',
                 getModItem(Minecraft.ID, "sand", 1, wildcard, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                20,
-                FluidRegistry.getFluidStack("water", 100),
-                null,
-                getModItem(Forestry.ID, "fertilizerCompound", 6, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'b',
-                getModItem(Minecraft.ID, "sand", 1, wildcard, missing),
-                'e',
-                getModItem(MagicBees.ID, "miscResources", 1, 2, missing),
-                'h',
-                getModItem(Minecraft.ID, "sand", 1, wildcard, missing));
+        if (TML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    20,
+                    FluidRegistry.getFluidStack("water", 100),
+                    null,
+                    getModItem(Forestry.ID, "fertilizerCompound", 6, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'b',
+                    getModItem(Minecraft.ID, "sand", 1, wildcard, missing),
+                    'e',
+                    getModItem(MagicBees.ID, "miscResources", 1, 2, missing),
+                    'h',
+                    getModItem(Minecraft.ID, "sand", 1, wildcard, missing));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 20,
                 FluidRegistry.getFluidStack("water", 100),
@@ -4636,32 +4643,34 @@ public class ScriptForestry implements IScriptLoader {
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
                 'i',
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L));
-        RecipeManagers.carpenterManager.addRecipe(
-                20,
-                FluidRegistry.getFluidStack("water", 100),
-                null,
-                getModItem(Forestry.ID, "fertilizerCompound", 12, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
-                'b',
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
-                'c',
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
-                'd',
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
-                'e',
-                getModItem(MagicBees.ID, "miscResources", 1, 2, missing),
-                'f',
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
-                'g',
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
-                'h',
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
-                'i',
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L));
+        if (TML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    20,
+                    FluidRegistry.getFluidStack("water", 100),
+                    null,
+                    getModItem(Forestry.ID, "fertilizerCompound", 12, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
+                    'b',
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
+                    'c',
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
+                    'd',
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
+                    'e',
+                    getModItem(MagicBees.ID, "miscResources", 1, 2, missing),
+                    'f',
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
+                    'g',
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
+                    'h',
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
+                    'i',
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 20,
                 FluidRegistry.getFluidStack("water", 100),
@@ -4732,32 +4741,34 @@ public class ScriptForestry implements IScriptLoader {
                 getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
                 'i',
                 getModItem(Minecraft.ID, "gunpowder", 1, 0, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                40,
-                FluidRegistry.getFluidStack("for.honey", 1000),
-                getModItem(Forestry.ID, "canEmpty", 1, 0, missing),
-                getModItem(Forestry.ID, "iodineCapsule", 1, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                getModItem(Forestry.ID, "honeydew", 1, 0, missing),
-                'b',
-                getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
-                'c',
-                getModItem(Forestry.ID, "honeydew", 1, 0, missing),
-                'd',
-                getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
-                'e',
-                getModItem(MagicBees.ID, "propolis", 1, wildcard, missing),
-                'f',
-                getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
-                'g',
-                getModItem(Minecraft.ID, "gunpowder", 1, 0, missing),
-                'h',
-                getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
-                'i',
-                getModItem(Minecraft.ID, "gunpowder", 1, 0, missing));
+        if (TML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    40,
+                    FluidRegistry.getFluidStack("for.honey", 1000),
+                    getModItem(Forestry.ID, "canEmpty", 1, 0, missing),
+                    getModItem(Forestry.ID, "iodineCapsule", 1, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    getModItem(Forestry.ID, "honeydew", 1, 0, missing),
+                    'b',
+                    getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
+                    'c',
+                    getModItem(Forestry.ID, "honeydew", 1, 0, missing),
+                    'd',
+                    getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
+                    'e',
+                    getModItem(MagicBees.ID, "propolis", 1, wildcard, missing),
+                    'f',
+                    getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
+                    'g',
+                    getModItem(Minecraft.ID, "gunpowder", 1, 0, missing),
+                    'h',
+                    getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
+                    'i',
+                    getModItem(Minecraft.ID, "gunpowder", 1, 0, missing));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 40,
                 FluidRegistry.getFluidStack("for.honey", 1000),
@@ -4810,32 +4821,34 @@ public class ScriptForestry implements IScriptLoader {
                 getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
                 'i',
                 getModItem(Minecraft.ID, "gunpowder", 1, 0, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                40,
-                FluidRegistry.getFluidStack("for.honey", 1000),
-                getModItem(Forestry.ID, "canEmpty", 1, 0, missing),
-                getModItem(Forestry.ID, "craftingMaterial", 1, 4, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                getModItem(Forestry.ID, "honeydew", 1, 0, missing),
-                'b',
-                getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
-                'c',
-                getModItem(Forestry.ID, "honeydew", 1, 0, missing),
-                'd',
-                getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
-                'e',
-                getModItem(MagicBees.ID, "propolis", 1, wildcard, missing),
-                'f',
-                getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
-                'g',
-                getModItem(Minecraft.ID, "gunpowder", 1, 0, missing),
-                'h',
-                getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
-                'i',
-                getModItem(Minecraft.ID, "gunpowder", 1, 0, missing));
+        if (TML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    40,
+                    FluidRegistry.getFluidStack("for.honey", 1000),
+                    getModItem(Forestry.ID, "canEmpty", 1, 0, missing),
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 4, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    getModItem(Forestry.ID, "honeydew", 1, 0, missing),
+                    'b',
+                    getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
+                    'c',
+                    getModItem(Forestry.ID, "honeydew", 1, 0, missing),
+                    'd',
+                    getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
+                    'e',
+                    getModItem(MagicBees.ID, "propolis", 1, wildcard, missing),
+                    'f',
+                    getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
+                    'g',
+                    getModItem(Minecraft.ID, "gunpowder", 1, 0, missing),
+                    'h',
+                    getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
+                    'i',
+                    getModItem(Minecraft.ID, "gunpowder", 1, 0, missing));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 10,
                 FluidRegistry.getFluidStack("for.honey", 1000),
@@ -5257,16 +5270,18 @@ public class ScriptForestry implements IScriptLoader {
                 "ghi",
                 'a',
                 getModItem(Minecraft.ID, "stick", 1, 0, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                10,
-                FluidRegistry.getFluidStack("seedoil", 100),
-                null,
-                getModItem(Forestry.ID, "oakStick", 1, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                getModItem(Natura.ID, "natura.stick", 1, wildcard, missing));
+        if (NML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    10,
+                    FluidRegistry.getFluidStack("seedoil", 100),
+                    null,
+                    getModItem(Forestry.ID, "oakStick", 1, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    getModItem(Natura.ID, "natura.stick", 1, wildcard, missing));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 20,
                 FluidRegistry.getFluidStack("seedoil", 250),
@@ -5341,78 +5356,80 @@ public class ScriptForestry implements IScriptLoader {
                 getModItem(Forestry.ID, "craftingMaterial", 1, 2, missing),
                 'h',
                 getModItem(Forestry.ID, "refractoryWax", 1, 0, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                10,
-                FluidRegistry.getFluidStack("for.honey", 100),
-                null,
-                getModItem(Forestry.ID, "candle", 4, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'e',
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                'h',
-                getModItem(MagicBees.ID, "wax", 1, 0, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                10,
-                FluidRegistry.getFluidStack("for.honey", 100),
-                null,
-                getModItem(Forestry.ID, "candle", 8, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'e',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 2, missing),
-                'h',
-                getModItem(MagicBees.ID, "wax", 1, 0, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                10,
-                FluidRegistry.getFluidStack("for.honey", 100),
-                null,
-                getModItem(Forestry.ID, "candle", 4, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'e',
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                'h',
-                getModItem(MagicBees.ID, "wax", 1, 1, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                10,
-                FluidRegistry.getFluidStack("for.honey", 100),
-                null,
-                getModItem(Forestry.ID, "candle", 8, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'e',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 2, missing),
-                'h',
-                getModItem(MagicBees.ID, "wax", 1, 1, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                10,
-                FluidRegistry.getFluidStack("for.honey", 100),
-                null,
-                getModItem(Forestry.ID, "candle", 4, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'e',
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                'h',
-                getModItem(MagicBees.ID, "wax", 1, 2, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                10,
-                FluidRegistry.getFluidStack("for.honey", 100),
-                null,
-                getModItem(Forestry.ID, "candle", 8, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'e',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 2, missing),
-                'h',
-                getModItem(MagicBees.ID, "wax", 1, 2, missing));
+        if (TML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    10,
+                    FluidRegistry.getFluidStack("for.honey", 100),
+                    null,
+                    getModItem(Forestry.ID, "candle", 4, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'e',
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    'h',
+                    getModItem(MagicBees.ID, "wax", 1, 0, missing));
+            RecipeManagers.carpenterManager.addRecipe(
+                    10,
+                    FluidRegistry.getFluidStack("for.honey", 100),
+                    null,
+                    getModItem(Forestry.ID, "candle", 8, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'e',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 2, missing),
+                    'h',
+                    getModItem(MagicBees.ID, "wax", 1, 0, missing));
+            RecipeManagers.carpenterManager.addRecipe(
+                    10,
+                    FluidRegistry.getFluidStack("for.honey", 100),
+                    null,
+                    getModItem(Forestry.ID, "candle", 4, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'e',
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    'h',
+                    getModItem(MagicBees.ID, "wax", 1, 1, missing));
+            RecipeManagers.carpenterManager.addRecipe(
+                    10,
+                    FluidRegistry.getFluidStack("for.honey", 100),
+                    null,
+                    getModItem(Forestry.ID, "candle", 8, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'e',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 2, missing),
+                    'h',
+                    getModItem(MagicBees.ID, "wax", 1, 1, missing));
+            RecipeManagers.carpenterManager.addRecipe(
+                    10,
+                    FluidRegistry.getFluidStack("for.honey", 100),
+                    null,
+                    getModItem(Forestry.ID, "candle", 4, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'e',
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    'h',
+                    getModItem(MagicBees.ID, "wax", 1, 2, missing));
+            RecipeManagers.carpenterManager.addRecipe(
+                    10,
+                    FluidRegistry.getFluidStack("for.honey", 100),
+                    null,
+                    getModItem(Forestry.ID, "candle", 8, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'e',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 2, missing),
+                    'h',
+                    getModItem(MagicBees.ID, "wax", 1, 2, missing));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 10,
                 FluidRegistry.getFluidStack("for.honey", 800),
@@ -5503,24 +5520,26 @@ public class ScriptForestry implements IScriptLoader {
                 getModItem(Minecraft.ID, "paper", 1, 0, missing),
                 'h',
                 getModItem(Minecraft.ID, "paper", 1, 0, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                20,
-                FluidRegistry.getFluidStack("seedoil", 200),
-                getModItem(Minecraft.ID, "paper", 1, 0, missing),
-                getModItem(Forestry.ID, "letters", 4, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'b',
-                getModItem(Minecraft.ID, "paper", 1, 0, missing),
-                'd',
-                getModItem(Minecraft.ID, "paper", 1, 0, missing),
-                'e',
-                getModItem(MagicBees.ID, "propolis", 1, wildcard, missing),
-                'f',
-                getModItem(Minecraft.ID, "paper", 1, 0, missing),
-                'h',
-                getModItem(Minecraft.ID, "paper", 1, 0, missing));
+        if (TML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    20,
+                    FluidRegistry.getFluidStack("seedoil", 200),
+                    getModItem(Minecraft.ID, "paper", 1, 0, missing),
+                    getModItem(Forestry.ID, "letters", 4, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'b',
+                    getModItem(Minecraft.ID, "paper", 1, 0, missing),
+                    'd',
+                    getModItem(Minecraft.ID, "paper", 1, 0, missing),
+                    'e',
+                    getModItem(MagicBees.ID, "propolis", 1, wildcard, missing),
+                    'f',
+                    getModItem(Minecraft.ID, "paper", 1, 0, missing),
+                    'h',
+                    getModItem(Minecraft.ID, "paper", 1, 0, missing));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 40,
                 FluidRegistry.getFluidStack("seedoil", 400),

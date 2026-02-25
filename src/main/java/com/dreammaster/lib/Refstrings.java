@@ -5,7 +5,7 @@ public final class Refstrings {
     public static final String MODID = "dreamcraft";
     public static final String NAME = "GT5u Community Edition";
     public static final String VERSION = BuildVersion.VERSION;
-    public static final String MODPACKPACK_VERSION = "0.1a";
+    public static final String MODPACKPACK_VERSION = "1.0b";
     public static final String CLIENTSIDE = "com.dreammaster.main.ClientProxy";
     public static final String SERVERSIDE = "com.dreammaster.main.CommonProxy";
     public static final String COLLECTIONID = "GT5uCE";

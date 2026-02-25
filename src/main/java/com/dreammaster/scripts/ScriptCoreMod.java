@@ -1,26 +1,9 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static com.dreammaster.tinkersConstruct.SmelteryFluidTypes.getMoltenPatternFluidTypeName;
-import static gregtech.api.enums.Mods.AdvancedSolarPanel;
-import static gregtech.api.enums.Mods.AppliedEnergistics2;
-import static gregtech.api.enums.Mods.BiomesOPlenty;
-import static gregtech.api.enums.Mods.BuildCraftSilicon;
-import static gregtech.api.enums.Mods.EnderIO;
-import static gregtech.api.enums.Mods.Forestry;
-import static gregtech.api.enums.Mods.GalacticraftCore;
-import static gregtech.api.enums.Mods.GalacticraftMars;
-import static gregtech.api.enums.Mods.GalaxySpace;
-import static gregtech.api.enums.Mods.IndustrialCraft2;
-import static gregtech.api.enums.Mods.Minecraft;
-import static gregtech.api.enums.Mods.Natura;
-import static gregtech.api.enums.Mods.NewHorizonsCoreMod;
-import static gregtech.api.enums.Mods.OpenBlocks;
-import static gregtech.api.enums.Mods.PamsHarvestCraft;
-import static gregtech.api.enums.Mods.ProjectRedCore;
-import static gregtech.api.enums.Mods.Railcraft;
-import static gregtech.api.enums.Mods.RemoteIO;
-import static gregtech.api.enums.Mods.Thaumcraft;
-import static gregtech.api.enums.Mods.TinkerConstruct;
+import static gregtech.api.enums.Mods.*;
+import static gregtech.api.enums.Mods.Avaritia;
 import static gregtech.api.recipe.RecipeCategories.alloySmelterMolding;
 import static gregtech.api.recipe.RecipeMaps.alloySmelterRecipes;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
@@ -39,6 +22,7 @@ import static gregtech.api.recipe.RecipeMaps.laserEngraverRecipes;
 import static gregtech.api.recipe.RecipeMaps.latheRecipes;
 import static gregtech.api.recipe.RecipeMaps.maceratorRecipes;
 import static gregtech.api.recipe.RecipeMaps.wiremillRecipes;
+import static gregtech.api.util.GTModHandler.RecipeBits.BITS_STD;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.MINUTES;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
@@ -82,7 +66,6 @@ public class ScriptCoreMod implements IScriptLoader {
         return Arrays.asList(
                 AdvancedSolarPanel.ID,
                 AppliedEnergistics2.ID,
-                BiomesOPlenty.ID,
                 BuildCraftSilicon.ID,
                 EnderIO.ID,
                 Forestry.ID,
@@ -90,18 +73,26 @@ public class ScriptCoreMod implements IScriptLoader {
                 GalacticraftMars.ID,
                 GalaxySpace.ID,
                 IndustrialCraft2.ID,
-                Natura.ID,
                 OpenBlocks.ID,
                 PamsHarvestCraft.ID,
                 ProjectRedCore.ID,
                 Railcraft.ID,
-                RemoteIO.ID,
-                Thaumcraft.ID,
-                TinkerConstruct.ID);
+                RemoteIO.ID);
     }
 
     @Override
     public void loadRecipes() {
+        addShapedRecipe(
+                getModItem(Avaritia.ID, "Dire_Crafting", 1, 0, missing),
+                ItemList.Robot_Arm_HV.get(1L),
+                getModItem(Avaritia.ID, "Triple_Craft", 1, 0, missing),
+                ItemList.Robot_Arm_HV.get(1L),
+                "waferAdvanced",
+                getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
+                "waferAdvanced",
+                ItemList.Electric_Piston_HV.get(1L),
+                "circuitElite",
+                ItemList.Electric_Piston_HV.get(1L));
         addShapedRecipe(NHItemList.SandStoneRod.get(), "craftingToolFile", "sandstone", "craftingToolSaw");
         addShapedRecipe(
                 GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1),
@@ -165,6 +156,11 @@ public class ScriptCoreMod implements IScriptLoader {
                 "plateSteel",
                 "craftingToolHardHammer",
                 "plateSteel");
+        GTModHandler.addCraftingRecipe(
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Rubber, 1L),
+                BITS_STD,
+                new Object[] { "h", // craftingToolHardHammer
+                        "X", "X", 'X', GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Rubber, 1L) });
         addShapedRecipe(
                 NHItemList.SawBladeDiamond.get(),
                 "plateDiamond",
@@ -573,84 +569,85 @@ public class ScriptCoreMod implements IScriptLoader {
                 "stickDiamond",
                 "stickDiamond",
                 "stickDiamond");
-        addShapedRecipe(
-                NHItemList.MoldFormCoinage.get(),
-                null,
-                null,
-                null,
-                null,
-                getModItem(TinkerConstruct.ID, "blankPattern", 1, 1, missing),
-                null,
-                "craftingToolFile",
-                "craftingToolWireCutter",
-                null);
-
         GTModHandler.addSmeltingRecipe(NHItemList.UnfiredCokeOvenBrick.get(), NHItemList.CokeOvenBrick.get());
-        TConstructHelper.getMeltingAdder(FluidType.getFluidType(getMoltenPatternFluidTypeName()), 150, 72)
-                .add(
-                        Stream.of(
-                                NHItemList.ShapeBolt,
-                                NHItemList.ShapeHoeHead,
-                                NHItemList.ShapeGear,
-                                NHItemList.ShapePlate,
-                                NHItemList.MoldFormAnvil,
-                                NHItemList.MoldFormPlate,
-                                NHItemList.MoldFormLeggings,
-                                NHItemList.MoldFormBaguette,
-                                NHItemList.MoldFormGear,
-                                NHItemList.MoldFormRotor,
-                                NHItemList.ShapeBottle,
-                                NHItemList.ShapeRotor,
-                                NHItemList.ShapeTurbineBlade,
-                                NHItemList.ShapeSmallGear,
-                                NHItemList.MoldFormBoots,
-                                NHItemList.ShapeLargePipe,
-                                NHItemList.MoldFormSmallGear,
-                                NHItemList.MoldFormCasing,
-                                NHItemList.MoldFormChestplate,
-                                NHItemList.ShapeShovelHead,
-                                NHItemList.MoldFormBread,
-                                NHItemList.ShapeIngot,
-                                NHItemList.MoldFormIngot,
-                                NHItemList.ShapeFileHead,
-                                NHItemList.ShapeRod,
-                                NHItemList.ShapeHugePipe,
-                                NHItemList.ShapeSwordBlade,
-                                NHItemList.ShapeRing,
-                                NHItemList.ShapeCasing,
-                                NHItemList.MoldFormNuggets,
-                                NHItemList.ShapeSmallPipe,
-                                NHItemList.MoldFormName,
-                                NHItemList.ShapeHammerHead,
-                                NHItemList.ShapeTinyPipe,
-                                NHItemList.MoldFormCylinder,
-                                NHItemList.MoldFormBottle,
-                                NHItemList.ShapeAxeHead,
-                                NHItemList.ShapeSawBlade,
-                                NHItemList.MoldFormBlock,
-                                NHItemList.ShapeCell,
-                                NHItemList.MoldFormArrowHead,
-                                NHItemList.ShapeBoat,
-                                NHItemList.MoldFormCoinage,
-                                NHItemList.MoldFormBall,
-                                NHItemList.ShapeBlock,
-                                NHItemList.MoldFormHelmet,
-                                NHItemList.ShapePickaxeHead,
-                                NHItemList.MoldFormBuns,
-                                NHItemList.ShapeNormalPipe,
-                                NHItemList.MoldFormStick,
-                                NHItemList.MoldFormStickLong,
-                                NHItemList.MoldFormScrew,
-                                NHItemList.MoldFormRing,
-                                NHItemList.MoldFormBolt,
-                                NHItemList.MoldFormRound,
-                                NHItemList.MoldFormTurbineBlade,
-                                NHItemList.MoldFormPipeTiny,
-                                NHItemList.MoldFormPipeSmall,
-                                NHItemList.MoldFormPipeMedium,
-                                NHItemList.MoldFormPipeLarge,
-                                NHItemList.MoldFormPipeHuge).map(NHItemList::get))
-                .add(NHItemList.MarshmallowFormMold.get());
+        if (TCML) {
+            addShapedRecipe(
+                    NHItemList.MoldFormCoinage.get(),
+                    null,
+                    null,
+                    null,
+                    null,
+                    getModItem(TinkerConstruct.ID, "blankPattern", 1, 1, missing),
+                    null,
+                    "craftingToolFile",
+                    "craftingToolWireCutter",
+                    null);
+            TConstructHelper.getMeltingAdder(FluidType.getFluidType(getMoltenPatternFluidTypeName()), 150, 72)
+                    .add(
+                            Stream.of(
+                                    NHItemList.ShapeBolt,
+                                    NHItemList.ShapeHoeHead,
+                                    NHItemList.ShapeGear,
+                                    NHItemList.ShapePlate,
+                                    NHItemList.MoldFormAnvil,
+                                    NHItemList.MoldFormPlate,
+                                    NHItemList.MoldFormLeggings,
+                                    NHItemList.MoldFormBaguette,
+                                    NHItemList.MoldFormGear,
+                                    NHItemList.MoldFormRotor,
+                                    NHItemList.ShapeBottle,
+                                    NHItemList.ShapeRotor,
+                                    NHItemList.ShapeTurbineBlade,
+                                    NHItemList.ShapeSmallGear,
+                                    NHItemList.MoldFormBoots,
+                                    NHItemList.ShapeLargePipe,
+                                    NHItemList.MoldFormSmallGear,
+                                    NHItemList.MoldFormCasing,
+                                    NHItemList.MoldFormChestplate,
+                                    NHItemList.ShapeShovelHead,
+                                    NHItemList.MoldFormBread,
+                                    NHItemList.ShapeIngot,
+                                    NHItemList.MoldFormIngot,
+                                    NHItemList.ShapeFileHead,
+                                    NHItemList.ShapeRod,
+                                    NHItemList.ShapeHugePipe,
+                                    NHItemList.ShapeSwordBlade,
+                                    NHItemList.ShapeRing,
+                                    NHItemList.ShapeCasing,
+                                    NHItemList.MoldFormNuggets,
+                                    NHItemList.ShapeSmallPipe,
+                                    NHItemList.MoldFormName,
+                                    NHItemList.ShapeHammerHead,
+                                    NHItemList.ShapeTinyPipe,
+                                    NHItemList.MoldFormCylinder,
+                                    NHItemList.MoldFormBottle,
+                                    NHItemList.ShapeAxeHead,
+                                    NHItemList.ShapeSawBlade,
+                                    NHItemList.MoldFormBlock,
+                                    NHItemList.ShapeCell,
+                                    NHItemList.MoldFormArrowHead,
+                                    NHItemList.ShapeBoat,
+                                    NHItemList.MoldFormCoinage,
+                                    NHItemList.MoldFormBall,
+                                    NHItemList.ShapeBlock,
+                                    NHItemList.MoldFormHelmet,
+                                    NHItemList.ShapePickaxeHead,
+                                    NHItemList.MoldFormBuns,
+                                    NHItemList.ShapeNormalPipe,
+                                    NHItemList.MoldFormStick,
+                                    NHItemList.MoldFormStickLong,
+                                    NHItemList.MoldFormScrew,
+                                    NHItemList.MoldFormRing,
+                                    NHItemList.MoldFormBolt,
+                                    NHItemList.MoldFormRound,
+                                    NHItemList.MoldFormTurbineBlade,
+                                    NHItemList.MoldFormPipeTiny,
+                                    NHItemList.MoldFormPipeSmall,
+                                    NHItemList.MoldFormPipeMedium,
+                                    NHItemList.MoldFormPipeLarge,
+                                    NHItemList.MoldFormPipeHuge).map(NHItemList::get))
+                    .add(NHItemList.MarshmallowFormMold.get());
+        }
 
         GTValues.RA.stdBuilder().itemInputs(ItemList.CokeOvenCasing.get(1)).itemOutputs(NHItemList.CokeOvenBrick.get(4))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
@@ -669,54 +666,1150 @@ public class ScriptCoreMod implements IScriptLoader {
                 GTOreDictUnificator.get(OrePrefixes.plate, Materials.Lapis, 1L),
                 'e',
                 getModItem(Minecraft.ID, "piston", 1, 0, missing));
-        TConstructRegistry.getTableCasting().addCastingRecipe(
-                NHItemList.ExtruderShapeBoat.get(),
-                FluidRegistry.getFluidStack("steel.molten", 576),
-                NHItemList.ShapeBoat.get(),
-                true,
-                100);
-        TConstructRegistry.getTableCasting().addCastingRecipe(
-                NHItemList.MoldBoots.get(),
-                FluidRegistry.getFluidStack("steel.molten", 576),
-                NHItemList.MoldFormBoots.get(),
-                true,
-                100);
-        TConstructRegistry.getTableCasting().addCastingRecipe(
-                NHItemList.MoldChestplate.get(),
-                FluidRegistry.getFluidStack("steel.molten", 576),
-                NHItemList.MoldFormChestplate.get(),
-                true,
-                100);
-        TConstructRegistry.getTableCasting().addCastingRecipe(
-                NHItemList.MoldHelmet.get(),
-                FluidRegistry.getFluidStack("steel.molten", 576),
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeBoat.get(1))
+                .itemOutputs(NHItemList.ExtruderShapeBoat.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeAxeHead.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Axe.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapePickaxeHead.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Pickaxe.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeShovelHead.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Shovel.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeSwordBlade.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Sword.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeHoeHead.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Hoe.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeHammerHead.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Hammer.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeFileHead.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_File.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeSawBlade.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Saw.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeGear.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Gear.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeSmallGear.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Small_Gear.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeRotor.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Rotor.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeTurbineBlade.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Turbine_Blade.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeDrillHead.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_ToolHeadDrill.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapePlate.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Plate.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeCell.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Cell.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeRing.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Ring.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeRod.get(1)).itemOutputs(ItemList.Shape_Extruder_Rod.get(1))
+                .fluidInputs(Materials.Steel.getMolten(576L)).duration(4000 * TICKS).eut(16)
+                .addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeBolt.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Bolt.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeIngot.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Ingot.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeCasing.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Casing.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeBlock.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Block.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeBottle.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Bottle.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeTinyPipe.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Pipe_Tiny.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeSmallPipe.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Pipe_Small.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeNormalPipe.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Pipe_Medium.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeLargePipe.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Pipe_Large.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeHugePipe.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Pipe_Huge.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.ShapeWire.get(1))
+                .itemOutputs(ItemList.Shape_Extruder_Wire.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormBottle.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Bottle.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormPlate.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Plate.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormIngot.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Ingot.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormCasing.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Casing.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormGear.get(1)).itemOutputs(ItemList.Shape_Mold_Gear.get(1))
+                .fluidInputs(Materials.Steel.getMolten(576L)).duration(4000 * TICKS).eut(16)
+                .addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormSmallGear.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Gear_Small.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormCoinage.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Credit.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormNuggets.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Nugget.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormBlock.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Block.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormBall.get(1)).itemOutputs(ItemList.Shape_Mold_Ball.get(1))
+                .fluidInputs(Materials.Steel.getMolten(576L)).duration(4000 * TICKS).eut(16)
+                .addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormBuns.get(1)).itemOutputs(ItemList.Shape_Mold_Bun.get(1))
+                .fluidInputs(Materials.Steel.getMolten(576L)).duration(4000 * TICKS).eut(16)
+                .addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormBread.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Bread.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormBaguette.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Baguette.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormCylinder.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Cylinder.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormAnvil.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Anvil.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormArrowHead.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Arrow.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormName.get(1)).itemOutputs(ItemList.Shape_Mold_Name.get(1))
+                .fluidInputs(Materials.Steel.getMolten(576L)).duration(4000 * TICKS).eut(16)
+                .addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormBolt.get(1)).itemOutputs(ItemList.Shape_Mold_Bolt.get(1))
+                .fluidInputs(Materials.Steel.getMolten(576L)).duration(4000 * TICKS).eut(16)
+                .addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormRound.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Round.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormScrew.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Screw.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormRing.get(1)).itemOutputs(ItemList.Shape_Mold_Ring.get(1))
+                .fluidInputs(Materials.Steel.getMolten(576L)).duration(4000 * TICKS).eut(16)
+                .addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormStick.get(1)).itemOutputs(ItemList.Shape_Mold_Rod.get(1))
+                .fluidInputs(Materials.Steel.getMolten(576L)).duration(4000 * TICKS).eut(16)
+                .addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormStickLong.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Rod_Long.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormRotor.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Rotor.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormTurbineBlade.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Turbine_Blade.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        // Pipes
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormPipeTiny.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Pipe_Tiny.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormPipeSmall.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Pipe_Small.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormPipeMedium.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Pipe_Medium.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormPipeLarge.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Pipe_Large.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormPipeHuge.get(1))
+                .itemOutputs(ItemList.Shape_Mold_Pipe_Huge.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormDrillHead.get(1))
+                .itemOutputs(ItemList.Shape_Mold_ToolHeadDrill.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormHelmet.get(1)).itemOutputs(NHItemList.MoldHelmet.get(1))
+                .fluidInputs(Materials.Steel.getMolten(576L)).duration(4000 * TICKS).eut(16)
+                .addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormChestplate.get(1))
+                .itemOutputs(NHItemList.MoldChestplate.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormLeggings.get(1))
+                .itemOutputs(NHItemList.MoldLeggings.get(1)).fluidInputs(Materials.Steel.getMolten(576L))
+                .duration(4000 * TICKS).eut(16).addTo(fluidSolidifierRecipes);
+
+        GTValues.RA.stdBuilder().itemInputs(NHItemList.MoldFormBoots.get(1)).itemOutputs(NHItemList.MoldBoots.get(1))
+                .fluidInputs(Materials.Steel.getMolten(576L)).duration(4000 * TICKS).eut(16)
+                .addTo(fluidSolidifierRecipes);
+
+        // Center slot MUST stay casing (index 4).
+        // Indexes: 0 1 2 / 3 4 5 / 6 7 8
+
+        // --------------------
+        // MOLD FORMS (generic)
+        // --------------------
+
+        addShapedRecipe(
+                NHItemList.MoldFormArrowHead.get(),
+                "craftingToolHardHammer",
+                null,
+                "craftingToolFile",
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormBaguette.get(),
+                null,
+                "craftingToolHardHammer",
+                null,
+                "craftingToolFile",
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormBall.get(),
+                "craftingToolFile",
+                null,
+                "craftingToolHardHammer",
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormBlock.get(),
+                null,
+                "craftingToolFile",
+                null,
+                null,
+                "itemCasingBrass",
+                "craftingToolHardHammer",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormBolt.get(),
+                null,
+                null,
+                null,
+                "craftingToolHardHammer",
+                "itemCasingBrass",
+                "craftingToolFile",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormBottle.get(),
+                null,
+                null,
+                null,
+                "craftingToolFile",
+                "itemCasingBrass",
+                "craftingToolHardHammer",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormBread.get(),
+                null,
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                "craftingToolHardHammer",
+                null,
+                "craftingToolFile");
+
+        addShapedRecipe(
+                NHItemList.MoldFormBuns.get(),
+                null,
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                "craftingToolFile",
+                null,
+                "craftingToolHardHammer");
+
+        addShapedRecipe(
+                NHItemList.MoldFormCasing.get(),
+                "craftingToolWrench",
+                null,
+                "craftingToolHardHammer",
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormCoinage.get(),
+                "craftingToolScrewdriver",
+                null,
+                "craftingToolHardHammer",
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormCylinder.get(),
+                "craftingToolHardHammer",
+                null,
+                "craftingToolScrewdriver",
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormGear.get(),
+                null,
+                "craftingToolHardHammer",
+                null,
+                null,
+                "itemCasingBrass",
+                "craftingToolWrench",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormIngot.get(),
+                null,
+                "craftingToolHardHammer",
+                null,
+                null,
+                "itemCasingBrass",
+                "craftingToolFile",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormName.get(),
+                "craftingToolFile",
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                "craftingToolHardHammer");
+
+        addShapedRecipe(
+                NHItemList.MoldFormNuggets.get(),
+                null,
+                "craftingToolFile",
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                "craftingToolHardHammer",
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormPlate.get(),
+                "craftingToolHardHammer",
+                "craftingToolFile",
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormRing.get(),
+                null,
+                "craftingToolHardHammer",
+                "craftingToolFile",
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormRound.get(),
+                "craftingToolFile",
+                "craftingToolHardHammer",
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormRotor.get(),
+                null,
+                null,
+                null,
+                "craftingToolWrench",
+                "itemCasingBrass",
+                "craftingToolHardHammer",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormScrew.get(),
+                null,
+                null,
+                null,
+                "craftingToolScrewdriver",
+                "itemCasingBrass",
+                "craftingToolHardHammer",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormSmallGear.get(),
+                null,
+                null,
+                null,
+                "craftingToolHardHammer",
+                "itemCasingBrass",
+                "craftingToolWrench",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormStick.get(),
+                null,
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                "craftingToolHardHammer",
+                "craftingToolFile");
+
+        addShapedRecipe(
+                NHItemList.MoldFormStickLong.get(),
+                null,
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                "craftingToolHardHammer",
+                "craftingToolFile",
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormTurbineBlade.get(),
+                "craftingToolWrench",
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                "craftingToolHardHammer");
+
+        addShapedRecipe(
+                NHItemList.MoldFormPipeTiny.get(),
+                "craftingToolHardHammer",
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                "craftingToolFile",
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormPipeSmall.get(),
+                null,
+                "craftingToolHardHammer",
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                "craftingToolFile",
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormPipeMedium.get(),
+                null,
+                null,
+                "craftingToolHardHammer",
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                "craftingToolFile",
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormPipeLarge.get(),
+                null,
+                "craftingToolFile",
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                "craftingToolHardHammer",
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormPipeHuge.get(),
+                null,
+                "craftingToolFile",
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                "craftingToolHardHammer");
+
+        addShapedRecipe(
+                NHItemList.MoldFormDrillHead.get(),
+                null,
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                "craftingToolHardHammer",
+                null,
+                "craftingToolWrench");
+
+        addShapedRecipe(
+                NHItemList.MoldFormAnvil.get(),
+                null,
+                "craftingToolHardHammer",
+                null,
+                "craftingToolWrench",
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        // --------------------
+        // ARMOR MOLD FORMS
+        // --------------------
+
+        addShapedRecipe(
                 NHItemList.MoldFormHelmet.get(),
-                true,
-                100);
-        TConstructRegistry.getTableCasting().addCastingRecipe(
-                NHItemList.MoldLeggings.get(),
-                FluidRegistry.getFluidStack("steel.molten", 576),
+                "craftingToolHardHammer",
+                null,
+                "craftingToolScrewdriver",
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormChestplate.get(),
+                "craftingToolHardHammer",
+                null,
+                "craftingToolWrench",
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
                 NHItemList.MoldFormLeggings.get(),
-                true,
-                100);
-        TConstructRegistry.getTableCasting().addCastingRecipe(
-                NHItemList.MarshmallowForm.get(),
-                FluidRegistry.getFluidStack("steel.molten", 576),
-                NHItemList.MarshmallowFormMold.get(),
-                true,
-                100);
-        TConstructRegistry.getTableCasting().addCastingRecipe(
-                NHItemList.BowFletchingCast.get(),
-                FluidRegistry.getFluidStack(SmelteryFluidTypes.getMoltenPatternFluidName(), 144),
-                getModItem(TinkerConstruct.ID, "fletching", 1, wildcard, missing),
-                true,
-                100);
-        TConstructRegistry.getTableCasting().addCastingRecipe(
-                NHItemList.BowStringCast.get(),
-                FluidRegistry.getFluidStack(SmelteryFluidTypes.getMoltenPatternFluidName(), 144),
-                getModItem(TinkerConstruct.ID, "bowstring", 1, wildcard, missing),
-                true,
-                100);
+                "craftingToolFile",
+                null,
+                "craftingToolHardHammer",
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldFormBoots.get(),
+                null,
+                "craftingToolHardHammer",
+                null,
+                null,
+                "itemCasingBrass",
+                "craftingToolScrewdriver",
+                null,
+                null,
+                null);
+
+        // --------------------
+        // MOLDS (final molds)
+        // (crafted similarly; distinct tool layouts)
+        // --------------------
+
+        addShapedRecipe(
+                NHItemList.MoldHelmet.get(),
+                null,
+                "craftingToolFile",
+                null,
+                "craftingToolHardHammer",
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldChestplate.get(),
+                null,
+                "craftingToolWrench",
+                null,
+                "craftingToolHardHammer",
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldLeggings.get(),
+                null,
+                "craftingToolScrewdriver",
+                null,
+                "craftingToolHardHammer",
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.MoldBoots.get(),
+                null,
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                "craftingToolHardHammer",
+                "craftingToolFile",
+                null);
+
+        // --------------------
+        // SHAPES
+        // --------------------
+
+        addShapedRecipe(
+                NHItemList.ShapePlate.get(),
+                "craftingToolHardHammer",
+                "craftingToolScrewdriver",
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeIngot.get(),
+                "craftingToolHardHammer",
+                "craftingToolWireCutter",
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeRod.get(),
+                null,
+                "craftingToolHardHammer",
+                "craftingToolWireCutter",
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeRing.get(),
+                "craftingToolWireCutter",
+                "craftingToolHardHammer",
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeBolt.get(),
+                null,
+                null,
+                null,
+                "craftingToolHardHammer",
+                "itemCasingBrass",
+                "craftingToolWireCutter",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeCell.get(),
+                null,
+                "craftingToolWireCutter",
+                null,
+                null,
+                "itemCasingBrass",
+                "craftingToolHardHammer",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeBottle.get(),
+                null,
+                null,
+                "craftingToolFile",
+                null,
+                "itemCasingBrass",
+                "craftingToolHardHammer",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeBlock.get(),
+                "craftingToolHardHammer",
+                null,
+                "craftingToolWrench",
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeCasing.get(),
+                "craftingToolWrench",
+                null,
+                "craftingToolHardHammer",
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeGear.get(),
+                null,
+                "craftingToolHardHammer",
+                null,
+                null,
+                "itemCasingBrass",
+                "craftingToolBranchCutter",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeSmallGear.get(),
+                null,
+                null,
+                null,
+                "craftingToolWrench",
+                "itemCasingBrass",
+                "craftingToolHardHammer",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeRotor.get(),
+                null,
+                null,
+                null,
+                "craftingToolHardHammer",
+                "itemCasingBrass",
+                "craftingToolBranchCutter",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeTurbineBlade.get(),
+                "craftingToolWrench",
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                "craftingToolHardHammer");
+
+        addShapedRecipe(
+                NHItemList.ShapeWire.get(),
+                null,
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                "craftingToolHardHammer",
+                "craftingToolFile");
+
+        addShapedRecipe(
+                NHItemList.ShapeTinyPipe.get(),
+                "craftingToolHardHammer",
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                "craftingToolWireCutter",
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeSmallPipe.get(),
+                null,
+                "craftingToolHardHammer",
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                "craftingToolBranchCutter",
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeNormalPipe.get(),
+                null,
+                null,
+                "craftingToolHardHammer",
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                "craftingToolBranchCutter",
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeLargePipe.get(),
+                null,
+                "craftingToolBranchCutter",
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                "craftingToolHardHammer",
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeHugePipe.get(),
+                null,
+                "craftingToolBranchCutter",
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                "craftingToolHardHammer");
+
+        addShapedRecipe(
+                NHItemList.ShapeSwordBlade.get(),
+                "craftingToolHardHammer",
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                "craftingToolFile",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapePickaxeHead.get(),
+                null,
+                "craftingToolHardHammer",
+                null,
+                "craftingToolFile",
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeShovelHead.get(),
+                null,
+                "craftingToolFile",
+                null,
+                "craftingToolHardHammer",
+                "itemCasingBrass",
+                null,
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeAxeHead.get(),
+                "craftingToolFile",
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                "craftingToolHardHammer",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeHoeHead.get(),
+                null,
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                "craftingToolHardHammer",
+                null,
+                "craftingToolFile");
+
+        addShapedRecipe(
+                NHItemList.ShapeHammerHead.get(),
+                null,
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                "craftingToolHardHammer",
+                "craftingToolWrench",
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeFileHead.get(),
+                null,
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                "craftingToolFile",
+                null,
+                "craftingToolHardHammer");
+
+        addShapedRecipe(
+                NHItemList.ShapeSawBlade.get(),
+                null,
+                null,
+                null,
+                "craftingToolSaw",
+                "itemCasingBrass",
+                "craftingToolHardHammer",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeBoat.get(),
+                "craftingToolSaw",
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                "craftingToolHardHammer",
+                null,
+                null,
+                null);
+
+        addShapedRecipe(
+                NHItemList.ShapeDrillHead.get(),
+                null,
+                null,
+                null,
+                null,
+                "itemCasingBrass",
+                null,
+                "craftingToolHardHammer",
+                null,
+                "craftingToolBranchCutter");
+
+        if (TCML) {
+            TConstructRegistry.getTableCasting().addCastingRecipe(
+                    NHItemList.ExtruderShapeBoat.get(),
+                    FluidRegistry.getFluidStack("steel.molten", 576),
+                    NHItemList.ShapeBoat.get(),
+                    true,
+                    100);
+            TConstructRegistry.getTableCasting().addCastingRecipe(
+                    NHItemList.MoldBoots.get(),
+                    FluidRegistry.getFluidStack("steel.molten", 576),
+                    NHItemList.MoldFormBoots.get(),
+                    true,
+                    100);
+            TConstructRegistry.getTableCasting().addCastingRecipe(
+                    NHItemList.MoldChestplate.get(),
+                    FluidRegistry.getFluidStack("steel.molten", 576),
+                    NHItemList.MoldFormChestplate.get(),
+                    true,
+                    100);
+            TConstructRegistry.getTableCasting().addCastingRecipe(
+                    NHItemList.MoldHelmet.get(),
+                    FluidRegistry.getFluidStack("steel.molten", 576),
+                    NHItemList.MoldFormHelmet.get(),
+                    true,
+                    100);
+            TConstructRegistry.getTableCasting().addCastingRecipe(
+                    NHItemList.MoldLeggings.get(),
+                    FluidRegistry.getFluidStack("steel.molten", 576),
+                    NHItemList.MoldFormLeggings.get(),
+                    true,
+                    100);
+            TConstructRegistry.getTableCasting().addCastingRecipe(
+                    NHItemList.MarshmallowForm.get(),
+                    FluidRegistry.getFluidStack("steel.molten", 576),
+                    NHItemList.MarshmallowFormMold.get(),
+                    true,
+                    100);
+            TConstructRegistry.getTableCasting().addCastingRecipe(
+                    NHItemList.BowFletchingCast.get(),
+                    FluidRegistry.getFluidStack(SmelteryFluidTypes.getMoltenPatternFluidName(), 144),
+                    getModItem(TinkerConstruct.ID, "fletching", 1, wildcard, missing),
+                    true,
+                    100);
+            TConstructRegistry.getTableCasting().addCastingRecipe(
+                    NHItemList.BowStringCast.get(),
+                    FluidRegistry.getFluidStack(SmelteryFluidTypes.getMoltenPatternFluidName(), 144),
+                    getModItem(TinkerConstruct.ID, "bowstring", 1, wildcard, missing),
+                    true,
+                    100);
+        }
 
         GTValues.RA.stdBuilder()
                 .itemInputs(
@@ -1067,62 +2160,68 @@ public class ScriptCoreMod implements IScriptLoader {
                         ItemList.Shape_Extruder_Casing.get(0L))
                 .itemOutputs(NHItemList.IridiumAlloyItemCasing.get(2)).duration(20 * SECONDS).eut(384)
                 .addTo(extruderRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(TinkerConstruct.ID, "materials", 2, 4, missing),
-                        ItemList.Shape_Extruder_Saw.get(0L))
-                .itemOutputs(NHItemList.SawBladeArdite.get()).duration(20 * SECONDS).eut(TierEU.RECIPE_MV)
-                .addTo(extruderRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(TinkerConstruct.ID, "materials", 2, 5, missing),
-                        ItemList.Shape_Extruder_Saw.get(0L))
-                .itemOutputs(NHItemList.SawBladeManyullyn.get()).duration(30 * SECONDS).eut(TierEU.RECIPE_MV)
-                .addTo(extruderRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(TinkerConstruct.ID, "materials", 1, 5, missing),
-                        ItemList.Shape_Extruder_Plate.get(0L))
-                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.plate, Materials.Manyullyn, 1)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(extruderRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(Minecraft.ID, "feather", 1, 0, missing), NHItemList.BowFletchingCast.get(0))
-                .itemOutputs(getModItem(TinkerConstruct.ID, "fletching", 1, 0, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(extruderRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(TinkerConstruct.ID, "materials", 1, 1, missing),
-                        NHItemList.BowFletchingCast.get(0))
-                .itemOutputs(getModItem(TinkerConstruct.ID, "fletching", 1, 2, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(extruderRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(TinkerConstruct.ID, "materials", 1, 17, missing),
-                        NHItemList.BowFletchingCast.get(0))
-                .itemOutputs(getModItem(TinkerConstruct.ID, "fletching", 1, 3, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(extruderRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(Minecraft.ID, "leaves", 1, 0, missing), NHItemList.BowFletchingCast.get(0))
-                .itemOutputs(getModItem(TinkerConstruct.ID, "fletching", 1, 1, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(extruderRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(TinkerConstruct.ID, "slime.leaves", 1, 0, missing),
-                        NHItemList.BowFletchingCast.get(0))
-                .itemOutputs(getModItem(TinkerConstruct.ID, "fletching", 1, 4, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(extruderRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(Minecraft.ID, "string", 3, 0, missing), NHItemList.BowStringCast.get(0))
-                .itemOutputs(getModItem(TinkerConstruct.ID, "bowstring", 1, 0, missing)).duration(20 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(extruderRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(Natura.ID, "barleyFood", 3, 7, missing), NHItemList.BowStringCast.get(0))
-                .itemOutputs(getModItem(TinkerConstruct.ID, "bowstring", 1, 2, missing)).duration(20 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(extruderRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(Thaumcraft.ID, "ItemResource", 3, 7, missing), NHItemList.BowStringCast.get(0))
-                .itemOutputs(getModItem(TinkerConstruct.ID, "bowstring", 1, 1, missing)).duration(20 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(extruderRecipes);
+        if (TML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TinkerConstruct.ID, "materials", 2, 4, missing),
+                            ItemList.Shape_Extruder_Saw.get(0L))
+                    .itemOutputs(NHItemList.SawBladeArdite.get()).duration(20 * SECONDS).eut(TierEU.RECIPE_MV)
+                    .addTo(extruderRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TinkerConstruct.ID, "materials", 2, 5, missing),
+                            ItemList.Shape_Extruder_Saw.get(0L))
+                    .itemOutputs(NHItemList.SawBladeManyullyn.get()).duration(30 * SECONDS).eut(TierEU.RECIPE_MV)
+                    .addTo(extruderRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TinkerConstruct.ID, "materials", 1, 5, missing),
+                            ItemList.Shape_Extruder_Plate.get(0L))
+                    .itemOutputs(GTOreDictUnificator.get(OrePrefixes.plate, Materials.Manyullyn, 1))
+                    .duration(5 * SECONDS).eut(TierEU.RECIPE_HV).addTo(extruderRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(getModItem(Minecraft.ID, "feather", 1, 0, missing), NHItemList.BowFletchingCast.get(0))
+                    .itemOutputs(getModItem(TinkerConstruct.ID, "fletching", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(extruderRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TinkerConstruct.ID, "materials", 1, 1, missing),
+                            NHItemList.BowFletchingCast.get(0))
+                    .itemOutputs(getModItem(TinkerConstruct.ID, "fletching", 1, 2, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(extruderRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TinkerConstruct.ID, "materials", 1, 17, missing),
+                            NHItemList.BowFletchingCast.get(0))
+                    .itemOutputs(getModItem(TinkerConstruct.ID, "fletching", 1, 3, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(extruderRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(getModItem(Minecraft.ID, "leaves", 1, 0, missing), NHItemList.BowFletchingCast.get(0))
+                    .itemOutputs(getModItem(TinkerConstruct.ID, "fletching", 1, 1, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(extruderRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TinkerConstruct.ID, "slime.leaves", 1, 0, missing),
+                            NHItemList.BowFletchingCast.get(0))
+                    .itemOutputs(getModItem(TinkerConstruct.ID, "fletching", 1, 4, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(extruderRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(getModItem(Minecraft.ID, "string", 3, 0, missing), NHItemList.BowStringCast.get(0))
+                    .itemOutputs(getModItem(TinkerConstruct.ID, "bowstring", 1, 0, missing)).duration(20 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(extruderRecipes);
+            if (NML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(getModItem(Natura.ID, "barleyFood", 3, 7, missing), NHItemList.BowStringCast.get(0))
+                        .itemOutputs(getModItem(TinkerConstruct.ID, "bowstring", 1, 2, missing)).duration(20 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(extruderRecipes);
+            }
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Thaumcraft.ID, "ItemResource", 3, 7, missing),
+                            NHItemList.BowStringCast.get(0))
+                    .itemOutputs(getModItem(TinkerConstruct.ID, "bowstring", 1, 1, missing)).duration(20 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(extruderRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         NHItemList.EngravedManyullynCrystalChip.get(),
@@ -1248,9 +2347,11 @@ public class ScriptCoreMod implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(Minecraft.ID, "brown_mushroom", 1, 0, missing))
                 .itemOutputs(NHItemList.MushroomPowder.get(2)).outputChances(10000).duration(15 * SECONDS).eut(2)
                 .addTo(maceratorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "mushrooms", 1, wildcard, missing))
-                .itemOutputs(NHItemList.MushroomPowder.get(2)).outputChances(10000).duration(15 * SECONDS).eut(2)
-                .addTo(maceratorRecipes);
+        if (BOPML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "mushrooms", 1, wildcard, missing))
+                    .itemOutputs(NHItemList.MushroomPowder.get(2)).outputChances(10000).duration(15 * SECONDS).eut(2)
+                    .addTo(maceratorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "whitemushroomItem", 1, 0, missing))
                 .itemOutputs(NHItemList.MushroomPowder.get(2)).outputChances(10000).duration(15 * SECONDS).eut(2)
                 .addTo(maceratorRecipes);

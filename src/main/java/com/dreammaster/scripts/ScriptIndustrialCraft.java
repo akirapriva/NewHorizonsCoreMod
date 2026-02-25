@@ -50,7 +50,7 @@ public class ScriptIndustrialCraft implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(BuildCraftFactory.ID, Forestry.ID, IndustrialCraft2.ID, Railcraft.ID, TwilightForest.ID);
+        return Arrays.asList(BuildCraftFactory.ID, Forestry.ID, IndustrialCraft2.ID, Railcraft.ID);
     }
 
     @Override

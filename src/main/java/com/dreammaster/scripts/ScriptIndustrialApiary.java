@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.BiomesOPlenty;
 import static gregtech.api.enums.Mods.Botany;
 import static gregtech.api.enums.Mods.ExtraBees;
@@ -40,15 +41,13 @@ public class ScriptIndustrialApiary implements IScriptLoader {
     @Override
     public List<String> getDependencies() {
         return Arrays.asList(
-                BiomesOPlenty.ID,
                 Botany.ID,
                 ExtraBees.ID,
                 ExtraUtilities.ID,
                 Forestry.ID,
                 Gendustry.ID,
                 Genetics.ID,
-                ProjectRedIllumination.ID,
-                TinkerConstruct.ID);
+                ProjectRedIllumination.ID);
     }
 
     @Override
@@ -218,17 +217,19 @@ public class ScriptIndustrialApiary implements IScriptLoader {
                 SmallStainlessGear);
 
         // Winter Upgrade
-        addShapedRecipe(
-                ItemList.IndustrialApiary_Upgrade_WINTER.get(1),
-                SmallSteelGear,
-                ClimateControlModule,
-                SmallSteelGear,
-                HardenedIce,
-                UpgradeFrame,
-                HardenedIce,
-                SmallStainlessGear,
-                EnvironmentalProcessor,
-                SmallStainlessGear);
+        if (BOPML) {
+            addShapedRecipe(
+                    ItemList.IndustrialApiary_Upgrade_WINTER.get(1),
+                    SmallSteelGear,
+                    ClimateControlModule,
+                    SmallSteelGear,
+                    HardenedIce,
+                    UpgradeFrame,
+                    HardenedIce,
+                    SmallStainlessGear,
+                    EnvironmentalProcessor,
+                    SmallStainlessGear);
+        }
 
         // Dryer Upgrade
         addShapedRecipe(
@@ -308,18 +309,20 @@ public class ScriptIndustrialApiary implements IScriptLoader {
                 EnvironmentalProcessor,
                 SmallStainlessGear);
 
-        // Cooler Upgrade
-        addShapedRecipe(
-                ItemList.IndustrialApiary_Upgrade_COOLER.get(1),
-                SmallSteelGear,
-                ClimateControlModule,
-                SmallSteelGear,
-                Snow,
-                UpgradeFrame,
-                Snow,
-                SmallStainlessGear,
-                HardenedIce,
-                SmallStainlessGear);
+        if (BOPML) {
+            // Cooler Upgrade
+            addShapedRecipe(
+                    ItemList.IndustrialApiary_Upgrade_COOLER.get(1),
+                    SmallSteelGear,
+                    ClimateControlModule,
+                    SmallSteelGear,
+                    Snow,
+                    UpgradeFrame,
+                    Snow,
+                    SmallStainlessGear,
+                    HardenedIce,
+                    SmallStainlessGear);
+        }
 
         // Lifespan Upgrade
         addShapedRecipe(
@@ -399,18 +402,20 @@ public class ScriptIndustrialApiary implements IScriptLoader {
                 EnvironmentalProcessor,
                 SmallStainlessGear);
 
-        // Open Sky Upgrade
-        addShapedRecipe(
-                ItemList.IndustrialApiary_Upgrade_SKY.get(1),
-                SmallSteelGear,
-                InvertedBlueLamp,
-                SmallSteelGear,
-                ClearGlassPane,
-                UpgradeFrame,
-                ClearGlassPane,
-                SmallStainlessGear,
-                ClearGlassPane,
-                SmallStainlessGear);
+        if (TCML) {
+            // Open Sky Upgrade
+            addShapedRecipe(
+                    ItemList.IndustrialApiary_Upgrade_SKY.get(1),
+                    SmallSteelGear,
+                    InvertedBlueLamp,
+                    SmallSteelGear,
+                    ClearGlassPane,
+                    UpgradeFrame,
+                    ClearGlassPane,
+                    SmallStainlessGear,
+                    ClearGlassPane,
+                    SmallStainlessGear);
+        }
 
         // Heater Upgrade
         addShapedRecipe(

@@ -1,9 +1,8 @@
 package com.dreammaster.scripts;
 
-import static gregtech.api.enums.Mods.BiomesOPlenty;
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.MalisisDoors;
 import static gregtech.api.enums.Mods.Minecraft;
-import static gregtech.api.enums.Mods.Natura;
 import static gregtech.api.enums.Mods.ProjectRedIntegration;
 import static gregtech.api.enums.Mods.TinkerConstruct;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
@@ -35,8 +34,7 @@ public class ScriptMalisDoors implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays
-                .asList(BiomesOPlenty.ID, MalisisDoors.ID, Natura.ID, ProjectRedIntegration.ID, TinkerConstruct.ID);
+        return Arrays.asList(MalisisDoors.ID, ProjectRedIntegration.ID);
     }
 
     @Override
@@ -577,17 +575,19 @@ public class ScriptMalisDoors implements IScriptLoader {
                 null,
                 "craftingToolSaw",
                 null);
-        addShapedRecipe(
-                getModItem(MalisisDoors.ID, "item.wood_sliding_door", 1, 0, missing),
-                null,
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                null,
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                getModItem(Minecraft.ID, "wooden_door", 1, 0, missing),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                null,
-                "craftingToolSaw",
-                null);
+        if (TCML) {
+            addShapedRecipe(
+                    getModItem(MalisisDoors.ID, "item.wood_sliding_door", 1, 0, missing),
+                    null,
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    null,
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    getModItem(Minecraft.ID, "wooden_door", 1, 0, missing),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    null,
+                    "craftingToolSaw",
+                    null);
+        }
         addShapedRecipe(
                 getModItem(MalisisDoors.ID, "item.iron_sliding_door", 1, 0, missing),
                 null,
@@ -599,17 +599,19 @@ public class ScriptMalisDoors implements IScriptLoader {
                 null,
                 "craftingToolSaw",
                 null);
-        addShapedRecipe(
-                getModItem(MalisisDoors.ID, "item.iron_sliding_door", 1, 0, missing),
-                null,
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                null,
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                getModItem(Minecraft.ID, "iron_door", 1, 0, missing),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                null,
-                "craftingToolSaw",
-                null);
+        if (TCML) {
+            addShapedRecipe(
+                    getModItem(MalisisDoors.ID, "item.iron_sliding_door", 1, 0, missing),
+                    null,
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    null,
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    getModItem(Minecraft.ID, "iron_door", 1, 0, missing),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    null,
+                    "craftingToolSaw",
+                    null);
+        }
         addShapedRecipe(
                 getModItem(MalisisDoors.ID, "item.jail_door", 1, 0, missing),
                 null,
@@ -1188,24 +1190,28 @@ public class ScriptMalisDoors implements IScriptLoader {
                         getModItem(Minecraft.ID, "glass_pane", 1, 0, missing))
                 .itemOutputs(getModItem(MalisisDoors.ID, "item.wood_sliding_door", 1, 0, missing))
                 .duration(20 * SECONDS).eut(4).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "wooden_door", 1, 0, missing),
-                        getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing))
-                .itemOutputs(getModItem(MalisisDoors.ID, "item.wood_sliding_door", 1, 0, missing))
-                .duration(20 * SECONDS).eut(4).addTo(assemblerRecipes);
+        if (TCML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "wooden_door", 1, 0, missing),
+                            getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing))
+                    .itemOutputs(getModItem(MalisisDoors.ID, "item.wood_sliding_door", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(4).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Minecraft.ID, "iron_door", 1, 0, missing),
                         getModItem(Minecraft.ID, "glass_pane", 1, 0, missing))
                 .itemOutputs(getModItem(MalisisDoors.ID, "item.iron_sliding_door", 1, 0, missing))
                 .duration(20 * SECONDS).eut(4).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "iron_door", 1, 0, missing),
-                        getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing))
-                .itemOutputs(getModItem(MalisisDoors.ID, "item.iron_sliding_door", 1, 0, missing))
-                .duration(20 * SECONDS).eut(4).addTo(assemblerRecipes);
+        if (TCML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "iron_door", 1, 0, missing),
+                            getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing))
+                    .itemOutputs(getModItem(MalisisDoors.ID, "item.iron_sliding_door", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(4).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(getModItem(Minecraft.ID, "iron_door", 1, 0, missing), NHItemList.SteelBars.get(2))
                 .itemOutputs(getModItem(MalisisDoors.ID, "item.jail_door", 1, 0, missing)).duration(20 * SECONDS).eut(4)

@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.AppliedEnergistics2;
 import static gregtech.api.enums.Mods.Avaritia;
 import static gregtech.api.enums.Mods.AvaritiaAddons;
@@ -51,12 +52,9 @@ public class ScriptAvaritiaAddons implements IScriptLoader {
                 AppliedEnergistics2.ID,
                 Avaritia.ID,
                 AvaritiaAddons.ID,
-                Botania.ID,
                 EternalSingularity.ID,
-                ForbiddenMagic.ID,
                 IronChests.ID,
-                UniversalSingularities.ID,
-                Witchery.ID);
+                UniversalSingularities.ID);
     }
 
     @Override
@@ -130,107 +128,111 @@ public class ScriptAvaritiaAddons implements IScriptLoader {
                 'h',
                 getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 60));
         // Asgardandelion
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                ItemBlockSpecialFlower.ofType("asgardandelion"),
-                "RXDXGXEXM",
-                "X009i900X",
-                "d0957490n",
-                "X0iAZai0X",
-                "T098B690r",
-                "X109i901X",
-                "t1102011H",
-                "X0112110X",
-                "eXK131SXm",
-                'R',
-                getModItem(Botania.ID, "corporeaSpark", 1, 1),
-                'D',
-                getModItem(Botania.ID, "rune", 1, 10),
-                'G',
-                getModItem(Botania.ID, "rune", 1, 9),
-                'E',
-                getModItem(Botania.ID, "rune", 1, 11),
-                'M',
-                getModItem(ForbiddenMagic.ID, "WandCores", 1, 11),
-                'd',
-                getModItem(Botania.ID, "rune", 1, 12),
-                'n',
-                getModItem(Botania.ID, "rune", 1, 13),
-                'T',
-                getModItem(Botania.ID, "rune", 1, 14),
-                'r',
-                getModItem(Botania.ID, "rune", 1, 15),
-                't',
-                getModItem(Botania.ID, "rune", 1, 3),
-                'H',
-                getModItem(Botania.ID, "rune", 1, 6),
-                'e',
-                getModItem(ForbiddenMagic.ID, "WandCores", 1, 7),
-                'K',
-                getModItem(Botania.ID, "rune", 1, 5),
-                'X',
-                getModItem(Botania.ID, "bifrostPermPane", 1, 0),
-                '3',
-                new ItemStack(ModItems.blackLotus, 1, 1),
-                'S',
-                getModItem(Botania.ID, "rune", 1, 4),
-                'm',
-                getModItem(Botania.ID, "lightRelay", 1, 1),
-                'Z',
-                new ItemStack(LudicrousBlocks.infinitato),
-                '1',
-                new ItemStack(LudicrousItems.resource, 1, 3), // Neutronium nugget
-                '2',
-                "blockCosmicNeutronium",
-                'i',
-                "plateInfinity",
-                'A',
-                "gemExquisiteBotaniaDragonstone",
-                'a',
-                "gemExquisiteManaDiamond",
-                'B',
-                "plateGaiaSpirit",
-                '4',
-                "plateLivingwood",
-                '5',
-                "plateLivingrock",
-                '6',
-                getModItem(ForbiddenMagic.ID, "WandCaps", 1, 5),
-                '7',
-                getModItem(ForbiddenMagic.ID, "WandCaps", 1, 3),
-                '8',
-                getModItem(ForbiddenMagic.ID, "WandCaps", 1, 2),
-                '9',
-                "nuggetInfinity");
-        // Infinity Egg (Witchery)
-        if (Config.witch) {
-
-            Block egg = GameRegistry.findBlock(Witchery.ID, "infinityegg");
-
+        if (BML && TML) {
             ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                    new ItemStack(egg, 1, 0),
-                    " NNNNNNN ",
-                    "NCIIAIICN",
-                    "NIIIDIIIN",
-                    "NIIDHDIIN",
-                    "NAIHEHIAN",
-                    "NIIDHDIIN",
-                    "NIIIDIIIN",
-                    "NCIIAIICN",
-                    " NNNNNNN ",
+                    ItemBlockSpecialFlower.ofType("asgardandelion"),
+                    "RXDXGXEXM",
+                    "X009i900X",
+                    "d0957490n",
+                    "X0iAZai0X",
+                    "T098B690r",
+                    "X109i901X",
+                    "t1102011H",
+                    "X0112110X",
+                    "eXK131SXm",
+                    'R',
+                    getModItem(Botania.ID, "corporeaSpark", 1, 1),
                     'D',
-                    getModItem(Witchery.ID, "ingredient", 1, 23),
-                    'N',
-                    "plateCosmicNeutronium",
-                    'H',
-                    new ItemStack(Blocks.dragon_egg),
+                    getModItem(Botania.ID, "rune", 1, 10),
+                    'G',
+                    getModItem(Botania.ID, "rune", 1, 9),
                     'E',
-                    getModItem(Witchery.ID, "stew", 1),
-                    'C',
-                    getModItem(Witchery.ID, "chalkinfernal", 1),
+                    getModItem(Botania.ID, "rune", 1, 11),
+                    'M',
+                    getModItem(ForbiddenMagic.ID, "WandCores", 1, 11),
+                    'd',
+                    getModItem(Botania.ID, "rune", 1, 12),
+                    'n',
+                    getModItem(Botania.ID, "rune", 1, 13),
+                    'T',
+                    getModItem(Botania.ID, "rune", 1, 14),
+                    'r',
+                    getModItem(Botania.ID, "rune", 1, 15),
+                    't',
+                    getModItem(Botania.ID, "rune", 1, 3),
+                    'H',
+                    getModItem(Botania.ID, "rune", 1, 6),
+                    'e',
+                    getModItem(ForbiddenMagic.ID, "WandCores", 1, 7),
+                    'K',
+                    getModItem(Botania.ID, "rune", 1, 5),
+                    'X',
+                    getModItem(Botania.ID, "bifrostPermPane", 1, 0),
+                    '3',
+                    new ItemStack(ModItems.blackLotus, 1, 1),
+                    'S',
+                    getModItem(Botania.ID, "rune", 1, 4),
+                    'm',
+                    getModItem(Botania.ID, "lightRelay", 1, 1),
+                    'Z',
+                    new ItemStack(LudicrousBlocks.infinitato),
+                    '1',
+                    new ItemStack(LudicrousItems.resource, 1, 3), // Neutronium nugget
+                    '2',
+                    "blockCosmicNeutronium",
+                    'i',
+                    "plateInfinity",
                     'A',
-                    getModItem(Witchery.ID, "chalkotherwhere", 1),
-                    'I',
-                    "plateInfinity");
+                    "gemExquisiteBotaniaDragonstone",
+                    'a',
+                    "gemExquisiteManaDiamond",
+                    'B',
+                    "plateGaiaSpirit",
+                    '4',
+                    "plateLivingwood",
+                    '5',
+                    "plateLivingrock",
+                    '6',
+                    getModItem(ForbiddenMagic.ID, "WandCaps", 1, 5),
+                    '7',
+                    getModItem(ForbiddenMagic.ID, "WandCaps", 1, 3),
+                    '8',
+                    getModItem(ForbiddenMagic.ID, "WandCaps", 1, 2),
+                    '9',
+                    "nuggetInfinity");
+        }
+        if (WML) {
+            // Infinity Egg (Witchery)
+            if (Config.witch) {
+
+                Block egg = GameRegistry.findBlock(Witchery.ID, "infinityegg");
+
+                ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                        new ItemStack(egg, 1, 0),
+                        " NNNNNNN ",
+                        "NCIIAIICN",
+                        "NIIIDIIIN",
+                        "NIIDHDIIN",
+                        "NAIHEHIAN",
+                        "NIIDHDIIN",
+                        "NIIIDIIIN",
+                        "NCIIAIICN",
+                        " NNNNNNN ",
+                        'D',
+                        getModItem(Witchery.ID, "ingredient", 1, 23),
+                        'N',
+                        "plateCosmicNeutronium",
+                        'H',
+                        new ItemStack(Blocks.dragon_egg),
+                        'E',
+                        getModItem(Witchery.ID, "stew", 1),
+                        'C',
+                        getModItem(Witchery.ID, "chalkinfernal", 1),
+                        'A',
+                        getModItem(Witchery.ID, "chalkotherwhere", 1),
+                        'I',
+                        "plateInfinity");
+            }
         }
         // Chronic Singularity
         {
@@ -248,20 +250,23 @@ public class ScriptAvaritiaAddons implements IScriptLoader {
                     .fluidInputs(Materials.Eternity.getMolten(144)).fluidOutputs(Materials.Infinity.getMolten(576))
                     .duration(5 * SECONDS).eut(TierEU.RECIPE_UXV).addTo(plasmaArcFurnaceRecipes);
 
-            // Spaghettic Singularity
-            GTValues.RA.stdBuilder().itemInputs(
-                    // fluxed electrum singularity
-                    getModItem(UniversalSingularities.ID, "universal.general.singularity", 1L, 20))
-                    .fluidInputs(Materials.Mellion.getMolten(4 * 144L))
-                    .itemOutputs(getModItem(EternalSingularity.ID, "combined_singularity", 1L, 2)).duration(1 * SECONDS)
-                    .eut(TierEU.RECIPE_UMV).metadata(CompressionTierKey.INSTANCE, 2).addTo(neutroniumCompressorRecipes);
-
-            // Cryptic Singularity
-            GTValues.RA.stdBuilder().itemInputs(
-                    // iron singularity
-                    getModItem(Avaritia.ID, "Singularity", 1L, 0)).fluidInputs(Materials.Creon.getMolten(4 * 144L))
-                    .itemOutputs(getModItem(EternalSingularity.ID, "combined_singularity", 1L, 4)).duration(1 * SECONDS)
-                    .eut(TierEU.RECIPE_UMV).metadata(CompressionTierKey.INSTANCE, 2).addTo(neutroniumCompressorRecipes);
+            if (TML) {
+                // Spaghettic Singularity
+                GTValues.RA.stdBuilder().itemInputs(
+                        // fluxed electrum singularity
+                        getModItem(UniversalSingularities.ID, "universal.general.singularity", 1L, 20))
+                        .fluidInputs(Materials.Mellion.getMolten(4 * 144L))
+                        .itemOutputs(getModItem(EternalSingularity.ID, "combined_singularity", 1L, 2))
+                        .duration(1 * SECONDS).eut(TierEU.RECIPE_UMV).metadata(CompressionTierKey.INSTANCE, 2)
+                        .addTo(neutroniumCompressorRecipes);
+                // Cryptic Singularity
+                GTValues.RA.stdBuilder().itemInputs(
+                        // iron singularity
+                        getModItem(Avaritia.ID, "Singularity", 1L, 0)).fluidInputs(Materials.Creon.getMolten(4 * 144L))
+                        .itemOutputs(getModItem(EternalSingularity.ID, "combined_singularity", 1L, 4))
+                        .duration(1 * SECONDS).eut(TierEU.RECIPE_UMV).metadata(CompressionTierKey.INSTANCE, 2)
+                        .addTo(neutroniumCompressorRecipes);
+            }
         }
     }
 }

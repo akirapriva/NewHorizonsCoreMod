@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.BiomesOPlenty;
 import static gregtech.api.enums.Mods.Botania;
 import static gregtech.api.enums.Mods.Chisel;
@@ -44,19 +45,14 @@ public class ScriptChisel implements IScriptLoader {
     @Override
     public List<String> getDependencies() {
         return Arrays.asList(
-                BiomesOPlenty.ID,
-                Botania.ID,
                 Chisel.ID,
                 EnderIO.ID,
                 GalacticraftAmunRa.ID,
                 GalacticraftCore.ID,
                 IndustrialCraft2.ID,
                 IronChests.ID,
-                Natura.ID,
                 ProjectRedExploration.ID,
-                Railcraft.ID,
-                TinkerConstruct.ID,
-                TwilightForest.ID);
+                Railcraft.ID);
     }
 
     @Override
@@ -182,17 +178,19 @@ public class ScriptChisel implements IScriptLoader {
                 "wireGt01RedAlloy",
                 ItemList.Electric_Motor_LV.get(1L),
                 "wireGt01RedAlloy");
-        addShapedRecipe(
-                getModItem(Chisel.ID, "mossy_templeblock", 1, 0, missing),
-                getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing),
-                getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing),
-                getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing),
-                getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing),
-                getModItem(Chisel.ID, "templeblock", 1, 0, missing),
-                getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing),
-                getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing),
-                getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing),
-                getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing));
+        if (BOPML) {
+            addShapedRecipe(
+                    getModItem(Chisel.ID, "mossy_templeblock", 1, 0, missing),
+                    getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing),
+                    getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing),
+                    getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing),
+                    getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing),
+                    getModItem(Chisel.ID, "templeblock", 1, 0, missing),
+                    getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing),
+                    getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing),
+                    getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing),
+                    getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(Chisel.ID, "voidstone2", 8, 0, missing),
                 getModItem(Chisel.ID, "voidstone", 1, 0, missing),
@@ -204,14 +202,15 @@ public class ScriptChisel implements IScriptLoader {
                 getModItem(Chisel.ID, "voidstone", 1, 0, missing),
                 getModItem(Chisel.ID, "voidstone", 1, 0, missing),
                 getModItem(Chisel.ID, "voidstone", 1, 0, missing));
-
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Natura.ID, "Cloud", 64, 0, missing),
-                        getModItem(Botania.ID, "manaBottle", 1, 0, missing),
-                        new ItemStack(Blocks.wooden_button, 1))
-                .itemOutputs(getModItem(Chisel.ID, "cloudinabottle", 1, 0, missing)).duration(10 * SECONDS).eut(2)
-                .addTo(formingPressRecipes);
+        if (BML && NML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Natura.ID, "Cloud", 64, 0, missing),
+                            getModItem(Botania.ID, "manaBottle", 1, 0, missing),
+                            new ItemStack(Blocks.wooden_button, 1))
+                    .itemOutputs(getModItem(Chisel.ID, "cloudinabottle", 1, 0, missing)).duration(10 * SECONDS).eut(2)
+                    .addTo(formingPressRecipes);
+        }
 
         ChiselHelper.addGroup("glasswork");
         CarvingUtils.getChiselRegistry().removeGroup("cobblestone");
@@ -278,10 +277,17 @@ public class ScriptChisel implements IScriptLoader {
         ChiselHelper.addVariationFromStack("glasswork", getModItem(Chisel.ID, "glass", 1, 14, missing));
         ChiselHelper.addVariationFromStack("glasswork", getModItem(Chisel.ID, "glass", 1, 15, missing));
         ChiselHelper.addVariationFromStack("glasswork", getModItem(Chisel.ID, "glass2", 1, 0, missing));
-        ChiselHelper.addVariationFromStack("glasswork", getModItem(TinkerConstruct.ID, "GlassBlock", 1, 0, missing));
+        if (TCML) {
+            ChiselHelper
+                    .addVariationFromStack("glasswork", getModItem(TinkerConstruct.ID, "GlassBlock", 1, 0, missing));
+        }
         ChiselHelper.addVariationFromStack("glasswork", getModItem(EnderIO.ID, "blockFusedQuartz", 1, 1, missing));
-        ChiselHelper.addVariationFromStack("glass", getModItem(TinkerConstruct.ID, "GlassBlock", 1, 0, missing));
-        ChiselHelper.addVariationFromStack("cloud", getModItem(Natura.ID, "Cloud", 1, 0, missing));
+        if (TCML) {
+            ChiselHelper.addVariationFromStack("glass", getModItem(TinkerConstruct.ID, "GlassBlock", 1, 0, missing));
+        }
+        if (NML) {
+            ChiselHelper.addVariationFromStack("cloud", getModItem(Natura.ID, "Cloud", 1, 0, missing));
+        }
         ChiselHelper.addVariationFromStack("marble", getModItem(Railcraft.ID, "cube", 1, 7, missing));
         ChiselHelper.addVariationFromStack("marble", new ItemStack(GregTechAPI.sBlockStones, 1, 0));
         ChiselHelper.addVariationFromStack("marble", new ItemStack(GregTechAPI.sBlockStones, 1, 1));
@@ -341,9 +347,13 @@ public class ScriptChisel implements IScriptLoader {
         ChiselHelper.addVariationFromStack("redgranite", new ItemStack(GregTechAPI.sBlockGranites, 1, 13));
         ChiselHelper.addVariationFromStack("redgranite", new ItemStack(GregTechAPI.sBlockGranites, 1, 14));
         ChiselHelper.addVariationFromStack("redgranite", new ItemStack(GregTechAPI.sBlockGranites, 1, 15));
-        ChiselHelper.addVariationFromStack("limestone", getModItem(BiomesOPlenty.ID, "rocks", 1, 0, missing));
+        if (BOPML) {
+            ChiselHelper.addVariationFromStack("limestone", getModItem(BiomesOPlenty.ID, "rocks", 1, 0, missing));
+        }
         ChiselHelper.addVariationFromStack("amber", new ItemStack(GregTechAPI.sBlockGem1, 1, 1));
-        ChiselHelper.addVariationFromStack("amber", getModItem(BiomesOPlenty.ID, "gemOre", 1, 15, missing));
+        if (BOPML) {
+            ChiselHelper.addVariationFromStack("amber", getModItem(BiomesOPlenty.ID, "gemOre", 1, 15, missing));
+        }
         CarvingUtils.getChiselRegistry().removeGroup("end_stone");
         ChiselHelper.addGroup("endstone");
         ChiselHelper.addVariationFromStack("endstone", getModItem(Minecraft.ID, "end_stone", 1, 0, missing));
@@ -361,12 +371,14 @@ public class ScriptChisel implements IScriptLoader {
         ChiselHelper.addVariationFromStack("endstone", getModItem(Chisel.ID, "end_Stone", 1, 11, missing));
         ChiselHelper.addVariationFromStack("endstone", getModItem(Chisel.ID, "end_Stone", 1, 12, missing));
         ChiselHelper.addVariationFromStack("endstone", getModItem(Chisel.ID, "end_Stone", 1, 13, missing));
-        ChiselHelper.addVariationFromStack(
-                "endstone",
-                getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 12, missing));
-        ChiselHelper.addVariationFromStack(
-                "endstone",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 12, missing));
+        if (TCML) {
+            ChiselHelper.addVariationFromStack(
+                    "endstone",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 12, missing));
+            ChiselHelper.addVariationFromStack(
+                    "endstone",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 12, missing));
+        }
         ChiselHelper.addVariationFromStack("concrete", new ItemStack(GregTechAPI.sBlockConcretes, 1, 8));
         ChiselHelper.addGroup("glowstoneGTNH");
         ChiselHelper.addVariationFromStack("glowstoneGTNH", getModItem(Minecraft.ID, "glowstone", 1, 0, missing));
@@ -389,156 +401,173 @@ public class ScriptChisel implements IScriptLoader {
                 .addVariationFromStack("torch", getModItem(GalacticraftCore.ID, "tile.glowstoneTorch", 1, 0, missing));
         ChiselHelper.addVariationFromStack("aluminumblock", new ItemStack(GregTechAPI.sBlockMetal1, 1, 1));
         ChiselHelper.addGroup("searedStoneTCon");
-        ChiselHelper
-                .addVariationFromStack("searedStoneTCon", getModItem(TinkerConstruct.ID, "Smeltery", 1, 4, missing));
-        ChiselHelper
-                .addVariationFromStack("searedStoneTCon", getModItem(TinkerConstruct.ID, "Smeltery", 1, 6, missing));
-        ChiselHelper
-                .addVariationFromStack("searedStoneTCon", getModItem(TinkerConstruct.ID, "Smeltery", 1, 11, missing));
-        ChiselHelper.addGroup("searedStoneNetherTCon");
-        ChiselHelper.addVariationFromStack(
-                "searedStoneNetherTCon",
-                getModItem(TinkerConstruct.ID, "SmelteryNether", 1, 4, missing));
-        ChiselHelper.addVariationFromStack(
-                "searedStoneNetherTCon",
-                getModItem(TinkerConstruct.ID, "SmelteryNether", 1, 6, missing));
-        ChiselHelper.addVariationFromStack(
-                "searedStoneNetherTCon",
-                getModItem(TinkerConstruct.ID, "SmelteryNether", 1, 11, missing));
-        ChiselHelper.addGroup("searedBricksTCon");
-        ChiselHelper
-                .addVariationFromStack("searedBricksTCon", getModItem(TinkerConstruct.ID, "Smeltery", 1, 2, missing));
-        ChiselHelper
-                .addVariationFromStack("searedBricksTCon", getModItem(TinkerConstruct.ID, "Smeltery", 1, 8, missing));
-        ChiselHelper
-                .addVariationFromStack("searedBricksTCon", getModItem(TinkerConstruct.ID, "Smeltery", 1, 9, missing));
-        ChiselHelper.addGroup("searedBricksNetherTCon");
-        ChiselHelper.addVariationFromStack(
-                "searedBricksNetherTCon",
-                getModItem(TinkerConstruct.ID, "SmelteryNether", 1, 2, missing));
-        ChiselHelper.addVariationFromStack(
-                "searedBricksNetherTCon",
-                getModItem(TinkerConstruct.ID, "SmelteryNether", 1, 8, missing));
-        ChiselHelper.addVariationFromStack(
-                "searedBricksNetherTCon",
-                getModItem(TinkerConstruct.ID, "SmelteryNether", 1, 9, missing));
-        ChiselHelper.addGroup("speedBlockTCon");
-        ChiselHelper
-                .addVariationFromStack("speedBlockTCon", getModItem(TinkerConstruct.ID, "SpeedBlock", 1, 0, missing));
-        ChiselHelper
-                .addVariationFromStack("speedBlockTCon", getModItem(TinkerConstruct.ID, "SpeedBlock", 1, 1, missing));
-        ChiselHelper.addGroup("brownStoneTCon");
-        ChiselHelper
-                .addVariationFromStack("brownStoneTCon", getModItem(TinkerConstruct.ID, "SpeedBlock", 1, 2, missing));
-        ChiselHelper
-                .addVariationFromStack("brownStoneTCon", getModItem(TinkerConstruct.ID, "SpeedBlock", 1, 3, missing));
-        ChiselHelper
-                .addVariationFromStack("brownStoneTCon", getModItem(TinkerConstruct.ID, "SpeedBlock", 1, 4, missing));
-        ChiselHelper
-                .addVariationFromStack("brownStoneTCon", getModItem(TinkerConstruct.ID, "SpeedBlock", 1, 5, missing));
-        ChiselHelper
-                .addVariationFromStack("brownStoneTCon", getModItem(TinkerConstruct.ID, "SpeedBlock", 1, 6, missing));
-        ChiselHelper.addGroup("ironBricksTCon");
-        ChiselHelper.addVariationFromStack(
-                "ironBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 4, missing));
-        ChiselHelper.addVariationFromStack(
-                "ironBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 4, missing));
-        ChiselHelper.addGroup("goldBricksTCon");
-        ChiselHelper.addVariationFromStack(
-                "goldBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 5, missing));
-        ChiselHelper.addVariationFromStack(
-                "goldBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 5, missing));
-        ChiselHelper.addGroup("lapisBricksTCon");
-        ChiselHelper.addVariationFromStack(
-                "lapisBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 6, missing));
-        ChiselHelper.addVariationFromStack(
-                "lapisBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 6, missing));
-        ChiselHelper.addGroup("diamondBricksTCon");
-        ChiselHelper.addVariationFromStack(
-                "diamondBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 7, missing));
-        ChiselHelper.addVariationFromStack(
-                "diamondBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 7, missing));
-        ChiselHelper.addGroup("redstoneBricksTCon");
-        ChiselHelper.addVariationFromStack(
-                "redstoneBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 8, missing));
-        ChiselHelper.addVariationFromStack(
-                "redstoneBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 8, missing));
-        ChiselHelper.addGroup("boneBricksTCon");
-        ChiselHelper.addVariationFromStack(
-                "boneBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 9, missing));
-        ChiselHelper.addVariationFromStack(
-                "boneBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 9, missing));
-        ChiselHelper.addGroup("greenSlimeBricksTCon");
-        ChiselHelper.addVariationFromStack(
-                "greenSlimeBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 10, missing));
-        ChiselHelper.addVariationFromStack(
-                "greenSlimeBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 10, missing));
-        ChiselHelper.addGroup("blueSlimeBricksTCon");
-        ChiselHelper.addVariationFromStack(
-                "blueSlimeBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 11, missing));
-        ChiselHelper.addVariationFromStack(
-                "blueSlimeBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 11, missing));
-        ChiselHelper.addGroup("obsidianBricksTCon");
-        ChiselHelper.addVariationFromStack(
-                "obsidianBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 13, missing));
-        ChiselHelper.addVariationFromStack(
-                "obsidianBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 13, missing));
-        ChiselHelper.addGroup("alumiteBricksTCon");
-        ChiselHelper.addVariationFromStack(
-                "alumiteBricksTCon",
-                getModItem(TinkerConstruct.ID, "MetalBlock", 1, 8, missing));
-        ChiselHelper.addVariationFromStack(
-                "alumiteBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickmetal", 1, 0, missing));
-        ChiselHelper.addVariationFromStack(
-                "alumiteBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickmetal", 1, 4, missing));
-        ChiselHelper.addGroup("arditeBricksTCon");
-        ChiselHelper
-                .addVariationFromStack("arditeBricksTCon", getModItem(TinkerConstruct.ID, "MetalBlock", 1, 1, missing));
-        ChiselHelper.addVariationFromStack(
-                "arditeBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickmetal", 1, 1, missing));
-        ChiselHelper.addVariationFromStack(
-                "arditeBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickmetal", 1, 5, missing));
-        ChiselHelper.addGroup("cobaltBricksTCon");
-        ChiselHelper
-                .addVariationFromStack("cobaltBricksTCon", getModItem(TinkerConstruct.ID, "MetalBlock", 1, 0, missing));
-        ChiselHelper.addVariationFromStack(
-                "cobaltBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickmetal", 1, 2, missing));
-        ChiselHelper.addVariationFromStack(
-                "cobaltBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickmetal", 1, 6, missing));
-        ChiselHelper.addGroup("manyullynBricksTCon");
-        ChiselHelper.addVariationFromStack(
-                "manyullynBricksTCon",
-                getModItem(TinkerConstruct.ID, "MetalBlock", 1, 2, missing));
-        ChiselHelper.addVariationFromStack(
-                "manyullynBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickmetal", 1, 3, missing));
-        ChiselHelper.addVariationFromStack(
-                "manyullynBricksTCon",
-                getModItem(TinkerConstruct.ID, "decoration.multibrickmetal", 1, 7, missing));
+        if (TCML) {
+            ChiselHelper.addVariationFromStack(
+                    "searedStoneTCon",
+                    getModItem(TinkerConstruct.ID, "Smeltery", 1, 4, missing));
+            ChiselHelper.addVariationFromStack(
+                    "searedStoneTCon",
+                    getModItem(TinkerConstruct.ID, "Smeltery", 1, 6, missing));
+            ChiselHelper.addVariationFromStack(
+                    "searedStoneTCon",
+                    getModItem(TinkerConstruct.ID, "Smeltery", 1, 11, missing));
+            ChiselHelper.addGroup("searedStoneNetherTCon");
+            ChiselHelper.addVariationFromStack(
+                    "searedStoneNetherTCon",
+                    getModItem(TinkerConstruct.ID, "SmelteryNether", 1, 4, missing));
+            ChiselHelper.addVariationFromStack(
+                    "searedStoneNetherTCon",
+                    getModItem(TinkerConstruct.ID, "SmelteryNether", 1, 6, missing));
+            ChiselHelper.addVariationFromStack(
+                    "searedStoneNetherTCon",
+                    getModItem(TinkerConstruct.ID, "SmelteryNether", 1, 11, missing));
+            ChiselHelper.addGroup("searedBricksTCon");
+            ChiselHelper.addVariationFromStack(
+                    "searedBricksTCon",
+                    getModItem(TinkerConstruct.ID, "Smeltery", 1, 2, missing));
+            ChiselHelper.addVariationFromStack(
+                    "searedBricksTCon",
+                    getModItem(TinkerConstruct.ID, "Smeltery", 1, 8, missing));
+            ChiselHelper.addVariationFromStack(
+                    "searedBricksTCon",
+                    getModItem(TinkerConstruct.ID, "Smeltery", 1, 9, missing));
+            ChiselHelper.addGroup("searedBricksNetherTCon");
+            ChiselHelper.addVariationFromStack(
+                    "searedBricksNetherTCon",
+                    getModItem(TinkerConstruct.ID, "SmelteryNether", 1, 2, missing));
+            ChiselHelper.addVariationFromStack(
+                    "searedBricksNetherTCon",
+                    getModItem(TinkerConstruct.ID, "SmelteryNether", 1, 8, missing));
+            ChiselHelper.addVariationFromStack(
+                    "searedBricksNetherTCon",
+                    getModItem(TinkerConstruct.ID, "SmelteryNether", 1, 9, missing));
+            ChiselHelper.addGroup("speedBlockTCon");
+            ChiselHelper.addVariationFromStack(
+                    "speedBlockTCon",
+                    getModItem(TinkerConstruct.ID, "SpeedBlock", 1, 0, missing));
+            ChiselHelper.addVariationFromStack(
+                    "speedBlockTCon",
+                    getModItem(TinkerConstruct.ID, "SpeedBlock", 1, 1, missing));
+            ChiselHelper.addGroup("brownStoneTCon");
+            ChiselHelper.addVariationFromStack(
+                    "brownStoneTCon",
+                    getModItem(TinkerConstruct.ID, "SpeedBlock", 1, 2, missing));
+            ChiselHelper.addVariationFromStack(
+                    "brownStoneTCon",
+                    getModItem(TinkerConstruct.ID, "SpeedBlock", 1, 3, missing));
+            ChiselHelper.addVariationFromStack(
+                    "brownStoneTCon",
+                    getModItem(TinkerConstruct.ID, "SpeedBlock", 1, 4, missing));
+            ChiselHelper.addVariationFromStack(
+                    "brownStoneTCon",
+                    getModItem(TinkerConstruct.ID, "SpeedBlock", 1, 5, missing));
+            ChiselHelper.addVariationFromStack(
+                    "brownStoneTCon",
+                    getModItem(TinkerConstruct.ID, "SpeedBlock", 1, 6, missing));
+            ChiselHelper.addGroup("ironBricksTCon");
+            ChiselHelper.addVariationFromStack(
+                    "ironBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 4, missing));
+            ChiselHelper.addVariationFromStack(
+                    "ironBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 4, missing));
+            ChiselHelper.addGroup("goldBricksTCon");
+            ChiselHelper.addVariationFromStack(
+                    "goldBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 5, missing));
+            ChiselHelper.addVariationFromStack(
+                    "goldBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 5, missing));
+            ChiselHelper.addGroup("lapisBricksTCon");
+            ChiselHelper.addVariationFromStack(
+                    "lapisBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 6, missing));
+            ChiselHelper.addVariationFromStack(
+                    "lapisBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 6, missing));
+            ChiselHelper.addGroup("diamondBricksTCon");
+            ChiselHelper.addVariationFromStack(
+                    "diamondBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 7, missing));
+            ChiselHelper.addVariationFromStack(
+                    "diamondBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 7, missing));
+            ChiselHelper.addGroup("redstoneBricksTCon");
+            ChiselHelper.addVariationFromStack(
+                    "redstoneBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 8, missing));
+            ChiselHelper.addVariationFromStack(
+                    "redstoneBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 8, missing));
+            ChiselHelper.addGroup("boneBricksTCon");
+            ChiselHelper.addVariationFromStack(
+                    "boneBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 9, missing));
+            ChiselHelper.addVariationFromStack(
+                    "boneBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 9, missing));
+            ChiselHelper.addGroup("greenSlimeBricksTCon");
+            ChiselHelper.addVariationFromStack(
+                    "greenSlimeBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 10, missing));
+            ChiselHelper.addVariationFromStack(
+                    "greenSlimeBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 10, missing));
+            ChiselHelper.addGroup("blueSlimeBricksTCon");
+            ChiselHelper.addVariationFromStack(
+                    "blueSlimeBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 11, missing));
+            ChiselHelper.addVariationFromStack(
+                    "blueSlimeBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 11, missing));
+            ChiselHelper.addGroup("obsidianBricksTCon");
+            ChiselHelper.addVariationFromStack(
+                    "obsidianBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrick", 1, 13, missing));
+            ChiselHelper.addVariationFromStack(
+                    "obsidianBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickfancy", 1, 13, missing));
+            ChiselHelper.addGroup("alumiteBricksTCon");
+            ChiselHelper.addVariationFromStack(
+                    "alumiteBricksTCon",
+                    getModItem(TinkerConstruct.ID, "MetalBlock", 1, 8, missing));
+            ChiselHelper.addVariationFromStack(
+                    "alumiteBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickmetal", 1, 0, missing));
+            ChiselHelper.addVariationFromStack(
+                    "alumiteBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickmetal", 1, 4, missing));
+            ChiselHelper.addGroup("arditeBricksTCon");
+            ChiselHelper.addVariationFromStack(
+                    "arditeBricksTCon",
+                    getModItem(TinkerConstruct.ID, "MetalBlock", 1, 1, missing));
+            ChiselHelper.addVariationFromStack(
+                    "arditeBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickmetal", 1, 1, missing));
+            ChiselHelper.addVariationFromStack(
+                    "arditeBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickmetal", 1, 5, missing));
+            ChiselHelper.addGroup("cobaltBricksTCon");
+            ChiselHelper.addVariationFromStack(
+                    "cobaltBricksTCon",
+                    getModItem(TinkerConstruct.ID, "MetalBlock", 1, 0, missing));
+            ChiselHelper.addVariationFromStack(
+                    "cobaltBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickmetal", 1, 2, missing));
+            ChiselHelper.addVariationFromStack(
+                    "cobaltBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickmetal", 1, 6, missing));
+            ChiselHelper.addGroup("manyullynBricksTCon");
+            ChiselHelper.addVariationFromStack(
+                    "manyullynBricksTCon",
+                    getModItem(TinkerConstruct.ID, "MetalBlock", 1, 2, missing));
+            ChiselHelper.addVariationFromStack(
+                    "manyullynBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickmetal", 1, 3, missing));
+            ChiselHelper.addVariationFromStack(
+                    "manyullynBricksTCon",
+                    getModItem(TinkerConstruct.ID, "decoration.multibrickmetal", 1, 7, missing));
+        }
         ChiselHelper.addGroup("brown_mushroom");
         ChiselHelper.addGroup("red_mushroom");
         ChiselHelper.addVariationFromStack(
@@ -623,24 +652,30 @@ public class ScriptChisel implements IScriptLoader {
                 .addVariationFromStack("red_mushroom", getModItem(Minecraft.ID, "red_mushroom_block", 1, 15, missing));
 
         ChiselHelper.addGroup("blazeblock");
-        ChiselHelper.addVariationFromStack("blazeblock", getModItem(Botania.ID, "blazeBlock", 1, 0, missing));
+        if (BML) {
+            ChiselHelper.addVariationFromStack("blazeblock", getModItem(Botania.ID, "blazeBlock", 1, 0, missing));
+        }
         ChiselHelper.addVariationFromStack("blazeblock", new ItemStack(GregTechAPI.sBlockGem3, 1, 5));
         ChiselHelper.addGroup("steeleafblock");
-        ChiselHelper.addVariationFromStack("steeleafblock", getModItem(TwilightForest.ID, "tile.SteeleafBlock", 1));
-        ChiselHelper.addVariationFromStack("steeleafblock", new ItemStack(GregTechAPI.sBlockMetal8, 1, 12));
-        ChiselHelper.addGroup("knightmetalblock");
-        ChiselHelper.addVariationFromStack(
-                "knightmetalblock",
-                getModItem(TwilightForest.ID, "tile.KnightmetalBlock", 1, 0, missing));
-        ChiselHelper.addVariationFromStack("knightmetalblock", new ItemStack(GregTechAPI.sBlockMetal4, 1, 0));
-        ChiselHelper.addGroup("ironwoodblock");
-        ChiselHelper.addVariationFromStack(
-                "ironwoodblock",
-                getModItem(TwilightForest.ID, "tile.IronwoodBlock", 1, 0, missing));
-        ChiselHelper.addVariationFromStack("ironwoodblock", new ItemStack(GregTechAPI.sBlockMetal3, 1, 14));
-        ChiselHelper.addGroup("fieryblock");
-        ChiselHelper
-                .addVariationFromStack("fieryblock", getModItem(TwilightForest.ID, "tile.FieryBlock", 1, 0, missing));
-        ChiselHelper.addVariationFromStack("fieryblock", new ItemStack(GregTechAPI.sBlockMetal3, 1, 4));
+        if (TFML) {
+            ChiselHelper.addVariationFromStack("steeleafblock", getModItem(TwilightForest.ID, "tile.SteeleafBlock", 1));
+
+            ChiselHelper.addVariationFromStack("steeleafblock", new ItemStack(GregTechAPI.sBlockMetal8, 1, 12));
+            ChiselHelper.addGroup("knightmetalblock");
+            ChiselHelper.addVariationFromStack(
+                    "knightmetalblock",
+                    getModItem(TwilightForest.ID, "tile.KnightmetalBlock", 1, 0, missing));
+            ChiselHelper.addVariationFromStack("knightmetalblock", new ItemStack(GregTechAPI.sBlockMetal4, 1, 0));
+            ChiselHelper.addGroup("ironwoodblock");
+            ChiselHelper.addVariationFromStack(
+                    "ironwoodblock",
+                    getModItem(TwilightForest.ID, "tile.IronwoodBlock", 1, 0, missing));
+            ChiselHelper.addVariationFromStack("ironwoodblock", new ItemStack(GregTechAPI.sBlockMetal3, 1, 14));
+            ChiselHelper.addGroup("fieryblock");
+            ChiselHelper.addVariationFromStack(
+                    "fieryblock",
+                    getModItem(TwilightForest.ID, "tile.FieryBlock", 1, 0, missing));
+            ChiselHelper.addVariationFromStack("fieryblock", new ItemStack(GregTechAPI.sBlockMetal3, 1, 4));
+        }
     }
 }

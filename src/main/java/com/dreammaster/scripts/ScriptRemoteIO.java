@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.AppliedEnergistics2;
 import static gregtech.api.enums.Mods.EnderStorage;
 import static gregtech.api.enums.Mods.ExtraUtilities;
@@ -46,7 +47,6 @@ public class ScriptRemoteIO implements IScriptLoader {
                 ProjectRedIntegration.ID,
                 RandomThings.ID,
                 RemoteIO.ID,
-                Thaumcraft.ID,
                 TinkerConstruct.ID,
                 WirelessRedstoneCBELogic.ID);
     }
@@ -190,10 +190,12 @@ public class ScriptRemoteIO implements IScriptLoader {
                         getModItem(EnderStorage.ID, "enderChest", 1, 4096, missing))
                 .itemOutputs(getModItem(RemoteIO.ID, "item.chip.transfer", 1, 1, missing)).duration(10 * SECONDS)
                 .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(NHItemList.BlankPlatedChip.get(1), getModItem(Thaumcraft.ID, "blockJar", 2, 0, missing))
-                .itemOutputs(getModItem(RemoteIO.ID, "item.chip.transfer", 1, 2, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        if (TML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(NHItemList.BlankPlatedChip.get(1), getModItem(Thaumcraft.ID, "blockJar", 2, 0, missing))
+                    .itemOutputs(getModItem(RemoteIO.ID, "item.chip.transfer", 1, 2, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         NHItemList.BlankPlatedChip.get(1),

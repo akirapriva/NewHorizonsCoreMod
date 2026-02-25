@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.Avaritia;
 import static gregtech.api.enums.Mods.Computronics;
 import static gregtech.api.enums.Mods.OpenComputers;
@@ -21,39 +22,41 @@ public class ScriptComputronics implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(Avaritia.ID, Computronics.ID, OpenComputers.ID, Thaumcraft.ID);
+        return Arrays.asList(Avaritia.ID, Computronics.ID, OpenComputers.ID);
     }
 
     @Override
     public void loadRecipes() {
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                getModItem(Computronics.ID, "computronics.ocSpecialParts", 1),
-                "aaaaaaaaa",
-                "abbbbbbbc",
-                "abdefedbc",
-                "abgggggbc",
-                "abdhihdbc",
-                "abgggggbc",
-                "abdefedbc",
-                "abbbbbbbc",
-                "aaaaaaaaa",
-                'a',
-                "plateNeutronium",
-                'b',
-                "oc:ram6",
-                'c',
-                "wireGt04ElectrumFlux",
-                'd',
-                "circuitBio",
-                'e',
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 14),
-                'f',
-                getModItem(OpenComputers.ID, "item", 1, 103),
-                'g',
-                ItemList.Circuit_Chip_PPIC.get(1L),
-                'h',
-                "ingotInfinity",
-                'i',
-                getModItem(Avaritia.ID, "big_pearl", 1));
+        if (TML) {
+            ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                    getModItem(Computronics.ID, "computronics.ocSpecialParts", 1),
+                    "aaaaaaaaa",
+                    "abbbbbbbc",
+                    "abdefedbc",
+                    "abgggggbc",
+                    "abdhihdbc",
+                    "abgggggbc",
+                    "abdefedbc",
+                    "abbbbbbbc",
+                    "aaaaaaaaa",
+                    'a',
+                    "plateNeutronium",
+                    'b',
+                    "oc:ram6",
+                    'c',
+                    "wireGt04ElectrumFlux",
+                    'd',
+                    "circuitBio",
+                    'e',
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 14),
+                    'f',
+                    getModItem(OpenComputers.ID, "item", 1, 103),
+                    'g',
+                    ItemList.Circuit_Chip_PPIC.get(1L),
+                    'h',
+                    "ingotInfinity",
+                    'i',
+                    getModItem(Avaritia.ID, "big_pearl", 1));
+        }
     }
 }

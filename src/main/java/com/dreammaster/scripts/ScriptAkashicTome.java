@@ -17,22 +17,24 @@ public class ScriptAkashicTome implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(AkashicTome.ID, Backpack.ID);
+        return Arrays.asList(AkashicTome.ID);
     }
 
     @Override
     public void loadRecipes() {
-        addShapedRecipe(
-                getModItem(AkashicTome.ID, "tome", 1, 0, missing),
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                getModItem(Minecraft.ID, "book", 1, 0, missing),
-                getModItem(Minecraft.ID, "book", 1, 0, missing),
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                getModItem(Minecraft.ID, "chest", 1, 0, missing),
-                getModItem(Minecraft.ID, "paper", 1, 0, missing),
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                getModItem(Minecraft.ID, "book", 1, 0, missing),
-                getModItem(Minecraft.ID, "book", 1, 0, missing));
+        if (Backpack.isModLoaded()) {
+            addShapedRecipe(
+                    getModItem(AkashicTome.ID, "tome", 1, 0, missing),
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    getModItem(Minecraft.ID, "book", 1, 0, missing),
+                    getModItem(Minecraft.ID, "book", 1, 0, missing),
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    getModItem(Minecraft.ID, "chest", 1, 0, missing),
+                    getModItem(Minecraft.ID, "paper", 1, 0, missing),
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    getModItem(Minecraft.ID, "book", 1, 0, missing),
+                    getModItem(Minecraft.ID, "book", 1, 0, missing));
+        }
     }
 
 }

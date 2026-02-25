@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.Backpack;
 import static gregtech.api.enums.Mods.BiomesOPlenty;
 import static gregtech.api.enums.Mods.BuildCraftFactory;
@@ -13,7 +14,6 @@ import static gregtech.api.enums.Mods.PamsHarvestCraft;
 import static gregtech.api.enums.Mods.ProjectRedIntegration;
 import static gregtech.api.enums.Mods.Railcraft;
 import static gregtech.api.enums.Mods.StevesCarts2;
-import static gregtech.api.enums.Mods.Thaumcraft;
 import static gregtech.api.recipe.RecipeMaps.alloySmelterRecipes;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.blastFurnaceRecipes;
@@ -67,7 +67,6 @@ public class ScriptRailcraft implements IScriptLoader {
     public List<String> getDependencies() {
         return Arrays.asList(
                 Backpack.ID,
-                BiomesOPlenty.ID,
                 BuildCraftFactory.ID,
                 EnderIO.ID,
                 Forestry.ID,
@@ -77,8 +76,7 @@ public class ScriptRailcraft implements IScriptLoader {
                 PamsHarvestCraft.ID,
                 ProjectRedIntegration.ID,
                 Railcraft.ID,
-                StevesCarts2.ID,
-                Thaumcraft.ID);
+                StevesCarts2.ID);
     }
 
     @Override
@@ -1376,17 +1374,19 @@ public class ScriptRailcraft implements IScriptLoader {
         addShapelessRecipe(
                 getModItem(Railcraft.ID, "backpack.trackman.t1", 1, 0, missing),
                 getModItem(Railcraft.ID, "backpack.trackman.t1", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "backpack.iceman.t1", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                getModItem(BiomesOPlenty.ID, "hardIce", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "itemLeather",
-                getModItem(BiomesOPlenty.ID, "hardIce", 1, 0, missing),
-                "itemLeather",
-                "itemLeather",
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                "itemLeather");
+        if (BOPML) {
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "backpack.iceman.t1", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    getModItem(BiomesOPlenty.ID, "hardIce", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "itemLeather",
+                    getModItem(BiomesOPlenty.ID, "hardIce", 1, 0, missing),
+                    "itemLeather",
+                    "itemLeather",
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    "itemLeather");
+        }
         addShapelessRecipe(
                 getModItem(Railcraft.ID, "backpack.iceman.t1", 1, 0, missing),
                 getModItem(Railcraft.ID, "backpack.iceman.t1", 1, 0, missing));
@@ -2159,82 +2159,84 @@ public class ScriptRailcraft implements IScriptLoader {
                 .itemOutputs(getModItem(Railcraft.ID, "firestone.cut", 1, 0, missing)).duration(2 * MINUTES)
                 .eut(TierEU.RECIPE_LV).addTo(laserEngraverRecipes);
 
-        TCHelper.removeArcaneRecipe(getModItem(Railcraft.ID, "tool.crowbar.magic", 1, 0, missing));
-        TCHelper.removeArcaneRecipe(getModItem(Railcraft.ID, "tool.crowbar.void", 1, 0, missing));
-        TCHelper.moveResearch("RC_Crowbar", "ARTIFICE", 0, -4);
-        TCHelper.clearPrereq("RC_Crowbar");
-        TCHelper.addResearchPrereq("RC_Crowbar", "THAUMIUM", false);
-        TCHelper.clearPages("RC_Crowbar");
-        TCHelper.addResearchPage("RC_Crowbar", new ResearchPage("thaumcraft.research.RC_Crowbar.page.1"));
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "RC_Crowbar",
-                getModItem(Railcraft.ID, "tool.crowbar.magic", 1, 0, missing),
-                new AspectList().add(Aspect.getAspect("ordo"), 24).add(Aspect.getAspect("ignis"), 24)
-                        .add(Aspect.getAspect("aer"), 24),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "craftingToolHardHammer",
-                'b',
-                "dyeRed",
-                'c',
-                GTOreDictUnificator.get(OrePrefixes.stick, Materials.Thaumium, 1L),
-                'd',
-                "dyeRed",
-                'e',
-                GTOreDictUnificator.get(OrePrefixes.stick, Materials.Thaumium, 1L),
-                'f',
-                "dyeRed",
-                'g',
-                GTOreDictUnificator.get(OrePrefixes.stick, Materials.Thaumium, 1L),
-                'h',
-                "dyeRed",
-                'i',
-                "craftingToolFile");
-        TCHelper.addResearchPage(
-                "RC_Crowbar",
-                new ResearchPage(
-                        TCHelper.findArcaneRecipe(getModItem(Railcraft.ID, "tool.crowbar.magic", 1, 0, missing))));
-        TCHelper.refreshResearchPages("RC_Crowbar");
-        TCHelper.moveResearch("RC_Crowbar_Void", "ELDRITCH", 2, -4);
-        TCHelper.clearPrereq("RC_Crowbar_Void");
-        TCHelper.addResearchPrereq("RC_Crowbar_Void", "VOIDMETAL", false);
-        TCHelper.addResearchPrereq("RC_Crowbar_Void", "RC_Crowbar", false);
-        TCHelper.clearPages("RC_Crowbar_Void");
-        TCHelper.addResearchPage("RC_Crowbar_Void", new ResearchPage("thaumcraft.research.RC_Crowbar_Void.page.1"));
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "RC_Crowbar_Void",
-                getModItem(Railcraft.ID, "tool.crowbar.void", 1, 0, missing),
-                new AspectList().add(Aspect.getAspect("perditio"), 50).add(Aspect.getAspect("ignis"), 50)
-                        .add(Aspect.getAspect("aer"), 50).add(Aspect.getAspect("terra"), 50),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "craftingToolHardHammer",
-                'b',
-                "dyeRed",
-                'c',
-                "stickVoid",
-                'd',
-                "dyeRed",
-                'e',
-                "stickVoid",
-                'f',
-                "dyeRed",
-                'g',
-                "stickVoid",
-                'h',
-                "dyeRed",
-                'i',
-                "craftingToolFile");
-        TCHelper.addResearchPage(
-                "RC_Crowbar_Void",
-                new ResearchPage(
-                        TCHelper.findArcaneRecipe(getModItem(Railcraft.ID, "tool.crowbar.void", 1, 0, missing))));
-        ThaumcraftApi.addWarpToResearch("RC_Crowbar_Void", 2);
-        TCHelper.refreshResearchPages("RC_Crowbar_Void");
-        ResearchCategories.researchCategories.remove("RAILCRAFT");
+        if (TML) {
+            TCHelper.removeArcaneRecipe(getModItem(Railcraft.ID, "tool.crowbar.magic", 1, 0, missing));
+            TCHelper.removeArcaneRecipe(getModItem(Railcraft.ID, "tool.crowbar.void", 1, 0, missing));
+            TCHelper.moveResearch("RC_Crowbar", "ARTIFICE", 0, -4);
+            TCHelper.clearPrereq("RC_Crowbar");
+            TCHelper.addResearchPrereq("RC_Crowbar", "THAUMIUM", false);
+            TCHelper.clearPages("RC_Crowbar");
+            TCHelper.addResearchPage("RC_Crowbar", new ResearchPage("thaumcraft.research.RC_Crowbar.page.1"));
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "RC_Crowbar",
+                    getModItem(Railcraft.ID, "tool.crowbar.magic", 1, 0, missing),
+                    new AspectList().add(Aspect.getAspect("ordo"), 24).add(Aspect.getAspect("ignis"), 24)
+                            .add(Aspect.getAspect("aer"), 24),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "craftingToolHardHammer",
+                    'b',
+                    "dyeRed",
+                    'c',
+                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.Thaumium, 1L),
+                    'd',
+                    "dyeRed",
+                    'e',
+                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.Thaumium, 1L),
+                    'f',
+                    "dyeRed",
+                    'g',
+                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.Thaumium, 1L),
+                    'h',
+                    "dyeRed",
+                    'i',
+                    "craftingToolFile");
+            TCHelper.addResearchPage(
+                    "RC_Crowbar",
+                    new ResearchPage(
+                            TCHelper.findArcaneRecipe(getModItem(Railcraft.ID, "tool.crowbar.magic", 1, 0, missing))));
+            TCHelper.refreshResearchPages("RC_Crowbar");
+            TCHelper.moveResearch("RC_Crowbar_Void", "ELDRITCH", 2, -4);
+            TCHelper.clearPrereq("RC_Crowbar_Void");
+            TCHelper.addResearchPrereq("RC_Crowbar_Void", "VOIDMETAL", false);
+            TCHelper.addResearchPrereq("RC_Crowbar_Void", "RC_Crowbar", false);
+            TCHelper.clearPages("RC_Crowbar_Void");
+            TCHelper.addResearchPage("RC_Crowbar_Void", new ResearchPage("thaumcraft.research.RC_Crowbar_Void.page.1"));
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "RC_Crowbar_Void",
+                    getModItem(Railcraft.ID, "tool.crowbar.void", 1, 0, missing),
+                    new AspectList().add(Aspect.getAspect("perditio"), 50).add(Aspect.getAspect("ignis"), 50)
+                            .add(Aspect.getAspect("aer"), 50).add(Aspect.getAspect("terra"), 50),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "craftingToolHardHammer",
+                    'b',
+                    "dyeRed",
+                    'c',
+                    "stickVoid",
+                    'd',
+                    "dyeRed",
+                    'e',
+                    "stickVoid",
+                    'f',
+                    "dyeRed",
+                    'g',
+                    "stickVoid",
+                    'h',
+                    "dyeRed",
+                    'i',
+                    "craftingToolFile");
+            TCHelper.addResearchPage(
+                    "RC_Crowbar_Void",
+                    new ResearchPage(
+                            TCHelper.findArcaneRecipe(getModItem(Railcraft.ID, "tool.crowbar.void", 1, 0, missing))));
+            ThaumcraftApi.addWarpToResearch("RC_Crowbar_Void", 2);
+            TCHelper.refreshResearchPages("RC_Crowbar_Void");
+            ResearchCategories.researchCategories.remove("RAILCRAFT");
+        }
     }
 }

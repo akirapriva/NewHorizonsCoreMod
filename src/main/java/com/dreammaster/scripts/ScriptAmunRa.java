@@ -1,14 +1,7 @@
 package com.dreammaster.scripts;
 
-import static gregtech.api.enums.Mods.AdvancedSolarPanel;
-import static gregtech.api.enums.Mods.GalacticraftAmunRa;
-import static gregtech.api.enums.Mods.GalacticraftCore;
-import static gregtech.api.enums.Mods.GalacticraftMars;
-import static gregtech.api.enums.Mods.GalaxySpace;
-import static gregtech.api.enums.Mods.GoodGenerator;
-import static gregtech.api.enums.Mods.GraviSuite;
-import static gregtech.api.enums.Mods.IronChests;
-import static gregtech.api.enums.Mods.RandomThings;
+import static com.dreammaster.scripts.BooleanModLoaded.*;
+import static gregtech.api.enums.Mods.*;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.cutterRecipes;
 import static gregtech.api.recipe.RecipeMaps.implosionRecipes;
@@ -63,15 +56,7 @@ public class ScriptAmunRa implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                AdvancedSolarPanel.ID,
-                GalacticraftAmunRa.ID,
-                GalacticraftCore.ID,
-                GalacticraftMars.ID,
-                GalaxySpace.ID,
-                GraviSuite.ID,
-                IronChests.ID,
-                RandomThings.ID);
+        return Arrays.asList(GalacticraftAmunRa.ID, GalacticraftCore.ID, GalacticraftMars.ID);
     }
 
     @Override
@@ -200,23 +185,25 @@ public class ScriptAmunRa implements IScriptLoader {
                 "circuitSuperconductor",
                 'G',
                 new ItemStack(baseItem, 1, 24));
-        addShapedOredictRecipe(
-                new ItemStack(machines4, 1, 1),
-                "GGG",
-                "ODO",
-                "CFP",
-                'G',
-                new ItemStack(GameRegistry.findItem(AdvancedSolarPanel.ID, "asp_crafting_items"), 1, 5),
-                'O',
-                GameRegistry.findItemStack(GalacticraftCore.ID, "tile.oxygenCollector", 1),
-                'D',
-                GameRegistry.findItemStack(RandomThings.ID, "fertilizedDirt", 1),
-                'C',
-                "circuitData",
-                'F',
-                ItemList.PlanetaryGasSiphonCasing.get(1),
-                'P',
-                ItemList.Pump_HV.get(1));
+        if (ASML) {
+            addShapedOredictRecipe(
+                    new ItemStack(machines4, 1, 1),
+                    "GGG",
+                    "ODO",
+                    "CFP",
+                    'G',
+                    new ItemStack(GameRegistry.findItem(AdvancedSolarPanel.ID, "asp_crafting_items"), 1, 5),
+                    'O',
+                    GameRegistry.findItemStack(GalacticraftCore.ID, "tile.oxygenCollector", 1),
+                    'D',
+                    GameRegistry.findItemStack(RandomThings.ID, "fertilizedDirt", 1),
+                    'C',
+                    "circuitData",
+                    'F',
+                    ItemList.PlanetaryGasSiphonCasing.get(1),
+                    'P',
+                    ItemList.Pump_HV.get(1));
+        }
         addShapedOredictRecipe(
                 new ItemStack(baseItem, 1, 14),
                 "H8F",
@@ -291,16 +278,18 @@ public class ScriptAmunRa implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(new ItemStack(Blocks.obsidian, 1, 0)).circuit(23)
                 .itemOutputs(new ItemStack(baseBlockRock, 1, 9)).duration(2 * SECONDS + 10 * TICKS).eut(4)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        ItemList.Hull_UV.get(1),
-                        new ItemStack(simpleItem, 32, 3),
-                        ItemList.Field_Generator_UV.get(4),
-                        new Object[] { OrePrefixes.circuit.get(Materials.UV), 2 },
-                        new Object[] { OrePrefixes.gearGt.get("EnrichedNaquadahAlloy"), 1 },
-                        new ItemStack(baseItem, 1, 26))
-                .itemOutputs(new ItemStack(machines3, 1, 1)).duration(20 * SECONDS).eut(TierEU.RECIPE_UV)
-                .addTo(assemblerRecipes);
+        if (GSuiteML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            ItemList.Hull_UV.get(1),
+                            new ItemStack(simpleItem, 32, 3),
+                            ItemList.Field_Generator_UV.get(4),
+                            new Object[] { OrePrefixes.circuit.get(Materials.UV), 2 },
+                            new Object[] { OrePrefixes.gearGt.get("EnrichedNaquadahAlloy"), 1 },
+                            new ItemStack(baseItem, 1, 26))
+                    .itemOutputs(new ItemStack(machines3, 1, 1)).duration(20 * SECONDS).eut(TierEU.RECIPE_UV)
+                    .addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         NHItemList.HeavyDutyPlateTier8.get(2),
@@ -331,15 +320,17 @@ public class ScriptAmunRa implements IScriptLoader {
                 .fluidInputs(new FluidStack(mutatedLivingSolder, 4 * INGOTS))
                 .itemOutputs(new ItemStack(baseItem, 1, 28)).duration(2 * MINUTES).eut(TierEU.RECIPE_UHV)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        new ItemStack(simpleItem, 16, 3),
-                        GameRegistry.findItemStack(GoodGenerator.ID, "radiationProtectionPlate", 4),
-                        new Object[] { OrePrefixes.circuit.get(Materials.UV), 1 },
-                        new Object[] { OrePrefixes.gearGtSmall.get("EnrichedNaquadahAlloy"), 1 },
-                        new ItemStack(baseItem, 1, 26))
-                .itemOutputs(new ItemStack(baseItem, 1, 30)).duration(20 * SECONDS).eut(TierEU.RECIPE_UV)
-                .addTo(assemblerRecipes);
+        if (GSuiteML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            new ItemStack(simpleItem, 16, 3),
+                            GameRegistry.findItemStack(GoodGenerator.ID, "radiationProtectionPlate", 4),
+                            new Object[] { OrePrefixes.circuit.get(Materials.UV), 1 },
+                            new Object[] { OrePrefixes.gearGtSmall.get("EnrichedNaquadahAlloy"), 1 },
+                            new ItemStack(baseItem, 1, 26))
+                    .itemOutputs(new ItemStack(baseItem, 1, 30)).duration(20 * SECONDS).eut(TierEU.RECIPE_UV)
+                    .addTo(assemblerRecipes);
+        }
 
         /************************
          * Implosion Compressor *
@@ -361,25 +352,26 @@ public class ScriptAmunRa implements IScriptLoader {
         /*****************
          * Assembly Line *
          *****************/
-
-        // Mothership Navigation Console
-        TTRecipeAdder.addResearchableAssemblylineRecipe(
-                new ItemStack(GameRegistry.findBlock(GalacticraftMars.ID, "tile.marsMachine"), 1, 8),
-                64000,
-                64,
-                (int) TierEU.RECIPE_UHV,
-                8,
-                new Object[] { ItemList.Hull_MAX.get(1), new ItemStack(baseItem, 32, 28),
-                        NHItemList.IrradiantReinforcedNeutroniumPlate.get(64),
-                        new ItemStack(GameRegistry.findItem(GalaxySpace.ID, "item.RocketControlComputer"), 4, 8),
-                        new Object[] { OrePrefixes.circuit.get(Materials.UHV), 16 }, ItemList.Sensor_UHV.get(8),
-                        ItemList.Emitter_UHV.get(8) },
-                new FluidStack[] { Materials.Infinity.getMolten(100 * INGOTS),
-                        FluidRegistry.getFluidStack("molten.enriched naquadah alloy", 256 * INGOTS),
-                        new FluidStack(mutatedLivingSolder, 64 * INGOTS) },
-                new ItemStack(machines1, 1, 2),
-                4 * MINUTES,
-                (int) TierEU.RECIPE_UEV);
+        if (GSML) {
+            // Mothership Navigation Console
+            TTRecipeAdder.addResearchableAssemblylineRecipe(
+                    new ItemStack(GameRegistry.findBlock(GalacticraftMars.ID, "tile.marsMachine"), 1, 8),
+                    64000,
+                    64,
+                    (int) TierEU.RECIPE_UHV,
+                    8,
+                    new Object[] { ItemList.Hull_MAX.get(1), new ItemStack(baseItem, 32, 28),
+                            NHItemList.IrradiantReinforcedNeutroniumPlate.get(64),
+                            new ItemStack(GameRegistry.findItem(GalaxySpace.ID, "item.RocketControlComputer"), 4, 8),
+                            new Object[] { OrePrefixes.circuit.get(Materials.UHV), 16 }, ItemList.Sensor_UHV.get(8),
+                            ItemList.Emitter_UHV.get(8) },
+                    new FluidStack[] { Materials.Infinity.getMolten(100 * INGOTS),
+                            FluidRegistry.getFluidStack("molten.enriched naquadah alloy", 256 * INGOTS),
+                            new FluidStack(mutatedLivingSolder, 64 * INGOTS) },
+                    new ItemStack(machines1, 1, 2),
+                    4 * MINUTES,
+                    (int) TierEU.RECIPE_UEV);
+        }
         // Rocket Engine Jet
         TTRecipeAdder.addResearchableAssemblylineRecipe(
                 NHItemList.HeavyDutyRocketEngineTier4.get(),
@@ -449,34 +441,35 @@ public class ScriptAmunRa implements IScriptLoader {
                 new ItemStack(msBoosters1, 1, 1),
                 60 * SECONDS,
                 2500000);
-        // Shuttle Schematic
-        TTRecipeAdder.addResearchableAssemblylineRecipe(
-                GameRegistry.findItemStack(GalaxySpace.ID, "item.SchematicTier8", 1),
-                64000,
-                64,
-                (int) TierEU.RECIPE_UHV,
-                8,
-                new Object[] { new Object[] { OrePrefixes.ore.get(Materials.Samarium), 64 },
-                        new Object[] { OrePrefixes.ore.get(Materials.Tartarite), 64 },
-                        new Object[] { OrePrefixes.ore.get(Materials.Cadmium), 64 },
-                        new Object[] { OrePrefixes.ore.get(Materials.Caesium), 64 },
-                        new Object[] { OrePrefixes.ore.get(Materials.Lanthanum), 64 },
-                        new Object[] { OrePrefixes.ore.get(Materials.Cerium), 64 },
-                        new Object[] { OrePrefixes.ingot.get(Materials.Bedrockium), 64 },
-                        new Object[] { OrePrefixes.ingot.get(Materials.DraconiumAwakened), 64 },
-                        new Object[] { OrePrefixes.ingot.get(Materials.CosmicNeutronium), 64 },
-                        new Object[] { OrePrefixes.ingot.get(Materials.InfinityCatalyst), 64 },
-                        new Object[] { OrePrefixes.ingot.get(Materials.Infinity), 64 },
-                        ItemList.Electric_Pump_UHV.get(8), ItemList.Conveyor_Module_UHV.get(8),
-                        ItemList.Robot_Arm_UHV.get(8), ItemList.Field_Generator_UHV.get(8),
-                        ItemList.Sensor_UHV.get(8) },
-                new FluidStack[] { FluidRegistry.getFluidStack("molten.abyssalalloy", 64 * INGOTS),
-                        FluidRegistry.getFluidStack("molten.octiron", 64 * INGOTS),
-                        FluidRegistry.getFluidStack("molten.astraltitanium", 64 * INGOTS) },
-                GameRegistry.findItemStack(GalacticraftAmunRa.ID, "item.schematic", 1),
-                6 * MINUTES,
-                (int) TierEU.RECIPE_UEV);
-
+        if (GSML) {
+            // Shuttle Schematic
+            TTRecipeAdder.addResearchableAssemblylineRecipe(
+                    GameRegistry.findItemStack(GalaxySpace.ID, "item.SchematicTier8", 1),
+                    64000,
+                    64,
+                    (int) TierEU.RECIPE_UHV,
+                    8,
+                    new Object[] { new Object[] { OrePrefixes.ore.get(Materials.Samarium), 64 },
+                            new Object[] { OrePrefixes.ore.get(Materials.Tartarite), 64 },
+                            new Object[] { OrePrefixes.ore.get(Materials.Cadmium), 64 },
+                            new Object[] { OrePrefixes.ore.get(Materials.Caesium), 64 },
+                            new Object[] { OrePrefixes.ore.get(Materials.Lanthanum), 64 },
+                            new Object[] { OrePrefixes.ore.get(Materials.Cerium), 64 },
+                            new Object[] { OrePrefixes.ingot.get(Materials.Bedrockium), 64 },
+                            new Object[] { OrePrefixes.ingot.get(Materials.DraconiumAwakened), 64 },
+                            new Object[] { OrePrefixes.ingot.get(Materials.CosmicNeutronium), 64 },
+                            new Object[] { OrePrefixes.ingot.get(Materials.InfinityCatalyst), 64 },
+                            new Object[] { OrePrefixes.ingot.get(Materials.Infinity), 64 },
+                            ItemList.Electric_Pump_UHV.get(8), ItemList.Conveyor_Module_UHV.get(8),
+                            ItemList.Robot_Arm_UHV.get(8), ItemList.Field_Generator_UHV.get(8),
+                            ItemList.Sensor_UHV.get(8) },
+                    new FluidStack[] { FluidRegistry.getFluidStack("molten.abyssalalloy", 64 * INGOTS),
+                            FluidRegistry.getFluidStack("molten.octiron", 64 * INGOTS),
+                            FluidRegistry.getFluidStack("molten.astraltitanium", 64 * INGOTS) },
+                    GameRegistry.findItemStack(GalacticraftAmunRa.ID, "item.schematic", 1),
+                    6 * MINUTES,
+                    (int) TierEU.RECIPE_UEV);
+        }
         // Lightweight Alloy Ingot
         GTValues.RA.stdBuilder()
                 .itemInputs(

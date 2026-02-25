@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.AppliedEnergistics2;
 import static gregtech.api.enums.Mods.BuildCraftSilicon;
 import static gregtech.api.enums.Mods.ExtraUtilities;
@@ -59,8 +60,7 @@ public class ScriptLogisticPipes implements IScriptLoader {
                 OpenComputers.ID,
                 ProjectRedExpansion.ID,
                 ProjectRedCore.ID,
-                Railcraft.ID,
-                Thaumcraft.ID);
+                Railcraft.ID);
     }
 
     // This should ideally be shared somewhere; pending more cleanup/rewrite.
@@ -352,13 +352,15 @@ public class ScriptLogisticPipes implements IScriptLoader {
                 .eut(TierEU.RECIPE_LV).addTo(formingPressRecipes);
 
         // Thaumic AspectSink module
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(LogisticsPipes.ID, "item.itemModule", 1, 1, missing),
-                        getModItem(BuildCraftSilicon.ID, "redstoneChipset", 1, 5, missing),
-                        getModItem(Thaumcraft.ID, "ItemShard", 2, 6, missing))
-                .itemOutputs(getModItem(LogisticsPipes.ID, "item.itemModule", 1, 30, missing)).duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(formingPressRecipes);
+        if (TML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(LogisticsPipes.ID, "item.itemModule", 1, 1, missing),
+                            getModItem(BuildCraftSilicon.ID, "redstoneChipset", 1, 5, missing),
+                            getModItem(Thaumcraft.ID, "ItemShard", 2, 6, missing))
+                    .itemOutputs(getModItem(LogisticsPipes.ID, "item.itemModule", 1, 30, missing))
+                    .duration(30 * SECONDS).eut(TierEU.RECIPE_LV).addTo(formingPressRecipes);
+        }
 
         // Enchantment Sink module
         GTValues.RA.stdBuilder()

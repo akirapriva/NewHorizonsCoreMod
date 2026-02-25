@@ -1,10 +1,10 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.Backpack;
 import static gregtech.api.enums.Mods.ExtraUtilities;
 import static gregtech.api.enums.Mods.Minecraft;
 import static gregtech.api.enums.Mods.PamsHarvestCraft;
-import static gregtech.api.enums.Mods.TinkerConstruct;
 import static gregtech.api.util.GTModHandler.getModItem;
 
 import java.util.Arrays;
@@ -32,7 +32,7 @@ public class ScriptBackpack implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(Backpack.ID, ExtraUtilities.ID, PamsHarvestCraft.ID, TinkerConstruct.ID);
+        return Arrays.asList(Backpack.ID, ExtraUtilities.ID, PamsHarvestCraft.ID);
     }
 
     @Override
@@ -184,7 +184,7 @@ public class ScriptBackpack implements IScriptLoader {
                 "materialCloth",
                 getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
                 getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                getModItem(TinkerConstruct.ID, "CraftingSlab", 1, 0, missing),
+                getModItem(Minecraft.ID, "crafting_table", 1, 0, missing),
                 getModItem(Backpack.ID, "tannedLeather", 1, 0, missing));
         addShapedRecipe(
                 getModItem(Backpack.ID, "workbenchbackpack", 1, 217, missing),
@@ -195,13 +195,15 @@ public class ScriptBackpack implements IScriptLoader {
                 getModItem(Backpack.ID, "backpack", 1, 100, missing),
                 getModItem(PamsHarvestCraft.ID, "hardenedleatherItem", 1, 0, missing),
                 "ringTitanium",
-                getModItem(TinkerConstruct.ID, "CraftingSlab", 1, 0, missing),
+                getModItem(Minecraft.ID, "crafting_table", 1, 0, missing),
                 "ringTitanium");
 
-        DryingRackRecipes.addDryingRecipe(
-                getModItem(Backpack.ID, "boundLeather", 1, 0, missing),
-                12000,
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing));
+        if (TCML) {
+            DryingRackRecipes.addDryingRecipe(
+                    getModItem(Backpack.ID, "boundLeather", 1, 0, missing),
+                    12000,
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing));
+        }
 
     }
 

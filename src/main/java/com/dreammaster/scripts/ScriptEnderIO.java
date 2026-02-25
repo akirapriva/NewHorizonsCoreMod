@@ -1,11 +1,11 @@
 package com.dreammaster.scripts;
 
 import static bartworks.common.loaders.ItemRegistry.bw_realglas;
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.AppliedEnergistics2;
 import static gregtech.api.enums.Mods.Avaritia;
 import static gregtech.api.enums.Mods.Backpack;
 import static gregtech.api.enums.Mods.BiomesOPlenty;
-import static gregtech.api.enums.Mods.Botania;
 import static gregtech.api.enums.Mods.BuildCraftFactory;
 import static gregtech.api.enums.Mods.DraconicEvolution;
 import static gregtech.api.enums.Mods.EnderIO;
@@ -22,7 +22,6 @@ import static gregtech.api.enums.Mods.ProjectRedIllumination;
 import static gregtech.api.enums.Mods.ProjectRedIntegration;
 import static gregtech.api.enums.Mods.RandomThings;
 import static gregtech.api.enums.Mods.Thaumcraft;
-import static gregtech.api.enums.Mods.ThaumicExploration;
 import static gregtech.api.enums.Mods.Witchery;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.autoclaveRecipes;
@@ -69,21 +68,16 @@ public class ScriptEnderIO implements IScriptLoader {
                 AppliedEnergistics2.ID,
                 Avaritia.ID,
                 Backpack.ID,
-                Botania.ID,
                 BuildCraftFactory.ID,
-                DraconicEvolution.ID,
                 EnderIO.ID,
                 ExtraUtilities.ID,
                 FloodLights.ID,
                 GraviSuite.ID,
                 HardcoreEnderExpansion.ID,
                 IndustrialCraft2.ID,
-                MagicBees.ID,
                 OpenBlocks.ID,
                 ProjectRedIllumination.ID,
-                ProjectRedIntegration.ID,
-                Thaumcraft.ID,
-                ThaumicExploration.ID);
+                ProjectRedIntegration.ID);
     }
 
     @Override
@@ -137,41 +131,43 @@ public class ScriptEnderIO implements IScriptLoader {
                 .fluidInputs(Materials.EnergeticAlloy.getMolten(144L)).duration(10 * SECONDS).eut(TierEU.RECIPE_HV)
                 .addTo(assemblerRecipes);
 
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                createItemStack(
-                        EnderIO.ID,
-                        "blockCapBank",
-                        1,
-                        0,
-                        "{type:\"CREATIVE\",storedEnergyRF:2500000}",
-                        missing),
-                "aaaaaaaaa",
-                "aabbcbbaa",
-                "abadddaba",
-                "abdaeadba",
-                "acdefedca",
-                "abdaeadba",
-                "abadddaba",
-                "aabbcbbaa",
-                "aaaaaaaaa",
-                'a',
-                createItemStack(
-                        EnderIO.ID,
-                        "blockCapBank",
-                        1,
-                        3,
-                        "{type:\"VIBRANT\",storedEnergyRF:25000000}",
-                        missing),
-                'b',
-                getModItem(EnderIO.ID, "itemMaterial", 1, 6, missing),
-                'c',
-                "plateVibrantAlloy",
-                'd',
-                "plateNeutronium",
-                'e',
-                createItemStack(DraconicEvolution.ID, "draconiumFluxCapacitor", 1, 0, "{Energy:80000000}", missing),
-                'f',
-                getModItem(DraconicEvolution.ID, "chaoticCore", 1, 0, missing));
+        if (DEML) {
+            ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                    createItemStack(
+                            EnderIO.ID,
+                            "blockCapBank",
+                            1,
+                            0,
+                            "{type:\"CREATIVE\",storedEnergyRF:2500000}",
+                            missing),
+                    "aaaaaaaaa",
+                    "aabbcbbaa",
+                    "abadddaba",
+                    "abdaeadba",
+                    "acdefedca",
+                    "abdaeadba",
+                    "abadddaba",
+                    "aabbcbbaa",
+                    "aaaaaaaaa",
+                    'a',
+                    createItemStack(
+                            EnderIO.ID,
+                            "blockCapBank",
+                            1,
+                            3,
+                            "{type:\"VIBRANT\",storedEnergyRF:25000000}",
+                            missing),
+                    'b',
+                    getModItem(EnderIO.ID, "itemMaterial", 1, 6, missing),
+                    'c',
+                    "plateVibrantAlloy",
+                    'd',
+                    "plateNeutronium",
+                    'e',
+                    createItemStack(DraconicEvolution.ID, "draconiumFluxCapacitor", 1, 0, "{Energy:80000000}", missing),
+                    'f',
+                    getModItem(DraconicEvolution.ID, "chaoticCore", 1, 0, missing));
+        }
         ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
                 getModItem(EnderIO.ID, "blockTelePad", 9, 0, missing),
                 "aaaaaaaaa",
@@ -1755,13 +1751,15 @@ public class ScriptEnderIO implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(EnderIO.ID, "itemMaterial", 1, 13, missing))
                 .itemOutputs(getModItem(EnderIO.ID, "itemMaterial", 1, 17, missing)).duration(15 * SECONDS)
                 .eut(TierEU.RECIPE_MV).addTo(maceratorRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTModHandler.getModItem(HardcoreEnderExpansion.ID, "enderman_head", 1L, 0),
-                        GTModHandler.getModItem(MagicBees.ID, "wax", 4L, 1))
-                .itemOutputs(getModItem(EnderIO.ID, "blockEndermanSkull", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("endergoo", 1000)).duration(15 * SECONDS)
-                .eut(TierEU.RECIPE_HV / 2).addTo(UniversalChemical);
+        if (MBML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTModHandler.getModItem(HardcoreEnderExpansion.ID, "enderman_head", 1L, 0),
+                            GTModHandler.getModItem(MagicBees.ID, "wax", 4L, 1))
+                    .itemOutputs(getModItem(EnderIO.ID, "blockEndermanSkull", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("endergoo", 1000)).duration(15 * SECONDS)
+                    .eut(TierEU.RECIPE_HV / 2).addTo(UniversalChemical);
+        }
 
         // Vibrant Capacitor Bank
         ItemStack vibrantCapacitor = createItemStack(
@@ -1839,24 +1837,25 @@ public class ScriptEnderIO implements IScriptLoader {
                 .addTo(autoclaveRecipes);
 
         // Soul Infused Medium
-
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Soularium, 1),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Emerald, 1),
-                        getModItem(EnderIO.ID, "blockEndermanSkull", 1, 0, missing),
-                        getModItem(Thaumcraft.ID, "ItemZombieBrain", 1, 0, missing),
-                        getModItem(Witchery.ID, "witchhand", 1, 0, missing))
-                .itemOutputs(getModItem(BiomesOPlenty.ID, "misc", 4, 3, missing))
-                .fluidInputs(
-                        FluidRegistry.getFluidStack("xpjuice", 1728),
-                        FluidRegistry.getFluidStack("hell_blood", 100),
-                        FluidRegistry.getFluidStack("putrescine", 250),
-                        FluidRegistry.getFluidStack("binnie.growthmedium", 100),
-                        FluidRegistry.getFluidStack("vapor_of_levity", 500),
-                        FluidRegistry.getFluidStack("cadaverine", 250))
-                .fluidOutputs(Materials.SoulInfusedMedium.getFluid(2880)).duration(30 * SECONDS).eut(TierEU.RECIPE_EV)
-                .addTo(multiblockChemicalReactorRecipes);
+        if (TML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Soularium, 1),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Emerald, 1),
+                            getModItem(EnderIO.ID, "blockEndermanSkull", 1, 0, missing),
+                            getModItem(Thaumcraft.ID, "ItemZombieBrain", 1, 0, missing),
+                            getModItem(Witchery.ID, "witchhand", 1, 0, missing))
+                    .itemOutputs(getModItem(BiomesOPlenty.ID, "misc", 4, 3, missing))
+                    .fluidInputs(
+                            FluidRegistry.getFluidStack("xpjuice", 1728),
+                            FluidRegistry.getFluidStack("hell_blood", 100),
+                            FluidRegistry.getFluidStack("putrescine", 250),
+                            FluidRegistry.getFluidStack("binnie.growthmedium", 100),
+                            FluidRegistry.getFluidStack("vapor_of_levity", 500),
+                            FluidRegistry.getFluidStack("cadaverine", 250))
+                    .fluidOutputs(Materials.SoulInfusedMedium.getFluid(2880)).duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_EV).addTo(multiblockChemicalReactorRecipes);
+        }
 
         GTValues.RA.stdBuilder()
                 .itemInputs(

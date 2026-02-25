@@ -2,7 +2,6 @@ package com.dreammaster.scripts;
 
 import static gregtech.api.enums.Mods.ArchitectureCraft;
 import static gregtech.api.enums.Mods.Minecraft;
-import static gregtech.api.enums.Mods.TinkerConstruct;
 import static gregtech.api.util.GTModHandler.getModItem;
 
 import java.util.Arrays;
@@ -21,7 +20,7 @@ public class ScriptArchitectureCraft implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(ArchitectureCraft.ID, TinkerConstruct.ID);
+        return Arrays.asList(ArchitectureCraft.ID);
     }
 
     @Override
@@ -31,9 +30,9 @@ public class ScriptArchitectureCraft implements IScriptLoader {
                 "screwSteel",
                 getModItem(Minecraft.ID, "heavy_weighted_pressure_plate", 1),
                 "screwSteel",
-                getModItem(TinkerConstruct.ID, "trap.barricade.oak", 1),
+                getModItem(Minecraft.ID, "trapdoor", 1),
                 getModItem(ArchitectureCraft.ID, "sawblade", 1),
-                getModItem(TinkerConstruct.ID, "trap.barricade.oak", 1),
+                getModItem(Minecraft.ID, "trapdoor", 1),
                 "craftingToolScrewdriver",
                 getModItem(ArchitectureCraft.ID, "largePulley", 1),
                 "craftingToolHardHammer");

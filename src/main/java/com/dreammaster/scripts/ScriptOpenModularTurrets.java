@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.EnderIO;
 import static gregtech.api.enums.Mods.EnderStorage;
 import static gregtech.api.enums.Mods.IndustrialCraft2;
@@ -42,8 +43,7 @@ public class ScriptOpenModularTurrets implements IScriptLoader {
                 IndustrialCraft2.ID,
                 IronChests.ID,
                 OpenComputers.ID,
-                OpenModularTurrets.ID,
-                Thaumcraft.ID);
+                OpenModularTurrets.ID);
     }
 
     @Override
@@ -621,12 +621,14 @@ public class ScriptOpenModularTurrets implements IScriptLoader {
                         getModItem(EnderStorage.ID, "enderChest", 1, 0, missing))
                 .itemOutputs(getModItem(OpenModularTurrets.ID, "recyclerAddon", 1, 0, missing)).duration(5 * SECONDS)
                 .eut(TierEU.RECIPE_MV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.ElectricalSteel, 1L),
-                        getModItem(Thaumcraft.ID, "blockTube", 4, 0, missing))
-                .itemOutputs(getModItem(OpenModularTurrets.ID, "potentiaAddon", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_MV).addTo(assemblerRecipes);
+        if (TML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.ElectricalSteel, 1L),
+                            getModItem(Thaumcraft.ID, "blockTube", 4, 0, missing))
+                    .itemOutputs(getModItem(OpenModularTurrets.ID, "potentiaAddon", 1, 0, missing))
+                    .duration(5 * SECONDS).eut(TierEU.RECIPE_MV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.plate, Materials.ElectricalSteel, 1L),

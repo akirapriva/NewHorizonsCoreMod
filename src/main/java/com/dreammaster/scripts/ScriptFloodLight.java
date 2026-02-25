@@ -2,7 +2,6 @@ package com.dreammaster.scripts;
 
 import static gregtech.api.enums.Mods.FloodLights;
 import static gregtech.api.enums.Mods.Minecraft;
-import static gregtech.api.enums.Mods.Thaumcraft;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
@@ -28,7 +27,7 @@ public class ScriptFloodLight implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(Mods.FloodLights.ID, Thaumcraft.ID);
+        return Arrays.asList(Mods.FloodLights.ID);
     }
 
     @Override
@@ -87,7 +86,7 @@ public class ScriptFloodLight implements IScriptLoader {
         addShapedRecipe(
                 getModItem(FloodLights.ID, "growLight", 1, 0, missing),
                 getModItem(FloodLights.ID, "electricIncandescentLightBulb", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "blockMetalDevice", 1, 8, missing),
+                "plateIron",
                 getModItem(FloodLights.ID, "electricIncandescentLightBulb", 1, 0, missing),
                 "circuitAdvanced",
                 getModItem(FloodLights.ID, "electricIncandescentLightBulb", 1, 0, missing),

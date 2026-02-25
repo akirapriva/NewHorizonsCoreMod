@@ -1,18 +1,7 @@
 package com.dreammaster.scripts;
 
-import static gregtech.api.enums.Mods.AppliedEnergistics2;
-import static gregtech.api.enums.Mods.Avaritia;
-import static gregtech.api.enums.Mods.Computronics;
-import static gregtech.api.enums.Mods.DraconicEvolution;
-import static gregtech.api.enums.Mods.EnderIO;
-import static gregtech.api.enums.Mods.EternalSingularity;
-import static gregtech.api.enums.Mods.ExtraUtilities;
-import static gregtech.api.enums.Mods.IndustrialCraft2;
-import static gregtech.api.enums.Mods.IronChests;
-import static gregtech.api.enums.Mods.Minecraft;
-import static gregtech.api.enums.Mods.OpenComputers;
-import static gregtech.api.enums.Mods.Thaumcraft;
-import static gregtech.api.enums.Mods.TinkerConstruct;
+import static com.dreammaster.scripts.BooleanModLoaded.*;
+import static gregtech.api.enums.Mods.*;
 import static gregtech.api.recipe.RecipeMaps.alloySmelterRecipes;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.blastFurnaceRecipes;
@@ -61,19 +50,7 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                AppliedEnergistics2.ID,
-                Avaritia.ID,
-                Computronics.ID,
-                DraconicEvolution.ID,
-                EnderIO.ID,
-                EternalSingularity.ID,
-                ExtraUtilities.ID,
-                IndustrialCraft2.ID,
-                IronChests.ID,
-                OpenComputers.ID,
-                Thaumcraft.ID,
-                TinkerConstruct.ID);
+        return Arrays.asList(AppliedEnergistics2.ID);
     }
 
     @Override
@@ -116,27 +93,30 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
         }
         // Preconfigured p2ps
 
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(IndustrialCraft2.ID, "itemFluidCell", 1),
-                        getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 460, missing))
-                .itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 463, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_MV).addTo(circuitAssemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(OpenComputers.ID, "cable", 1),
-                        getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 460, missing))
-                .itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 468, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_MV).addTo(circuitAssemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(EnderIO.ID, "itemPowerConduit", 1),
-                        getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 460, missing))
-                .itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 466, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_MV).addTo(circuitAssemblerRecipes);
-
+        if (ICML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(IndustrialCraft2.ID, "itemFluidCell", 1),
+                            getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 460, missing))
+                    .itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 463, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_MV).addTo(circuitAssemblerRecipes);
+        }
+        if (OCML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(OpenComputers.ID, "cable", 1),
+                            getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 460, missing))
+                    .itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 468, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_MV).addTo(circuitAssemblerRecipes);
+        }
+        if (EIOML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(EnderIO.ID, "itemPowerConduit", 1),
+                            getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 460, missing))
+                    .itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 466, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_MV).addTo(circuitAssemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.RedstoneAlloy, 1L),
@@ -158,20 +138,22 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
                 .itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 467, missing))
                 .duration(10 * SECONDS).eut(TierEU.RECIPE_MV).addTo(circuitAssemblerRecipes);
 
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Computronics.ID, "computronics.ironNoteBlock", 1),
-                        getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 460, missing))
-                .itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 472, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_MV).addTo(circuitAssemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraUtilities.ID, "chestMini", 1),
-                        getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 460, missing))
-                .itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 462, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_MV).addTo(circuitAssemblerRecipes);
-
+        if (CML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Computronics.ID, "computronics.ironNoteBlock", 1),
+                            getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 460, missing))
+                    .itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 472, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_MV).addTo(circuitAssemblerRecipes);
+        }
+        if (XUML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraUtilities.ID, "chestMini", 1),
+                            getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 460, missing))
+                    .itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 16, 462, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_MV).addTo(circuitAssemblerRecipes);
+        }
         // Hyper-Acceleration Card
         addShapelessRecipe(
                 SuperSpeedCard,
@@ -191,25 +173,26 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
                 .itemOutputs(CoCraftingUnit16x).duration(5 * SECONDS).eut(TierEU.RECIPE_LuV).addTo(assemblerRecipes);
 
         // Advanced Storage Housing
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GLASS_PANE,
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.CertusQuartz, 1L),
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Chrome, 3L),
-                        GTOreDictUnificator.get(OrePrefixes.screw, Materials.CertusQuartz, 2L))
-                .circuit(3).itemOutputs(AE2_ADVANCED_HOUSING).duration(5 * SECONDS).eut(TierEU.RECIPE_LV / 2)
-                .addTo(assemblerRecipes);
-        GTModHandler.addCraftingRecipe(
-                AE2_ADVANCED_HOUSING,
-                new Object[] { "hPS", "CGC", "SCd", 'P', CERTUS_PLATE, 'S',
-                        GTOreDictUnificator.get(OrePrefixes.screw, Materials.CertusQuartz, 1L), 'C',
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Chrome, 1L), 'G', GLASS_PANE });
-        GTModHandler.addCraftingRecipe(
-                AE2_ADVANCED_HOUSING,
-                new Object[] { "dPS", "CGC", "SCh", 'P', CERTUS_PLATE, 'S',
-                        GTOreDictUnificator.get(OrePrefixes.screw, Materials.CertusQuartz, 1L), 'C',
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Chrome, 1L), 'G', GLASS_PANE });
-
+        if (TCML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GLASS_PANE,
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.CertusQuartz, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Chrome, 3L),
+                            GTOreDictUnificator.get(OrePrefixes.screw, Materials.CertusQuartz, 2L))
+                    .circuit(3).itemOutputs(AE2_ADVANCED_HOUSING).duration(5 * SECONDS).eut(TierEU.RECIPE_LV / 2)
+                    .addTo(assemblerRecipes);
+            GTModHandler.addCraftingRecipe(
+                    AE2_ADVANCED_HOUSING,
+                    new Object[] { "hPS", "CGC", "SCd", 'P', CERTUS_PLATE, 'S',
+                            GTOreDictUnificator.get(OrePrefixes.screw, Materials.CertusQuartz, 1L), 'C',
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Chrome, 1L), 'G', GLASS_PANE });
+            GTModHandler.addCraftingRecipe(
+                    AE2_ADVANCED_HOUSING,
+                    new Object[] { "dPS", "CGC", "SCh", 'P', CERTUS_PLATE, 'S',
+                            GTOreDictUnificator.get(OrePrefixes.screw, Materials.CertusQuartz, 1L), 'C',
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Chrome, 1L), 'G', GLASS_PANE });
+        }
         // Advanced Storage Cells
         final ItemStack[] components = new ItemStack[] {
                 getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 57), // 256k
@@ -546,38 +529,40 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
                 AE2_ADVANCED_HOUSING);
 
         // ME Singularity crafting storage
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                getModItem(AppliedEnergistics2.ID, "tile.BlockSingularityCraftingStorage", 1),
-                "abcfhfcba",
-                "bcdfhfdcb",
-                "cdefhfedc",
-                "fffgigfff",
-                "hhhijihhh",
-                "fffgigfff",
-                "cdefhfedc",
-                "bcdfhfdcb",
-                "abcfhfcba",
-                'a',
-                getModItem(AppliedEnergistics2.ID, "tile.BlockCreativeEnergyCell", 1),
-                'b',
-                NHItemList.PikoCircuit.get(),
-                'c',
-                ItemList.Field_Generator_UIV.get(1L),
-                'd',
-                getModItem(DraconicEvolution.ID, "reactorStabilizer", 1),
-                'e',
-                GTOreDictUnificator.get(OrePrefixes.nanite, Materials.TranscendentMetal, 1L),
-                'f',
-                GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.Infinity, 1L),
-                'g',
-                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.SpaceTime, 1L),
-                'h',
-                GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SpaceTime, 1L),
-                'i',
-                getModItem(AppliedEnergistics2.ID, "tile.BlockCraftingUnit", 1),
-                'j',
-                getModItem(AppliedEnergistics2.ID, "item.ItemExtremeStorageCell.Singularity", 1));
+        if (DEML) {
+            ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                    getModItem(AppliedEnergistics2.ID, "tile.BlockSingularityCraftingStorage", 1),
+                    "abcfhfcba",
+                    "bcdfhfdcb",
+                    "cdefhfedc",
+                    "fffgigfff",
+                    "hhhijihhh",
+                    "fffgigfff",
+                    "cdefhfedc",
+                    "bcdfhfdcb",
+                    "abcfhfcba",
+                    'a',
+                    getModItem(AppliedEnergistics2.ID, "tile.BlockCreativeEnergyCell", 1),
+                    'b',
+                    NHItemList.PikoCircuit.get(),
+                    'c',
+                    ItemList.Field_Generator_UIV.get(1L),
+                    'd',
+                    getModItem(DraconicEvolution.ID, "reactorStabilizer", 1),
+                    'e',
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.TranscendentMetal, 1L),
+                    'f',
+                    GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.Infinity, 1L),
+                    'g',
+                    GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.SpaceTime, 1L),
+                    'h',
+                    GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SpaceTime, 1L),
+                    'i',
+                    getModItem(AppliedEnergistics2.ID, "tile.BlockCraftingUnit", 1),
+                    'j',
+                    getModItem(AppliedEnergistics2.ID, "item.ItemExtremeStorageCell.Singularity", 1));
 
+        }
         // ME Void Storage
         addShapedRecipe(
                 getModItem(AppliedEnergistics2.ID, "item.ItemVoidStorageCell", 1),
@@ -591,27 +576,29 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
                 "plateTungsten",
                 "craftingToolScrewdriver");
 
-        AvaritiaHelper.removeExtremeCraftingRecipe(
-                getModItem(AppliedEnergistics2.ID, "tile.BlockCreativeEnergyCell", 1, 0, missing)); // stays
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                getModItem(AppliedEnergistics2.ID, "tile.BlockCreativeEnergyCell", 1, 0, missing),
-                "aaaaaaaaa",
-                "abbbcbbba",
-                "abbbcbbba",
-                "abbbcbbba",
-                "acccdccca",
-                "abbbcbbba",
-                "abbbcbbba",
-                "abbbcbbba",
-                "aaaaaaaaa",
-                'a',
-                "ingotInfinity",
-                'b',
-                getModItem(AppliedEnergistics2.ID, "tile.BlockDenseEnergyCell", 1, 0, missing),
-                'c',
-                NHItemList.EngineeringProcessorItemAdvEmeraldCore.get(),
-                'd',
-                "blockCosmicNeutronium");
+        if (AML) {
+            AvaritiaHelper.removeExtremeCraftingRecipe(
+                    getModItem(AppliedEnergistics2.ID, "tile.BlockCreativeEnergyCell", 1, 0, missing)); // stays
+            ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                    getModItem(AppliedEnergistics2.ID, "tile.BlockCreativeEnergyCell", 1, 0, missing),
+                    "aaaaaaaaa",
+                    "abbbcbbba",
+                    "abbbcbbba",
+                    "abbbcbbba",
+                    "acccdccca",
+                    "abbbcbbba",
+                    "abbbcbbba",
+                    "abbbcbbba",
+                    "aaaaaaaaa",
+                    'a',
+                    "ingotInfinity",
+                    'b',
+                    getModItem(AppliedEnergistics2.ID, "tile.BlockDenseEnergyCell", 1, 0, missing),
+                    'c',
+                    NHItemList.EngineeringProcessorItemAdvEmeraldCore.get(),
+                    'd',
+                    "blockCosmicNeutronium");
+        }
 
         addShapedRecipe(
                 getModItem(AppliedEnergistics2.ID, "tile.BlockController", 1, 0, missing),
@@ -646,17 +633,19 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
                 getModItem(AppliedEnergistics2.ID, "tile.BlockEnergyCell", 1, 0, missing),
                 ItemList.Battery_Buffer_4by4_EV.get(1L),
                 getModItem(AppliedEnergistics2.ID, "tile.BlockEnergyCell", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(AppliedEnergistics2.ID, "tile.BlockChest", 1, 0, missing),
-                "plateStainlessSteel",
-                "circuitGood",
-                "plateStainlessSteel",
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 16, missing),
-                getModItem(IronChests.ID, "BlockIronChest", 1, 4, missing),
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 16, missing),
-                "plateStainlessSteel",
-                "circuitGood",
-                "plateStainlessSteel");
+        if (IML) {
+            addShapedRecipe(
+                    getModItem(AppliedEnergistics2.ID, "tile.BlockChest", 1, 0, missing),
+                    "plateStainlessSteel",
+                    "circuitGood",
+                    "plateStainlessSteel",
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 16, missing),
+                    getModItem(IronChests.ID, "BlockIronChest", 1, 4, missing),
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 16, missing),
+                    "plateStainlessSteel",
+                    "circuitGood",
+                    "plateStainlessSteel");
+        }
         addShapedRecipe(
                 getModItem(AppliedEnergistics2.ID, "tile.BlockDrive", 1, 0, missing),
                 "plateTitanium",
@@ -1020,28 +1009,30 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
                 GTOreDictUnificator.get(OrePrefixes.plate, Materials.CertusQuartz, 1L),
                 "circuitAdvanced",
                 GTOreDictUnificator.get(OrePrefixes.plate, Materials.CertusQuartz, 1L));
-        addShapedRecipe(
-                getModItem(AppliedEnergistics2.ID, "tile.BlockSkyCompass", 1, 0, missing),
-                "craftingToolScrewdriver",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "screwCertusQuartz",
-                "plateSteel",
-                "stickSteelMagnetic",
-                "plateSteel",
-                "screwCertusQuartz",
-                "plateSteel",
-                "craftingToolHardHammer");
-        addShapedRecipe(
-                getModItem(AppliedEnergistics2.ID, "tile.BlockSkyCompass", 1, 0, missing),
-                "craftingToolHardHammer",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "screwCertusQuartz",
-                "plateSteel",
-                "stickSteelMagnetic",
-                "plateSteel",
-                "screwCertusQuartz",
-                "plateSteel",
-                "craftingToolScrewdriver");
+        if (TCML) {
+            addShapedRecipe(
+                    getModItem(AppliedEnergistics2.ID, "tile.BlockSkyCompass", 1, 0, missing),
+                    "craftingToolScrewdriver",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "screwCertusQuartz",
+                    "plateSteel",
+                    "stickSteelMagnetic",
+                    "plateSteel",
+                    "screwCertusQuartz",
+                    "plateSteel",
+                    "craftingToolHardHammer");
+            addShapedRecipe(
+                    getModItem(AppliedEnergistics2.ID, "tile.BlockSkyCompass", 1, 0, missing),
+                    "craftingToolHardHammer",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "screwCertusQuartz",
+                    "plateSteel",
+                    "stickSteelMagnetic",
+                    "plateSteel",
+                    "screwCertusQuartz",
+                    "plateSteel",
+                    "craftingToolScrewdriver");
+        }
         addShapedRecipe(
                 getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 180, missing),
                 "craftingToolScrewdriver",
@@ -1075,17 +1066,19 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
                 "stickNetherQuartz",
                 "screwQuartzite",
                 "stickNetherQuartz");
-        addShapedRecipe(
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 360, missing),
-                "craftingToolScrewdriver",
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 380, missing),
-                ToolDictNames.craftingToolSoftMallet.name(),
-                "screwCertusQuartz",
-                getModItem(TinkerConstruct.ID, "CraftingSlab", 1, 0, missing),
-                "screwCertusQuartz",
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.NetherQuartz, 1L),
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 24, missing),
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.NetherQuartz, 1L));
+        if (TML) {
+            addShapedRecipe(
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 360, missing),
+                    "craftingToolScrewdriver",
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 380, missing),
+                    ToolDictNames.craftingToolSoftMallet.name(),
+                    "screwCertusQuartz",
+                    getModItem(TinkerConstruct.ID, "CraftingSlab", 1, 0, missing),
+                    "screwCertusQuartz",
+                    GTOreDictUnificator.get(OrePrefixes.plate, Materials.NetherQuartz, 1L),
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 24, missing),
+                    GTOreDictUnificator.get(OrePrefixes.plate, Materials.NetherQuartz, 1L));
+        }
         addShapedRecipe(
                 getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 500, missing),
                 "craftingToolScrewdriver",
@@ -1210,12 +1203,14 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
                 getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 22, missing),
                 getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 23, missing));
         // inverter card
-        addShapelessRecipe(
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 31, missing),
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 28, missing),
-                getModItem(IndustrialCraft2.ID, "upgradeModule", 1, 5, missing),
-                getModItem(IndustrialCraft2.ID, "upgradeModule", 1, 5, missing),
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 23, missing));
+        if (ICML) {
+            addShapelessRecipe(
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 31, missing),
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 28, missing),
+                    getModItem(IndustrialCraft2.ID, "upgradeModule", 1, 5, missing),
+                    getModItem(IndustrialCraft2.ID, "upgradeModule", 1, 5, missing),
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 23, missing));
+        }
         // acceleration card
         addShapelessRecipe(
                 getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 30, missing),
@@ -1441,17 +1436,19 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
                 null,
                 null);
         // charged staff
-        addShapedRecipe(
-                getModItem(AppliedEnergistics2.ID, "item.ToolChargedStaff", 1, 0, missing),
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 1, missing),
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 1, missing),
-                null,
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 1, missing),
-                getModItem(Thaumcraft.ID, "FocusShock", 1, 0, missing),
-                null,
-                null,
-                null,
-                "stickThaumium");
+        if (TML) {
+            addShapedRecipe(
+                    getModItem(AppliedEnergistics2.ID, "item.ToolChargedStaff", 1, 0, missing),
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 1, missing),
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 1, missing),
+                    null,
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 1, missing),
+                    getModItem(Thaumcraft.ID, "FocusShock", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    "stickThaumium");
+        }
         // entropy manipulator
         addShapedRecipe(
                 getModItem(AppliedEnergistics2.ID, "item.ToolEntropyManipulator", 1, 0, missing),
@@ -1739,28 +1736,30 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
                 getModItem(AppliedEnergistics2.ID, "item.ItemSpatialStorageCell.128Cubed", 1, 0, missing),
                 getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 39, missing),
                 getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 34, missing));
-        addShapedRecipe(
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 39, missing),
-                "craftingToolHardHammer",
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.CertusQuartz, 1L),
-                "screwCertusQuartz",
-                "plateStainlessSteel",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "plateStainlessSteel",
-                "screwCertusQuartz",
-                "plateAluminium",
-                "craftingToolScrewdriver");
-        addShapedRecipe(
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 39, missing),
-                "craftingToolScrewdriver",
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.CertusQuartz, 1L),
-                "screwCertusQuartz",
-                "plateStainlessSteel",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "plateStainlessSteel",
-                "screwCertusQuartz",
-                "plateAluminium",
-                "craftingToolHardHammer");
+        if (TML) {
+            addShapedRecipe(
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 39, missing),
+                    "craftingToolHardHammer",
+                    GTOreDictUnificator.get(OrePrefixes.plate, Materials.CertusQuartz, 1L),
+                    "screwCertusQuartz",
+                    "plateStainlessSteel",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "plateStainlessSteel",
+                    "screwCertusQuartz",
+                    "plateAluminium",
+                    "craftingToolScrewdriver");
+            addShapedRecipe(
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 39, missing),
+                    "craftingToolScrewdriver",
+                    GTOreDictUnificator.get(OrePrefixes.plate, Materials.CertusQuartz, 1L),
+                    "screwCertusQuartz",
+                    "plateStainlessSteel",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "plateStainlessSteel",
+                    "screwCertusQuartz",
+                    "plateAluminium",
+                    "craftingToolHardHammer");
+        }
         addShapedRecipe(
                 getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 35, missing),
                 "circuitPrimitive",
@@ -1849,17 +1848,19 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
                 "craftingToolScrewdriver",
                 getModItem(AppliedEnergistics2.ID, "tile.BlockEnergyCell", 1, 0, missing),
                 "craftingToolWrench");
-        addShapedRecipe(
-                getModItem(AppliedEnergistics2.ID, "tile.BlockInscriber", 1, 0, missing),
-                "plateTitanium",
-                "gemFluix",
-                "plateTitanium",
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
-                ItemList.Machine_EV_Press.get(1L),
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
-                "plateTitanium",
-                "gemFluix",
-                "plateTitanium");
+        if (ICML) {
+            addShapedRecipe(
+                    getModItem(AppliedEnergistics2.ID, "tile.BlockInscriber", 1, 0, missing),
+                    "plateTitanium",
+                    "gemFluix",
+                    "plateTitanium",
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
+                    ItemList.Machine_EV_Press.get(1L),
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
+                    "plateTitanium",
+                    "gemFluix",
+                    "plateTitanium");
+        }
         addShapedRecipe(
                 getModItem(AppliedEnergistics2.ID, "item.ToolCertusQuartzCuttingKnife", 1, 0, missing),
                 "craftingToolHardHammer",
@@ -1940,12 +1941,14 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
                         getModItem(Minecraft.ID, "glowstone_dust", 8, 0, missing))
                 .itemOutputs(getModItem(AppliedEnergistics2.ID, "tile.BlockQuartzLamp", 1, 0, missing))
                 .duration(10 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraUtilities.ID, "decorativeBlock2", 1, 7, missing),
-                        getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 2, 8, missing))
-                .itemOutputs(getModItem(AppliedEnergistics2.ID, "tile.BlockQuartzLamp", 1, 0, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (XUML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraUtilities.ID, "decorativeBlock2", 1, 7, missing),
+                            getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 2, 8, missing))
+                    .itemOutputs(getModItem(AppliedEnergistics2.ID, "tile.BlockQuartzLamp", 1, 0, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(AppliedEnergistics2.ID, "tile.BlockSkyStone", 8, 0, missing),
@@ -2079,15 +2082,17 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
                 .itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 380, missing))
                 .duration(20 * SECONDS).eut(TierEU.RECIPE_MV).addTo(assemblerRecipes);
         // ME Crafting Terminal
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 380, missing),
-                        GTOreDictUnificator.get(OrePrefixes.screw, Materials.CertusQuartz, 2),
-                        getModItem(TinkerConstruct.ID, "CraftingSlab", 1, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.NetherQuartz, 2),
-                        getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 24, missing))
-                .itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 360, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_MV).addTo(assemblerRecipes);
+        if (TML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 380, missing),
+                            GTOreDictUnificator.get(OrePrefixes.screw, Materials.CertusQuartz, 2),
+                            getModItem(TinkerConstruct.ID, "CraftingSlab", 1, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.NetherQuartz, 2),
+                            getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 24, missing))
+                    .itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 360, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_MV).addTo(assemblerRecipes);
+        }
         // ME Processing Pattern Terminal
         GTValues.RA.stdBuilder()
                 .itemInputs(
@@ -2205,17 +2210,20 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.CertusQuartz, 4))
                 .itemOutputs(getModItem(AppliedEnergistics2.ID, "tile.BlockQuartzGlass", 4, 0, missing))
                 .duration(10 * SECONDS).eut(TierEU.RECIPE_MV).specialValue(1000).addTo(blastFurnaceRecipes);
+
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Minecraft.ID, "glass", 4, 0, missing),
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.CertusQuartz, 4))
                 .itemOutputs(getModItem(AppliedEnergistics2.ID, "tile.BlockQuartzGlass", 4, 0, missing))
                 .duration(20 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(alloySmelterRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(IndustrialCraft2.ID, "blockITNT", 1, 0, missing))
-                .itemOutputs(
-                        getModItem(AppliedEnergistics2.ID, "tile.BlockTinyTNT", 1, 0, missing),
-                        getModItem(AppliedEnergistics2.ID, "tile.BlockTinyTNT", 1, 0, missing))
-                .duration(30 * SECONDS).eut(5).addTo(centrifugeRecipes);
+        if (ICML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(IndustrialCraft2.ID, "blockITNT", 1, 0, missing))
+                    .itemOutputs(
+                            getModItem(AppliedEnergistics2.ID, "tile.BlockTinyTNT", 1, 0, missing),
+                            getModItem(AppliedEnergistics2.ID, "tile.BlockTinyTNT", 1, 0, missing))
+                    .duration(30 * SECONDS).eut(5).addTo(centrifugeRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.CertusQuartz, 1),

@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.Backpack;
 import static gregtech.api.enums.Mods.BiblioCraft;
 import static gregtech.api.enums.Mods.BuildCraftCore;
@@ -14,7 +15,6 @@ import static gregtech.api.enums.Mods.ProjectBlue;
 import static gregtech.api.enums.Mods.ProjectRedExpansion;
 import static gregtech.api.enums.Mods.Railcraft;
 import static gregtech.api.enums.Mods.RandomThings;
-import static gregtech.api.enums.Mods.Thaumcraft;
 import static gregtech.api.enums.Mods.TinkerConstruct;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.chemicalBathRecipes;
@@ -68,9 +68,7 @@ public class ScriptOpenBlocks implements IScriptLoader {
                 ProjectBlue.ID,
                 ProjectRedExpansion.ID,
                 Railcraft.ID,
-                RandomThings.ID,
-                Thaumcraft.ID,
-                TinkerConstruct.ID);
+                RandomThings.ID);
     }
 
     @Override
@@ -268,17 +266,19 @@ public class ScriptOpenBlocks implements IScriptLoader {
                 "plateStone",
                 "plateStone",
                 "plateStone");
-        addShapedRecipe(
-                getModItem(OpenBlocks.ID, "sky", 6, 0, missing),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "plateEnderEye",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stoneEndstone",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "plateEnderEye",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing));
+        if (TCML) {
+            addShapedRecipe(
+                    getModItem(OpenBlocks.ID, "sky", 6, 0, missing),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "plateEnderEye",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stoneEndstone",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "plateEnderEye",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(OpenBlocks.ID, "sky", 1, 0, missing),
                 getModItem(OpenBlocks.ID, "sky", 1, 1, missing));
@@ -332,17 +332,19 @@ public class ScriptOpenBlocks implements IScriptLoader {
                 "rotorAluminium",
                 "plateEnderEye",
                 "rotorAluminium");
-        addShapedRecipe(
-                getModItem(OpenBlocks.ID, "slimalyzer", 1, 0, missing),
-                "screwIron",
-                "circuitBasic",
-                "screwIron",
-                "itemCasingAnyIron",
-                getModItem(TinkerConstruct.ID, "materials", 1, 1, missing),
-                "itemCasingAnyIron",
-                "craftingToolScrewdriver",
-                "circuitBasic",
-                "craftingToolFile");
+        if (TCML) {
+            addShapedRecipe(
+                    getModItem(OpenBlocks.ID, "slimalyzer", 1, 0, missing),
+                    "screwIron",
+                    "circuitBasic",
+                    "screwIron",
+                    "itemCasingAnyIron",
+                    getModItem(TinkerConstruct.ID, "materials", 1, 1, missing),
+                    "itemCasingAnyIron",
+                    "craftingToolScrewdriver",
+                    "circuitBasic",
+                    "craftingToolFile");
+        }
         addShapelessRecipe(
                 getModItem(OpenBlocks.ID, "paintBrush", 1, 0, missing),
                 getModItem(BuildCraftCore.ID, "paintbrush", 1, 0, missing));
@@ -410,12 +412,14 @@ public class ScriptOpenBlocks implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.PigIron, 4))
                 .itemOutputs(getModItem(OpenBlocks.ID, "xpbottler", 1, 0, missing)).duration(30 * SECONDS)
                 .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(TinkerConstruct.ID, "blankPattern", 1, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Iron, 1L))
-                .itemOutputs(getModItem(OpenBlocks.ID, "generic", 1, 10, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+        if (TCML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TinkerConstruct.ID, "blankPattern", 1, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Iron, 1L))
+                    .itemOutputs(getModItem(OpenBlocks.ID, "generic", 1, 10, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Minecraft.ID, "stick", 1, 0, missing),
@@ -724,33 +728,36 @@ public class ScriptOpenBlocks implements IScriptLoader {
                 .fluidInputs(FluidRegistry.getFluidStack("milk", 500)).duration(5 * SECONDS).eut(TierEU.RECIPE_ULV)
                 .addTo(mixerRecipes);
 
-        new ResearchItem(
-                "GOLDENEGG",
-                "MAGICBEES",
-                new AspectList().add(Aspect.getAspect("alienis"), 15).add(Aspect.getAspect("bestia"), 12)
-                        .add(Aspect.getAspect("victus"), 9).add(Aspect.getAspect("humanus"), 6),
-                -4,
-                5,
-                3,
-                getModItem(OpenBlocks.ID, "goldenegg", 1, 0, missing)).setParents("MB_DimensionalSingularity")
-                        .setConcealed().setPages(new ResearchPage("OpenBlocks.research_page.GOLDENEGG"))
-                        .registerResearchItem();
-        TCHelper.addInfusionCraftingRecipe(
-                "GOLDENEGG",
-                getModItem(OpenBlocks.ID, "goldenegg", 1, 0, missing),
-                2,
-                new AspectList().add(Aspect.getAspect("alienis"), 75).add(Aspect.getAspect("bestia"), 50)
-                        .add(Aspect.getAspect("victus"), 50).add(Aspect.getAspect("humanus"), 25),
-                getModItem(Minecraft.ID, "egg", 1, 0, missing),
-                OrePrefixes.plateDense.get(Materials.Gold),
-                getModItem(Minecraft.ID, "skull", 1, 3, missing),
-                OrePrefixes.plateDense.get(Materials.Gold),
-                getModItem(Minecraft.ID, "skull", 1, 3, missing),
-                OrePrefixes.plateDense.get(Materials.Gold),
-                getModItem(Minecraft.ID, "skull", 1, 3, missing));
-        TCHelper.addResearchPage(
-                "GOLDENEGG",
-                new ResearchPage(TCHelper.findInfusionRecipe(getModItem(OpenBlocks.ID, "goldenegg", 1, 0, missing))));
-        ThaumcraftApi.addWarpToResearch("GOLDENEGG", 2);
+        if (TCML) {
+            new ResearchItem(
+                    "GOLDENEGG",
+                    "MAGICBEES",
+                    new AspectList().add(Aspect.getAspect("alienis"), 15).add(Aspect.getAspect("bestia"), 12)
+                            .add(Aspect.getAspect("victus"), 9).add(Aspect.getAspect("humanus"), 6),
+                    -4,
+                    5,
+                    3,
+                    getModItem(OpenBlocks.ID, "goldenegg", 1, 0, missing)).setParents("MB_DimensionalSingularity")
+                            .setConcealed().setPages(new ResearchPage("OpenBlocks.research_page.GOLDENEGG"))
+                            .registerResearchItem();
+            TCHelper.addInfusionCraftingRecipe(
+                    "GOLDENEGG",
+                    getModItem(OpenBlocks.ID, "goldenegg", 1, 0, missing),
+                    2,
+                    new AspectList().add(Aspect.getAspect("alienis"), 75).add(Aspect.getAspect("bestia"), 50)
+                            .add(Aspect.getAspect("victus"), 50).add(Aspect.getAspect("humanus"), 25),
+                    getModItem(Minecraft.ID, "egg", 1, 0, missing),
+                    OrePrefixes.plateDense.get(Materials.Gold),
+                    getModItem(Minecraft.ID, "skull", 1, 3, missing),
+                    OrePrefixes.plateDense.get(Materials.Gold),
+                    getModItem(Minecraft.ID, "skull", 1, 3, missing),
+                    OrePrefixes.plateDense.get(Materials.Gold),
+                    getModItem(Minecraft.ID, "skull", 1, 3, missing));
+            TCHelper.addResearchPage(
+                    "GOLDENEGG",
+                    new ResearchPage(
+                            TCHelper.findInfusionRecipe(getModItem(OpenBlocks.ID, "goldenegg", 1, 0, missing))));
+            ThaumcraftApi.addWarpToResearch("GOLDENEGG", 2);
+        }
     }
 }

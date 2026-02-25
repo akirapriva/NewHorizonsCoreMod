@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.BiomesOPlenty;
 import static gregtech.api.enums.Mods.ExtraTrees;
 import static gregtech.api.enums.Mods.ExtraUtilities;
@@ -42,23 +43,16 @@ public class ScriptIronChests implements IScriptLoader {
     @Override
     public List<String> getDependencies() {
         return Arrays.asList(
-                BiomesOPlenty.ID,
                 ExtraTrees.ID,
                 ExtraUtilities.ID,
-                ForbiddenMagic.ID,
                 Forestry.ID,
                 GalacticraftAmunRa.ID,
                 GalaxySpace.ID,
                 IndustrialCraft2.ID,
                 IronChests.ID,
                 IronChestsMinecarts.ID,
-                Natura.ID,
                 PamsHarvestTheNether.ID,
-                TaintedMagic.ID,
-                Thaumcraft.ID,
-                ThaumicBases.ID,
-                TwilightForest.ID,
-                Witchery.ID);
+                TwilightForest.ID);
     }
 
     @Override
@@ -498,30 +492,36 @@ public class ScriptIronChests implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
                 .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
                 .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Thaumcraft.ID, "blockWoodenDevice", 1, 6, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
-                .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Thaumcraft.ID, "blockWoodenDevice", 1, 7, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
-                .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Natura.ID, "planks", 1, wildcard, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
-                .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(BiomesOPlenty.ID, "planks", 1, wildcard, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
-                .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+        if (TML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Thaumcraft.ID, "blockWoodenDevice", 1, 6, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
+                    .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Thaumcraft.ID, "blockWoodenDevice", 1, 7, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
+                    .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+        }
+        if (NML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Natura.ID, "planks", 1, wildcard, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
+                    .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+        }
+        if (BOPML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BiomesOPlenty.ID, "planks", 1, wildcard, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
+                    .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Forestry.ID, "planks", 1, wildcard, missing),
@@ -750,30 +750,36 @@ public class ScriptIronChests implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
                 .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
                 .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ThaumicBases.ID, "enderPlanks", 1, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
-                .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Witchery.ID, "witchwood", 1, wildcard, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
-                .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+        if (TBML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ThaumicBases.ID, "enderPlanks", 1, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
+                    .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+        }
+        if (WML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Witchery.ID, "witchwood", 1, wildcard, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
+                    .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(GalaxySpace.ID, "barnardaCplanks", 1, 0, missing),
                         GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
                 .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
                 .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(TaintedMagic.ID, "BlockWarpwoodPlanks", 1, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
-                .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+        if (TMML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TaintedMagic.ID, "BlockWarpwoodPlanks", 1, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
+                    .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestTheNether.ID, "netherPlanks", 1, 0, missing),
@@ -792,12 +798,14 @@ public class ScriptIronChests implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
                 .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
                 .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ForbiddenMagic.ID, "TaintPlank", 1, wildcard, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
-                .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+        if (TML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ForbiddenMagic.ID, "TaintPlank", 1, wildcard, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Copper, 3L))
+                    .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodCopperUpgrade", 1, 0, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Minecraft.ID, "chest", 1, 0, missing),
@@ -918,30 +926,36 @@ public class ScriptIronChests implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
                 .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
                 .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Thaumcraft.ID, "blockWoodenDevice", 1, 6, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
-                .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
-                .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Thaumcraft.ID, "blockWoodenDevice", 1, 7, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
-                .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
-                .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Natura.ID, "planks", 1, wildcard, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
-                .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
-                .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(BiomesOPlenty.ID, "planks", 1, wildcard, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
-                .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
-                .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (TML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Thaumcraft.ID, "blockWoodenDevice", 1, 6, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
+                    .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Thaumcraft.ID, "blockWoodenDevice", 1, 7, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
+                    .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
+        if (NML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Natura.ID, "planks", 1, wildcard, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
+                    .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
+        if (BOPML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BiomesOPlenty.ID, "planks", 1, wildcard, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
+                    .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Forestry.ID, "planks", 1, wildcard, missing),
@@ -1170,30 +1184,36 @@ public class ScriptIronChests implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
                 .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
                 .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ThaumicBases.ID, "enderPlanks", 1, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
-                .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
-                .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Witchery.ID, "witchwood", 1, wildcard, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
-                .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
-                .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (TBML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ThaumicBases.ID, "enderPlanks", 1, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
+                    .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
+        if (WML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Witchery.ID, "witchwood", 1, wildcard, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
+                    .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(GalaxySpace.ID, "barnardaCplanks", 1, 0, missing),
                         GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
                 .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
                 .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(TaintedMagic.ID, "BlockWarpwoodPlanks", 1, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
-                .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
-                .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (TMML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TaintedMagic.ID, "BlockWarpwoodPlanks", 1, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
+                    .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestTheNether.ID, "netherPlanks", 1, 0, missing),
@@ -1212,12 +1232,14 @@ public class ScriptIronChests implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
                 .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
                 .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ForbiddenMagic.ID, "TaintPlank", 1, wildcard, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
-                .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
-                .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (TML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ForbiddenMagic.ID, "TaintPlank", 1, wildcard, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Iron, 3L))
+                    .circuit(2).itemOutputs(getModItem(IronChests.ID, "woodIronUpgrade", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.plate, Materials.Copper, 1L),

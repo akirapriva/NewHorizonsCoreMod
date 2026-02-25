@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.Botany;
 import static gregtech.api.enums.Mods.BuildCraftBuilders;
 import static gregtech.api.enums.Mods.BuildCraftCompat;
@@ -70,8 +71,7 @@ public class ScriptBuildCraft implements IScriptLoader {
                 ProjectRedExpansion.ID,
                 ProjectRedTransportation.ID,
                 Railcraft.ID,
-                RandomThings.ID,
-                TinkerConstruct.ID);
+                RandomThings.ID);
     }
 
     @Override
@@ -92,116 +92,118 @@ public class ScriptBuildCraft implements IScriptLoader {
                 "gearInvar",
                 getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
                 "gearInvar");
-        addShapedRecipe(
-                getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipestructurecobblestone", 1, 0, missing),
-                GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                getModItem(Minecraft.ID, "gravel", 1, 0, missing),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1));
-        addShapedRecipe(
-                getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowercobblestone", 1, 0, missing),
-                GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "wireGt01Tin",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1));
-        addShapedRecipe(
-                getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowerstone", 1, 0, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "wireGt01Nickel",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowerwood", 1, 0, missing),
-                "stickWood",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickWood",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "wireGt01Copper",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickWood",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowersandstone", 1, 0, missing),
-                NHItemList.SandStoneRod.get(),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                NHItemList.SandStoneRod.get(),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "wireGt01Cupronickel",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                NHItemList.SandStoneRod.get(),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                NHItemList.SandStoneRod.get());
-        addShapedRecipe(
-                getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowerquartz", 1, 0, missing),
-                "stickNetherQuartz",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickNetherQuartz",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "wireGt01Silver",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickNetherQuartz",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickNetherQuartz");
-        addShapedRecipe(
-                getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepoweriron", 1, 0, missing),
-                "stickIron",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickIron",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "wireGt01Electrum",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickIron",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickIron");
-        addShapedRecipe(
-                getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowergold", 1, 0, missing),
-                "stickGold",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickGold",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "wireGt01Aluminium",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickGold",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickGold");
-        addShapedRecipe(
-                getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepoweremerald", 1, 0, missing),
-                "stickEmerald",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickEmerald",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "wireGt01Nichrome",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickEmerald",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickEmerald");
-        addShapedRecipe(
-                getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowerdiamond", 1, 0, missing),
-                "stickDiamond",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickDiamond",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "wireGt01Platinum",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickDiamond",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickDiamond");
+        if (TCML) {
+            addShapedRecipe(
+                    getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipestructurecobblestone", 1, 0, missing),
+                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    getModItem(Minecraft.ID, "gravel", 1, 0, missing),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1));
+            addShapedRecipe(
+                    getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowercobblestone", 1, 0, missing),
+                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "wireGt01Tin",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.Stone, 1));
+            addShapedRecipe(
+                    getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowerstone", 1, 0, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "wireGt01Nickel",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
+            addShapedRecipe(
+                    getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowerwood", 1, 0, missing),
+                    "stickWood",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickWood",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "wireGt01Copper",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickWood",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowersandstone", 1, 0, missing),
+                    NHItemList.SandStoneRod.get(),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    NHItemList.SandStoneRod.get(),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "wireGt01Cupronickel",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    NHItemList.SandStoneRod.get(),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    NHItemList.SandStoneRod.get());
+            addShapedRecipe(
+                    getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowerquartz", 1, 0, missing),
+                    "stickNetherQuartz",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickNetherQuartz",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "wireGt01Silver",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickNetherQuartz",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickNetherQuartz");
+            addShapedRecipe(
+                    getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepoweriron", 1, 0, missing),
+                    "stickIron",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickIron",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "wireGt01Electrum",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickIron",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickIron");
+            addShapedRecipe(
+                    getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowergold", 1, 0, missing),
+                    "stickGold",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickGold",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "wireGt01Aluminium",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickGold",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickGold");
+            addShapedRecipe(
+                    getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepoweremerald", 1, 0, missing),
+                    "stickEmerald",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickEmerald",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "wireGt01Nichrome",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickEmerald",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickEmerald");
+            addShapedRecipe(
+                    getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowerdiamond", 1, 0, missing),
+                    "stickDiamond",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickDiamond",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "wireGt01Platinum",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickDiamond",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickDiamond");
+        }
         addShapedRecipe(
                 getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
                 "screwIron",
@@ -224,28 +226,30 @@ public class ScriptBuildCraft implements IScriptLoader {
                 "screwIron",
                 "ringIron",
                 "screwIron");
-        addShapedRecipe(
-                getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipeitemsvoid", 1, 0, missing),
-                getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "gemEnderPearl",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                getModItem(RandomThings.ID, "ingredient", 1, 1, missing));
-        addShapedRecipe(
-                getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipefluidsvoid", 1, 0, missing),
-                "stickAnyRubber",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickAnyRubber",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "gemEnderPearl",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickAnyRubber",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "stickAnyRubber");
+        if (TCML) {
+            addShapedRecipe(
+                    getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipeitemsvoid", 1, 0, missing),
+                    getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "gemEnderPearl",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    getModItem(RandomThings.ID, "ingredient", 1, 1, missing));
+            addShapedRecipe(
+                    getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipefluidsvoid", 1, 0, missing),
+                    "stickAnyRubber",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickAnyRubber",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "gemEnderPearl",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickAnyRubber",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "stickAnyRubber");
+        }
         addShapedRecipe(
                 getModItem(BuildCraftFactory.ID, "autoWorkbenchBlock", 1, 0, missing),
                 "itemCasingAnyIron",

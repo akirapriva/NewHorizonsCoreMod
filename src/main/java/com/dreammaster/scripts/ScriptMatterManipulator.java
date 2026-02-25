@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.*;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.INGOTS;
@@ -48,14 +49,7 @@ public class ScriptMatterManipulator implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                AE2FluidCraft.ID,
-                AppliedEnergistics2.ID,
-                EnderIO.ID,
-                GraviSuite.ID,
-                MatterManipulator.ID,
-                Thaumcraft.ID,
-                ThaumicTinkerer.ID);
+        return Arrays.asList(AE2FluidCraft.ID, AppliedEnergistics2.ID, EnderIO.ID, GraviSuite.ID, MatterManipulator.ID);
     }
 
     @Override
@@ -493,12 +487,10 @@ public class ScriptMatterManipulator implements IScriptLoader {
                     .itemOutputs(MMItemList.UpgradePrototypeMining.get(1)).eut(TierEU.RECIPE_HV).duration(10 * SECONDS)
                     .addTo(RecipeMaps.assemblerRecipes);
         }
-        // :derangedgregger:
-        ItemStack jarredNode = getModItem(Thaumcraft.ID, "BlockJarNodeItem"); // node in a jar
-        jarredNode.setStackDisplayName(EnumChatFormatting.RESET + "Any " + jarredNode.getDisplayName());
-
         // Auxiliary Teleporter Manipulator Upgrade
         if (Thaumcraft.isModLoaded() && ThaumicTinkerer.isModLoaded()) {
+            ItemStack jarredNode = getModItem(Thaumcraft.ID, "BlockJarNodeItem"); // node in a jar
+            jarredNode.setStackDisplayName(EnumChatFormatting.RESET + "Any " + jarredNode.getDisplayName());
             GTValues.RA.stdBuilder()
                     .itemInputs(
                             MMItemList.UpgradeBlank.get(1),

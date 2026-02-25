@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.AE2WCT;
 import static gregtech.api.enums.Mods.AppliedEnergistics2;
 import static gregtech.api.enums.Mods.Avaritia;
@@ -19,7 +20,7 @@ public class ScriptAE2WC implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(AppliedEnergistics2.ID, Avaritia.ID, AE2WCT.ID);
+        return Arrays.asList(AppliedEnergistics2.ID, AE2WCT.ID);
     }
 
     @Override
@@ -47,25 +48,27 @@ public class ScriptAE2WC implements IScriptLoader {
                 getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 47, missing),
                 getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 38, missing));
 
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                getModItem(AE2WCT.ID, "infinityBoosterCard", 1, 0, missing),
-                "aaaaaaaaa",
-                "abcbabcba",
-                "acdcacdca",
-                "abcbabcba",
-                "aaaaaaaaa",
-                "abcbabcba",
-                "acdcacdca",
-                "abcbabcba",
-                "aaaaaaaaa",
-                'a',
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 42, missing),
-                'b',
-                getModItem(Avaritia.ID, "Resource", 1, 6, missing),
-                'c',
-                getModItem(Avaritia.ID, "Resource", 1, 4, missing),
-                'd',
-                getModItem(Avaritia.ID, "Resource", 1, 5, missing));
+        if (AML) {
+            ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                    getModItem(AE2WCT.ID, "infinityBoosterCard", 1, 0, missing),
+                    "aaaaaaaaa",
+                    "abcbabcba",
+                    "acdcacdca",
+                    "abcbabcba",
+                    "aaaaaaaaa",
+                    "abcbabcba",
+                    "acdcacdca",
+                    "abcbabcba",
+                    "aaaaaaaaa",
+                    'a',
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 42, missing),
+                    'b',
+                    getModItem(Avaritia.ID, "Resource", 1, 6, missing),
+                    'c',
+                    getModItem(Avaritia.ID, "Resource", 1, 4, missing),
+                    'd',
+                    getModItem(Avaritia.ID, "Resource", 1, 5, missing));
+        }
 
     }
 }
