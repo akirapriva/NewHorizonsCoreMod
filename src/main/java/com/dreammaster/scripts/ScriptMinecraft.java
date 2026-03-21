@@ -30,7 +30,7 @@ public class ScriptMinecraft implements IScriptLoader {
     }
 
     public List<String> getDependencies() {
-        return Arrays.asList(Minecraft.ID);
+        return Arrays.asList(GregTech.ID, IndustrialCraft2.ID);
     }
 
     @Override
@@ -1587,7 +1587,7 @@ public class ScriptMinecraft implements IScriptLoader {
                 .circuit(6).itemOutputs(getModItem(Minecraft.ID, "ladder", 32, 0, missing)).duration(5 * SECONDS)
                 .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
         GTValues.RA.stdBuilder().itemInputs(getModItem(Minecraft.ID, "brick", 8, 0, missing)).circuit(1)
-                .itemOutputs(getModItem(Minecraft.ID, "brick_block", 2, 0, missing))
+                .itemOutputs(getModItem(Minecraft.ID, "brick_block", 1, 0, missing))
                 .fluidInputs(Materials.Water.getFluid(500)).duration(15 * SECONDS).eut(TierEU.RECIPE_LV / 2)
                 .addTo(assemblerRecipes);
         GTValues.RA.stdBuilder()
@@ -2069,7 +2069,7 @@ public class ScriptMinecraft implements IScriptLoader {
                     "stickWood",
                     null);
         }
-        if (ITML) {
+        if (IGTML) {
             addShapedRecipe(
                     getModItem(Minecraft.ID, "torch", 5, 0, missing),
                     "blockWool",
@@ -3995,7 +3995,7 @@ public class ScriptMinecraft implements IScriptLoader {
                 "itemClay",
                 "itemClay",
                 "itemClay");
-        if (ITML) {
+        if (IGTML) {
             addShapedRecipe(
                     getModItem(Minecraft.ID, "clay", 2, 0, missing),
                     "itemClay",
@@ -4036,7 +4036,7 @@ public class ScriptMinecraft implements IScriptLoader {
                 "dustSmallGunpowder",
                 "dustSmallGunpowder",
                 "dustSmallGunpowder");
-        if (ITML) {
+        if (IGTML) {
             addShapelessRecipe(
                     ItemList.Food_Dough.get(1L),
                     getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketWater", 1, 0, missing),
@@ -4196,7 +4196,7 @@ public class ScriptMinecraft implements IScriptLoader {
                 "dustWood",
                 "dustWood",
                 "dustWood");
-        if (ITML) {
+        if (IGTML) {
             addShapedRecipe(
                     getModItem(Minecraft.ID, "paper", 2, 0, missing),
                     "dustWood",
@@ -4216,7 +4216,7 @@ public class ScriptMinecraft implements IScriptLoader {
                     getModItem(Natura.ID, "barleyFood", 1, 3, missing),
                     getModItem(Natura.ID, "barleyFood", 1, 3, missing));
         }
-        if (ITML) {
+        if (IGTML) {
             addShapelessRecipe(
                     getModItem(Minecraft.ID, "flower_pot", 1, 0, missing),
                     "craftingToolFile",
@@ -4299,7 +4299,7 @@ public class ScriptMinecraft implements IScriptLoader {
                 "stoneNetherBrick");
         addShapelessRecipe(getModItem(Minecraft.ID, "stone_slab", 1, 7, missing), "craftingToolSaw", "blockQuartz");
         addShapedRecipe(
-                getModItem(Minecraft.ID, "brick_block", 2, 0, missing),
+                getModItem(Minecraft.ID, "brick_block", 1, 0, missing),
                 "ingotBrick",
                 "ingotBrick",
                 "ingotBrick",
@@ -4309,9 +4309,9 @@ public class ScriptMinecraft implements IScriptLoader {
                 "ingotBrick",
                 "ingotBrick",
                 "ingotBrick");
-        if (ITML) {
+        if (IGTML) {
             addShapedRecipe(
-                    getModItem(Minecraft.ID, "brick_block", 2, 0, missing),
+                    getModItem(Minecraft.ID, "brick_block", 1, 0, missing),
                     "ingotBrick",
                     "ingotBrick",
                     "ingotBrick",
@@ -4333,7 +4333,7 @@ public class ScriptMinecraft implements IScriptLoader {
                 "ingotBrickNether",
                 "ingotBrickNether",
                 "ingotBrickNether");
-        if (ITML) {
+        if (IGTML) {
             addShapedRecipe(
                     getModItem(Minecraft.ID, "nether_brick", 2, 0, missing),
                     "ingotBrickNether",

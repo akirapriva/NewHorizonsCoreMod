@@ -462,7 +462,7 @@ public class ScriptGregtech implements IScriptLoader {
                 "circuitElite",
                 GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.Tungsten, 1L));
 
-        if (BiomesOPlenty.isModLoaded()) {
+        if (BOPML) {
             addShapedRecipe(
                     new ItemStack(GregTechAPI.sBlockStones, 1, 2),
                     getModItem(BiomesOPlenty.ID, "moss", 1, 0, missing),
@@ -597,7 +597,7 @@ public class ScriptGregtech implements IScriptLoader {
                 "dyeBlue",
                 "dyeWhite");
 
-        if (Thaumcraft.isModLoaded() && AML && AEML && OML) {
+        if (TML && AML && AEML && OML) {
             ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
                     ItemList.Spray_Color_Infinite.get(1L),
                     "---RR----",

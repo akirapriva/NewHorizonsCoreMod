@@ -347,7 +347,7 @@ public class ScriptEFR implements IScriptLoader {
                 getModItem(Minecraft.ID, "bed", 1L, 0, missing),
                 bits,
                 new Object[] { "AAA", "BBB", "CDC", 'A', getModItem(Minecraft.ID, "carpet", 1L, 14, missing), 'B',
-                        "plankWood", 'C', "fenceWood", 'D', "craftingToolSoftMallet" });
+                        "plankWood", 'C', "screwWood", 'D', "craftingToolSoftMallet" });
         for (ItemStack plank : allPlanks) {
             if (plank == null) continue;
             ItemStack plank2 = plank.copy();

@@ -504,64 +504,65 @@ public class ScriptAppliedEnergistics2 implements IScriptLoader {
                 .circuit(1).itemOutputs(getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 4, 76))
                 .fluidInputs(Materials.EnergeticAlloy.getMolten(144L)).duration(7 * SECONDS + 10 * TICKS)
                 .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-
-        // ME Quantum Storage
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                getModItem(AppliedEnergistics2.ID, "item.ItemExtremeStorageCell.Quantum", 1),
-                "---------",
-                "----a----",
-                "---bdb---",
-                "--bcdcb--",
-                "-addedda-",
-                "--bcdcb--",
-                "---bdb---",
-                "----a----",
-                "---------",
-                'a',
-                "blockCosmicNeutronium",
-                'b',
-                "plateDenseNeutronium",
-                'c',
-                "circuitInfinite",
-                'd',
-                components[3],
-                'e',
-                AE2_ADVANCED_HOUSING);
-
-        // ME Singularity crafting storage
-        if (DEML) {
+        if (AML) {
+            // ME Quantum Storage
             ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                    getModItem(AppliedEnergistics2.ID, "tile.BlockSingularityCraftingStorage", 1),
-                    "abcfhfcba",
-                    "bcdfhfdcb",
-                    "cdefhfedc",
-                    "fffgigfff",
-                    "hhhijihhh",
-                    "fffgigfff",
-                    "cdefhfedc",
-                    "bcdfhfdcb",
-                    "abcfhfcba",
+                    getModItem(AppliedEnergistics2.ID, "item.ItemExtremeStorageCell.Quantum", 1),
+                    "---------",
+                    "----a----",
+                    "---bdb---",
+                    "--bcdcb--",
+                    "-addedda-",
+                    "--bcdcb--",
+                    "---bdb---",
+                    "----a----",
+                    "---------",
                     'a',
-                    getModItem(AppliedEnergistics2.ID, "tile.BlockCreativeEnergyCell", 1),
+                    "blockCosmicNeutronium",
                     'b',
-                    NHItemList.PikoCircuit.get(),
+                    "plateDenseNeutronium",
                     'c',
-                    ItemList.Field_Generator_UIV.get(1L),
+                    "circuitInfinite",
                     'd',
-                    getModItem(DraconicEvolution.ID, "reactorStabilizer", 1),
+                    components[3],
                     'e',
-                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.TranscendentMetal, 1L),
-                    'f',
-                    GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.Infinity, 1L),
-                    'g',
-                    GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.SpaceTime, 1L),
-                    'h',
-                    GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SpaceTime, 1L),
-                    'i',
-                    getModItem(AppliedEnergistics2.ID, "tile.BlockCraftingUnit", 1),
-                    'j',
-                    getModItem(AppliedEnergistics2.ID, "item.ItemExtremeStorageCell.Singularity", 1));
+                    AE2_ADVANCED_HOUSING);
 
+            // ME Singularity crafting storage
+            if (DEML) {
+                ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                        getModItem(AppliedEnergistics2.ID, "tile.BlockSingularityCraftingStorage", 1),
+                        "abcfhfcba",
+                        "bcdfhfdcb",
+                        "cdefhfedc",
+                        "fffgigfff",
+                        "hhhijihhh",
+                        "fffgigfff",
+                        "cdefhfedc",
+                        "bcdfhfdcb",
+                        "abcfhfcba",
+                        'a',
+                        getModItem(AppliedEnergistics2.ID, "tile.BlockCreativeEnergyCell", 1),
+                        'b',
+                        NHItemList.PikoCircuit.get(),
+                        'c',
+                        ItemList.Field_Generator_UIV.get(1L),
+                        'd',
+                        getModItem(DraconicEvolution.ID, "reactorStabilizer", 1),
+                        'e',
+                        GTOreDictUnificator.get(OrePrefixes.nanite, Materials.TranscendentMetal, 1L),
+                        'f',
+                        GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.Infinity, 1L),
+                        'g',
+                        GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.SpaceTime, 1L),
+                        'h',
+                        GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.SpaceTime, 1L),
+                        'i',
+                        getModItem(AppliedEnergistics2.ID, "tile.BlockCraftingUnit", 1),
+                        'j',
+                        getModItem(AppliedEnergistics2.ID, "item.ItemExtremeStorageCell.Singularity", 1));
+
+            }
         }
         // ME Void Storage
         addShapedRecipe(
